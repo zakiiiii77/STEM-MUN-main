@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STEM MUN Newspaper</title>
+  <meta description="The STEM MUN Newspaper is a dynamic platform that showcases student engagement with global issues through articles, research papers, and creative content. It highlights key debates and covers major activities from all STEM MUN Agencies." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Varela+Round&display=swap" rel="stylesheet" />
+
+  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
+  <link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+  <link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/variables.css" />
+  <link type="text/css" rel="stylesheet" href="css/header.css" />
+  <link type="text/css" rel="stylesheet" href="css/header-enhancements.css" />
+  <link type="text/css" rel="stylesheet" href="css/footer.css" />
+  <link type="text/css" rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link rel="icon" type="image/png" href="icon.svg" />
+  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="https://kit.fontawesome.com/0d89f9ac34.js" crossorigin="anonymous"></script>
+  <script src="js/fast-preloader.js"></script>
+
+  <style>
+    /* Coming Soon Section Styles */
+    .coming-soon-section {
+      position: relative;
+      min-height: 80vh;
+      padding: 100px 0;
+      background-color: #f9f9f9;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Make header logo bigger */
+    #nav .navbar-brand img.logo {
+      height: auto;
+      width: 60px; /* Increased logo size */
+      max-width: none;
+    }
+    
+    .coming-soon-section:before {
+      content: "";
+      position: absolute;
+      right: -250px;
+      bottom: -250px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(rgba(66, 12, 2, 0.03), transparent 70%);
+    }
+    
+    .coming-soon-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .coming-soon-headline {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .coming-soon-headline:after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-warm));
+    }
+    
+    .coming-soon-description {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: var(--accent-color);
+      margin-bottom: 40px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .newspaper-icon {
+      font-size: 5rem;
+      color: var(--secondary-warm);
+      margin-bottom: 30px;
+    }
+    
+    .newspaper-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 50px;
+      gap: 30px;
+    }
+    
+    .newspaper-feature {
+      flex: 1;
+      min-width: 250px;
+      max-width: 280px;
+      padding: 30px 20px;
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+    }
+    
+    .newspaper-feature:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--secondary-warm);
+      margin-bottom: 20px;
+    }
+    
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .feature-text {
+      font-size: 0.95rem;
+      color: var(--accent-color);
+      line-height: 1.7;
+    }
+    
+    .newsletter-form {
+      margin-top: 50px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .newsletter-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+    
+    .newsletter-input {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    
+    .newsletter-input:focus {
+      border-color: var(--secondary-warm);
+    }
+    
+    .newsletter-button {
+      background-color: var(--secondary-warm);
+      color: #fff;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(205, 176, 111, 0.3);
+    }
+    
+    .newsletter-button:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(66, 12, 2, 0.3);
+    }
+    
+    .coming-soon-decoration {
+      position: absolute;
+      z-index: 1;
+      opacity: 0.6;
+    }
+    
+    .coming-soon-decoration.dots {
+      top: 20%;
+      right: 10%;
+      width: 200px;
+      height: 200px;
+      background-image: radial-gradient(rgba(205, 176, 111, 0.3) 2px, transparent 2px);
+      background-size: 15px 15px;
+    }
+    
+    .coming-soon-decoration.circle {
+      bottom: 15%;
+      left: 5%;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 2px solid rgba(66, 12, 2, 0.07);
+    }
+    
+    @media only screen and (max-width: 768px) {
+      .coming-soon-headline {
+        font-size: 2.8rem;
+      }
+      
+      .coming-soon-description {
+        font-size: 1.1rem;
+      }
+      
+      .newspaper-feature {
+        min-width: 100%;
+      }
+    }
+  </style>
+
+  <!-- Inline fallback script for header -->
+  <script>
+    // Wait for the DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set a timeout to check if the header was loaded by include-header.js
+      setTimeout(function() {
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (!headerPlaceholder) return;
+        
+        const headerContent = headerPlaceholder.innerHTML;
+        
+        // If the header is still empty or only contains an error message after 2 seconds,
+        // add the inline header as fallback
+        if (!headerContent || headerContent.includes('Error loading header')) {
+          console.log('Using inline header as fallback');
+          
+          // Load the header inline (copy of the header.html content)
+          headerPlaceholder.innerHTML = `
+          <header>
+            <nav id="nav" class="navbar nav">
+              <div class="navbar-header">
+                <div id="svg-icon" class="navbar-brand">
+                  <a href="index.html">
+                    <img class="logo" src="img/logo.svg" alt="logo" />
+                  </a>
+                </div>
+              </div>
+              <div class="nav-collapse">
+                <span></span>
+              </div>
+              <ul class="main-nav nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li class="has-dropdown">
+                  <a href="#">Events</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="events.html">All Events</a></li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                  </ul>
+                </li>
+                <li class="has-dropdown">
+                  <a href="#">Programs</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="conferences.html">Conferences</a></li>
+                  </ul>
+                </li>
+                <li><a href="Team.html">Meet The Board</a></li>
+                <li><a href="newspaper.html">Newspaper</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="delegates.html" id="cta">Become a Delegate</a></li>
+              </ul>
+            </nav>
+          </header>
+          `;
+          
+          // Add active class to current page
+          const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+          const links = document.querySelectorAll('#nav a');
+          
+          links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+              link.parentElement.classList.add('active');
+            }
+          });
+          
+          // Initialize navigation functionality
+          initNavFunctionalityFallback();
+        }
+      }, 2000); // Check after 2 seconds
+    });
+    
+    // Fallback navigation functionality
+    function initNavFunctionalityFallback() {
+      // Mobile Menu Toggle
+      const navCollapse = document.querySelector('.nav-collapse');
+      if (navCollapse) {
+        navCollapse.addEventListener('click', function() {
+          document.getElementById('nav').classList.toggle('open');
+          document.body.classList.toggle('nav-open');
+        });
+      }
+      
+      // Handle Dropdowns on Mobile
+      const dropdownLinks = document.querySelectorAll('.main-nav li.has-dropdown > a');
+      dropdownLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (window.innerWidth < 768) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('open');
+            const dropdown = this.nextElementSibling;
+            if (dropdown.style.display === 'block') {
+              dropdown.style.display = 'none';
+            } else {
+              dropdown.style.display = 'block';
+            }
+          }
+        });
+      });
+      
+      // Fixed header on scroll
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          document.getElementById('nav').classList.add('fixed-nav');
+          document.querySelector('header').classList.add('scrolled');
+        } else {
+          document.getElementById('nav').classList.remove('fixed-nav');
+          document.querySelector('header').classList.remove('scrolled');
+        }
+      });
+    }
+  </script>
+
+  <script src="js/preload-header.js"></script>
+  <script src="js/fast-preloader.js"></script>
+  <script src="js/fix-header-color.js"></script>
+</head>
+
+<body>
+
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Coming Soon Section -->
+  <section class="coming-soon-section">
+    <div class="coming-soon-decoration dots"></div>
+    <div class="coming-soon-decoration circle"></div>
+    
+    <div class="coming-soon-container" data-aos="fade-up">
+      <i class="newspaper-icon fas fa-newspaper"></i>
+      <h1 class="coming-soon-headline">Coming Soon</h1>
+      <p class="coming-soon-description">
+        The STEM MUN Newspaper is a dynamic platform that showcases student engagement with global issues through articles, research papers, and creative content. It highlights key debates, publishes opinion pieces on international affairs, and covers major activities from all STEM MUN Agencies—such as the WHO, UNEP, UNSC, and others. The newspaper also features special editions during conferences, organizes writing hackathons, and offers a space for delegates to publish analytical reflections, policy insights, and SDG-related articles. It serves as the voice of STEM MUN, connecting delegates through information, dialogue, and shared perspectives.
+      </p>
+      
+      <div class="newspaper-features">
+        <div class="newspaper-feature" data-aos="fade-up" data-aos-delay="100">
+          <i class="feature-icon fas fa-globe-americas"></i>
+          <h3 class="feature-title">Global Issues Coverage</h3>
+          <p class="feature-text">
+            Our platform showcases student engagement with global issues through research articles, opinion pieces, and in-depth analysis of key international debates and diplomatic discussions.
+          </p>
+        </div>
+        
+        <div class="newspaper-feature" data-aos="fade-up" data-aos-delay="200">
+          <i class="feature-icon fas fa-building"></i>
+          <h3 class="feature-title">Agency Activities</h3>
+          <p class="feature-text">
+            Comprehensive coverage of major activities from all STEM MUN Agencies including WHO, UNEP, UNSC, and others, with special editions published during conferences.
+          </p>
+        </div>
+        
+        <div class="newspaper-feature" data-aos="fade-up" data-aos-delay="300">
+          <i class="feature-icon fas fa-pen-nib"></i>
+          <h3 class="feature-title">Delegate Publications</h3>
+          <p class="feature-text">
+            A dedicated space for delegates to publish analytical reflections, policy insights, and SDG-related articles, connecting the STEM MUN community through shared perspectives.
+          </p>
+        </div>
+      </div>
+      
+      <div class="newsletter-form" data-aos="fade-up" data-aos-delay="400">
+        <h3 class="newsletter-title">Be the first to know when we launch</h3>
+        <form>
+          <input type="email" class="newsletter-input" placeholder="Your email address">
+          <button type="submit" class="newsletter-button">Notify Me</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div id="back-to-top"><i class="fas fa-arrow-up"></i></div>
+
+  <!-- Modern Footer -->
+  <footer class="modern-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#about">Our Mission</a></li>
+          <li><a href="Team-upgraded.html">The Board</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#">Our History</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="conferences.html">Conferences</a></li>
+          <li><a href="delegates.html">Delegate Applications</a></li>
+          <li><a href="events.html">Upcoming Events</a></li>
+          <li><a href="newspaper.html">Newspaper</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-map-marker fa-solid fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-text">
+              STEM Model United Nations<br>
+              Cairo, Egypt
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-envelope fa-solid fas fa-envelope"></i>
+            </div>
+            <div class="info-text">
+              <a href="mailto:stemmun@stemegypt.edu.eg">stemmun@stemegypt.edu.eg</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-phone fa-solid fas fa-phone"></i>
+            </div>
+            <div class="info-text">
+              <a href="tel:+20 111 269 0319">+20 111 269 0319</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Newsletter</h4>
+        <div class="footer-newsletter">
+          <p>Subscribe to receive updates about our events and opportunities</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Your email address">
+            <button type="submit" class="newsletter-button">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-logo-center">
+      <a href="index.html">
+        <img src="img/logo.svg" alt="STEM MUN Logo">
+      </a>
+    </div>
+    
+    <div class="social-icons">
+      <a href="https://www.facebook.com/STEMModelUnitedNations/"><i class="fa fa-facebook fa-brands fab fa-facebook-f"></i></a>
+      <a href="https://x.com/stem_mun?t=e0Ofa19utwuIQs8VO3P3_w&s=08"><i class="fa fa-twitter fa-brands fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/stem_mun/"><i class="fa fa-instagram fa-brands fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/stem-model-united-nation-s/"><i class="fa fa-linkedin fa-brands fab fa-linkedin-in"></i></a>
+    
+    </div>
+    
+    <div class="footer-links-modern">
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </div>
+    
+    <div class="copyright-text">
+      <p>&copy; 2023 STEM Model United Nations. All rights reserved.</p>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/include-header.js"></script>
+  <script src="js/header-enhancements.js" defer></script>
+  
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true
+    });
+    
+    // Back to top button functionality
+    $(document).ready(function() {
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+          $('#back-to-top').addClass('visible');
+        } else {
+          $('#back-to-top').removeClass('visible');
+        }
+      });
+      
+      $('#back-to-top').click(function() {
+        $('html, body').animate({scrollTop : 0}, 800);
+        return false;
+      });
+    });
+  </script>
+</body>
+</html> 

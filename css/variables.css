@@ -1,0 +1,577 @@
+/* Color Variables - New Color Scheme */
+:root {
+  --primary-color: #420c02;
+  --primary-dark: #580d00;
+  --secondary-color: #dcd8cc;
+  --secondary-warm: #cdb06f;
+  --neutral-color: #ffffff;
+  --accent-color: #48382f;
+}
+
+/* Base Typography */
+body {
+  font-family: "Varela Round", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--accent-color);
+}
+
+@font-face {
+  font-family: organetto;
+  src: url(../fonts/organetto/Fontspring-DEMO-organetto-regular.otf);
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: organetto;
+  src: url(../fonts/organetto/Fontspring-DEMO-organetto-bold.otf);
+  font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+h1 {
+  font-size: 54px;
+}
+
+h2 {
+  font-size: 36px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+/* Link Styles */
+a {
+  color: var(--secondary-warm);
+  text-decoration: none;
+  transition: 0.2s opacity;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+  opacity: 0.8;
+  color: var(--primary-color);
+}
+
+/* Text Utilities */
+.main-color {
+  color: var(--primary-color);
+}
+
+.white-text {
+  color: var(--neutral-color);
+}
+
+/* Selection Color */
+::-moz-selection {
+  background-color: var(--primary-color);
+  color: var(--neutral-color);
+}
+
+::selection {
+  background-color: var(--primary-color);
+  color: var(--neutral-color);
+}
+
+/* Lists */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Basic Layout */
+.section {
+  position: relative;
+}
+
+.md-padding {
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.sm-padding {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.right {
+  float: right;
+}
+
+/* Preloader */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--primary-dark);
+  background: linear-gradient(135deg, #420c02 0%, #2e0801 100%);
+  z-index: 99999;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow: hidden;
+}
+
+/* Earth container with enhanced animations */
+.earth-container {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin-bottom: 40px;
+  perspective: 800px;
+}
+
+.earth {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  border: 6px solid var(--secondary-warm);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(205, 176, 111, 0.3);
+  animation: pulse 1s ease-in-out infinite;
+  transform: scale(0.9) rotateY(10deg);
+  opacity: 0.9;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-image: 
+    linear-gradient(45deg, rgba(0,0,0,0.2) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.2) 75%),
+    linear-gradient(-45deg, rgba(0,0,0,0.2) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.2) 75%);
+  background-size: 40px 40px;
+  background-blend-mode: multiply;
+}
+
+.earth.animate-earth {
+  transform: scale(1) rotateY(0deg);
+  opacity: 1;
+}
+
+/* Multiple orbits for added visual interest */
+.orbits-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: float 4s ease-in-out infinite;
+}
+
+.orbit {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: calc(100% + 60px);
+  height: calc(100% + 60px);
+  border: 2px solid var(--secondary-warm);
+  border-radius: 50%;
+  animation: orbit-rotate 6s linear infinite;
+  opacity: 0.4;
+  transform: rotateX(60deg);
+}
+
+.orbit:nth-child(2) {
+  top: -45px;
+  left: -45px;
+  width: calc(100% + 90px);
+  height: calc(100% + 90px);
+  border-width: 1px;
+  animation-duration: 10s;
+  animation-direction: reverse;
+  opacity: 0.3;
+}
+
+.orbit:nth-child(3) {
+  top: -15px;
+  left: -15px;
+  width: calc(100% + 30px);
+  height: calc(100% + 30px);
+  border-width: 1px;
+  border-style: dashed;
+  animation-duration: 4s;
+  opacity: 0.5;
+}
+
+.satellite {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: var(--secondary-warm);
+  border-radius: 50%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  box-shadow: 0 0 15px var(--secondary-warm);
+  opacity: 0.7;
+  transition: all 0.5s ease-out;
+}
+
+.satellite.animate-satellite {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+.satellite:after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 6px;
+  background-color: var(--secondary-warm);
+  border-radius: 3px;
+  top: 5px;
+  left: -4px;
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+.satellite-2 {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: var(--secondary-warm);
+  border-radius: 50%;
+  bottom: 0;
+  left: 25%;
+  transform: translateX(-50%) scale(0.8);
+  box-shadow: 0 0 10px var(--secondary-warm);
+  opacity: 0.6;
+  transition: all 0.5s ease-out;
+  animation: satellite-blink 3s infinite;
+}
+
+.satellite-3 {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: var(--secondary-warm);
+  border-radius: 50%;
+  bottom: 30%;
+  right: 10%;
+  transform: translateX(-50%) scale(0.8);
+  box-shadow: 0 0 10px var(--secondary-warm);
+  opacity: 0.5;
+  transition: all 0.5s ease-out;
+  animation: satellite-blink 4s infinite 1s;
+}
+
+/* Enhanced stars effect */
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle, var(--secondary-warm) 1px, transparent 1px),
+    radial-gradient(circle, var(--secondary-warm) 1px, transparent 1px),
+    radial-gradient(circle, var(--secondary-warm) 2px, transparent 2px);
+  background-size: 30px 30px, 80px 80px, 150px 150px;
+  background-position: 0 0, 40px 40px, 70px 70px;
+  opacity: 0.2;
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+/* Shooting stars effect */
+.shooting-star {
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--secondary-warm), transparent);
+  opacity: 0;
+  border-radius: 50%;
+  animation: shooting-star 6s linear infinite;
+}
+
+.shooting-star:nth-child(1) {
+  top: 20%;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.shooting-star:nth-child(2) {
+  top: 60%;
+  left: -100px;
+  animation-delay: 3s;
+}
+
+.shooting-star:nth-child(3) {
+  top: 30%;
+  left: -100px;
+  width: 150px;
+  animation-delay: 5s;
+}
+
+.globe-decoration {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: linear-gradient(30deg, var(--secondary-warm) 12%, transparent 12.5%, transparent 87%, var(--secondary-warm) 87.5%, var(--secondary-warm)),
+    linear-gradient(150deg, var(--secondary-warm) 12%, transparent 12.5%, transparent 87%, var(--secondary-warm) 87.5%, var(--secondary-warm)),
+    linear-gradient(30deg, var(--secondary-warm) 12%, transparent 12.5%, transparent 87%, var(--secondary-warm) 87.5%, var(--secondary-warm)),
+    linear-gradient(150deg, var(--secondary-warm) 12%, transparent 12.5%, transparent 87%, var(--secondary-warm) 87.5%, var(--secondary-warm)),
+    linear-gradient(60deg, var(--secondary-warm) 25%, transparent 25.5%, transparent 75%, var(--secondary-warm) 75%, var(--secondary-warm)),
+    linear-gradient(60deg, var(--secondary-warm) 25%, transparent 25.5%, transparent 75%, var(--secondary-warm) 75%, var(--secondary-warm));
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  mix-blend-mode: overlay;
+}
+
+/* Enhanced typography */
+#preloader h1 {
+  position: relative;
+  font-size: 2.4rem;
+  text-align: center;
+  color: var(--neutral-color);
+  margin: 20px 0 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fade-in-up 1s ease forwards 0.3s;
+}
+
+#preloader h1:after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--secondary-warm), transparent);
+  margin: 15px auto 0;
+  transform: scaleX(0);
+  animation: expand 1.5s ease forwards 0.8s;
+}
+
+.loading-text {
+  color: var(--secondary-warm);
+  font-size: 1.1rem;
+  letter-spacing: 5px;
+  margin-top: 15px;
+  display: flex;
+  font-weight: 500;
+  text-transform: uppercase;
+  animation: pulse-text 2s infinite;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fade-in-up 1s ease forwards 0.6s, pulse-text 2s infinite 1s;
+}
+
+.loading-text .dot {
+  animation: dot-animate 0.8s infinite;
+  opacity: 0;
+  margin: 0 2px;
+}
+
+.loading-text .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading-text .dot:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.loading-text .dot:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+/* New animations */
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit-rotate {
+  0% { transform: rotateX(60deg) rotate(0deg); }
+  100% { transform: rotateX(60deg) rotate(-360deg); }
+}
+
+@keyframes dot-animate {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; box-shadow: 0 0 30px rgba(205, 176, 111, 0.3); }
+  50% { transform: scale(1.05); opacity: 0.9; box-shadow: 0 0 50px rgba(205, 176, 111, 0.5); }
+  100% { transform: scale(1); opacity: 1; box-shadow: 0 0 30px rgba(205, 176, 111, 0.3); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes expand {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes satellite-blink {
+  0%, 100% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 0.8; transform: scale(1); }
+}
+
+@keyframes shooting-star {
+  0% { transform: translateX(0) rotate(45deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  20% { opacity: 0; }
+  100% { transform: translateX(calc(100vw + 100px)) rotate(45deg); opacity: 0; }
+}
+
+/* Buttons */
+.main-btn, .white-btn, .outline-btn {
+  display: inline-block;
+  padding: 10px 35px;
+  margin: 3px;
+  border: 2px solid transparent;
+  border-radius: 3px;
+  transition: 0.2s opacity;
+}
+
+.main-btn {
+  background: var(--primary-color);
+  color: var(--neutral-color);
+}
+
+.white-btn {
+  background: var(--neutral-color);
+  color: var(--primary-color);
+}
+
+.outline-btn {
+  background: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.main-btn:hover, .white-btn:hover, .outline-btn:hover {
+  opacity: 0.8;
+  color: var(--neutral-color);
+  background-color: var(--primary-dark);
+}
+
+/* Forms */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+input[type="tel"],
+textarea {
+  height: 40px;
+  width: 100%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 3px;
+  padding: 0px 10px;
+  color: var(--accent-color);
+  opacity: 0.8;
+  transition: 0.2s border-color, 0.2s opacity;
+}
+
+textarea {
+  padding: 10px;
+  min-height: 80px;
+  resize: vertical;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+  opacity: 1;
+}
+
+/* Responsive Helpers */
+@media only screen and (max-width: 767px) {
+  h1 {
+    font-size: 42px;
+  }
+  
+  h2 {
+    font-size: 28px;
+  }
+  
+  .section-header h2.title {
+    font-size: 31.5px;
+  }
+  
+  .md-padding {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  
+  .sm-padding {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  /* Preloader mobile adjustments */
+  #preloader h1 {
+    font-size: 1.5rem;
+  }
+  
+  .earth-container {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 30px;
+  }
+  
+  .loading-text {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+  }
+  
+  .orbit:nth-child(2) {
+    display: none; /* Hide outermost orbit on mobile */
+  }
+} 

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>STEM Model United Nations</title>
+    <meta
+      description="Model United Nations is a Global Student
+    Activity that gained Popularity among thousands of
+    students from universities and high schools all
+    around the globe. Students get the opportunity to
+    experience the role of UN representatives, and run
+    a simulation for a typical UN conference. An MUN
+    conference is centered on a specified topic: a war,
+    conflict, famine, or humanitarian crisis somewhere
+    in the world. The topic is related to different parties
+    and countries. Accordingly, the topic is discussed
+    throughout the conference by delegates-the
+    representatives assigned for a specific country,
+    who talks from its perspective-. Throughout the
+    season, delegates engage in debates, academic
+    support sessions, and various activities that
+    contribute to enhancing social, academic, and intellectual skills."
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round"
+      rel="stylesheet"
+    />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
+    <link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+    <link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link rel="icon" type="image/png" href="icon.ico" />
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="css/animations.css" />
+  
+  <!-- Inline fallback script for header -->
+  <script>
+    // Wait for the DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set a timeout to check if the header was loaded by include-header.js
+      setTimeout(function() {
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (!headerPlaceholder) return;
+        
+        const headerContent = headerPlaceholder.innerHTML;
+        
+        // If the header is still empty or only contains an error message after 2 seconds,
+        // add the inline header as fallback
+        if (!headerContent || headerContent.includes('Error loading header')) {
+          console.log('Using inline header as fallback');
+          
+          // Load the header inline (copy of the header.html content)
+          headerPlaceholder.innerHTML = `
+          <header>
+            <nav id="nav" class="navbar nav">
+              <div class="navbar-header">
+                <div id="svg-icon" class="navbar-brand">
+                  <a href="index.html">
+                    <img class="logo" src="img/logo.svg" alt="logo" />
+                  </a>
+                </div>
+              </div>
+              <div class="nav-collapse">
+                <span></span>
+              </div>
+              <ul class="main-nav nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li class="has-dropdown">
+                  <a href="#">Events</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="events.html">All Events</a></li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="competition.html">Competitions</a></li>
+                  </ul>
+                </li>
+                <li class="has-dropdown">
+                  <a href="#">Programs</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="competition.html">SPARK</a></li>
+                    <li><a href="committees.html">Committees</a></li>
+                  </ul>
+                </li>
+                <li><a href="Team.html">Meet The Board</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="delegates.html" id="cta">Become a Delegate</a></li>
+              </ul>
+            </nav>
+          </header>
+          `;
+          
+          // Add active class to current page
+          const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+          const links = document.querySelectorAll('#nav a');
+          
+          links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === currentPage) {
+              link.parentElement.classList.add('active');
+            }
+          });
+          
+          // Initialize navigation functionality
+          initNavFunctionalityFallback();
+        }
+      }, 2000); // Check after 2 seconds
+    });
+    
+    // Fallback navigation functionality
+    function initNavFunctionalityFallback() {
+      // Mobile Menu Toggle
+      const navCollapse = document.querySelector('.nav-collapse');
+      if (navCollapse) {
+        navCollapse.addEventListener('click', function() {
+          document.getElementById('nav').classList.toggle('open');
+          document.body.classList.toggle('nav-open');
+        });
+      }
+      
+      // Handle Dropdowns on Mobile
+      const dropdownLinks = document.querySelectorAll('.main-nav li.has-dropdown > a');
+      dropdownLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (window.innerWidth < 768) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('open');
+            const dropdown = this.nextElementSibling;
+            if (dropdown.style.display === 'block') {
+              dropdown.style.display = 'none';
+            } else {
+              dropdown.style.display = 'block';
+            }
+          }
+        });
+      });
+      
+      // Fixed header on scroll
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          document.getElementById('nav').classList.add('fixed-nav');
+          document.querySelector('header').classList.add('scrolled');
+        } else {
+          document.getElementById('nav').classList.remove('fixed-nav');
+          document.querySelector('header').classList.remove('scrolled');
+        }
+      });
+    }
+  </script>
+
+</head>
+
+  <body>
+    <div id="header-placeholder"></div>
+
+    <div id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 style="text-align:center">Letter from the Secretary General</h2>
+            <h6>Dear Delegates and Faculty Advisors,</h6>
+            <p>
+              The process of performing something faultless for the first time
+              tends to be tough to accomplish. Nevertheless, repeating the
+              process again with the same faultless pattern is utterly harsh.
+              Regardless, we possess determinant intentions to yield a
+              completely new favorable experience for STEM Model United Nations.
+              Our former generation started the journey with an unexpected level
+              of proficiency. Now, STEM MUN 20’ will prove that the legacy is
+              within safe keepers.
+            </p>
+            <p>
+              Along the season, delegates will enjoy a memorable experience for
+              MUN, which is renowned for the fun in it, rather than boredom. Our
+              academics committee are exposing the extent of their efforts to
+              deliver the information in a smooth manner. Throughout the
+              multiple sessions, the elected delegates will acquire plenty of
+              helpful information. This information will enable them to engage
+              in fruitful debates which impacts in considering every potential
+              resolution. At the end, a well-established memory of us will be
+              dug deep-down in each one’s mind for good.
+            </p>
+            <h6>Secretary General</h6>
+            <h6>STEM Model United Nations 2020</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="about2" class="section md-padding bg-grey">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-header text-center">
+              <h2 class="title">About</h2>
+            </div>
+            <p style="text-align: center;">
+              Model United Nations (MUN) is an academic simulation where the
+              world's most pressing issues and they are debated and solved using
+              the same procedures as the UN. At MUN, one is bound to witness
+              exhilarating debate on a particular agenda in parliamentary form
+              within parliamentary walls. Nowadays, MUN has become one of the
+              most prestigious events for youth to learn about diplomacy, both
+              in national and internatianal scale. MUN gives an exceptional
+              opportunity to the participants to improve their writing,
+              debating, and public speaking skills through working in teams to
+              develop resolutions and to express views in a self-assured manner
+              during the switch-side debates. STEM Model United Nations (STEM
+              MUN) aims to provide a platform for STEM young diplomats to
+              encourage themselves in understanding international issues and
+              policies, debating, and sharing perspectives between participants
+              from different backgrounds with an atmosphere where participants
+              can improve their communication and diplomatic skill, critical
+              thinking, and networking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="portfolio" class="section md-padding">
+      <div class="container">
+        <div class="row">
+          <div class="section-header text-center">
+            <h2 class="title">Main Objectives</h2>
+          </div>
+
+          <div class="col-md-4">
+            <div class="about">
+              <img src="img/1.png" style="width: auto; height: 50px;" />
+              <h4>Convenient Knowledge</h4>
+              <p>
+                To establish a convenient knowledge of political science,
+                diplomacy, and world issues.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="about">
+              <img src="img/2.png" style="width: auto; height: 50px;" />
+              <h4>Develop Skills</h4>
+              <p>
+                To develop skills of research, negotiation, collaboration,
+                leadership, and critical thinking.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="about">
+              <img src="img/3.png" style="width: auto; height: 50px;" />
+              <h4>Comprehensive Improvement</h4>
+              <p>
+                To contribute to a comprehensive improvement on personal and
+                academic levels.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="pricing" class="section md-padding bg-grey">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="section-header">
+              <h2 class="title">Glimpse from the past</h2>
+            </div>
+            <p>
+              The first STEM MUN conference held a simulation for the UN
+              security council with its current 15 members and other 7 members
+              who are directly engaged in the Yemen civil war conflict. All
+              participating delegates received training to teach them how
+              foreign policy works, the principles and procedures of a UN
+              conference, and the recognized way to encounter world issues
+              through debating, providing evidence, and presenting resolutions.
+            </p>
+            <p>
+              The conference was held at Empire Training and Education at 6th of
+              October city by the attendance of the 22 delegates, STEM October
+              school principal, school counselor, and STEM Maadi deputy. After
+              previous preparation and hard work, the conference was proven to
+              be a remarkable simulation of the UN among high schoolers, the
+              delegates showed unique diplomacy and professionalism, and
+              received acclaim from all attendees.
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <div id="about-slider" class="owl-carousel owl-theme">
+              <img class="img-responsive" src="img/about1.jpg" alt="" />
+              <img class="img-responsive" src="img/about2.jpg" alt="" />
+              <img class="img-responsive" src="img/about3.jpg" alt="" />
+              <img class="img-responsive" src="img/about5.jpg" alt="" />
+              <img class="img-responsive" src="img/about6.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div id="Vision" class="section md-padding bg-grey">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="section-header">
+                <h2 class="title">Vision</h2>
+              </div>
+              <p>
+                Here in STEM MUN, we have a deep passion to make it possible for
+                every STEM student to experience the world of UN as a whole. Our
+                vision encompasses stimulating the acquiring of knowledge
+                relatable to the councils and understanding most of its
+                parliament’s procedures with emphasizing on historical moments
+                of this inveterate institution and being up to date with all of
+                its decisive decision being made nowadays. We believe that
+                through our community, we can create a hub for exchanging
+                culture and ideas, acting as an open gate for students to enter
+                the MUN platform in which we can present our believes and ideas,
+                and work together as a one entity to bring an impactful decision
+                on our community.
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <div id="about-slider">
+                <img class="img-responsive" src="img/about.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="team" class="section md-padding">
+      <div class="container">
+        <div class="row">
+          <div class="section-header text-center">
+            <h2 class="title">Our Team</h2>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team2.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/loay.a.refaat.3"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: Loayahmed9999@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Loay Refaat</h3>
+                <span>Vice President</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team1.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/mohand.ashraf.106"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: mohandashraf01112@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Mohand Ashref</h3>
+                <span>President</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team3.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/Yusef.Elsudani"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: yusef.elsudany2003@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Yousef Elsudany</h3>
+                <span>Secretary</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team17.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/profile.php?id=100009951784619"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto: kabaka121212@gmail.com"><i class="fa fa-google-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3 style="font-size: 1.1em;">Abdelrahman Abdelnasser</h3>
+                <span>Website Manager</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team16.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/fady0.2"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto: 18052@stemegypt.edu.eg"><i class="fa fa-google-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Fady Adel</h3>
+                <span>Website Manager</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team19.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/kerolos3kamal"><i class="fa fa-facebook"></i></a>
+                    <a href="mailto: 18147@stemegypt.edu.eg"><i class="fa fa-google-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Kerolos Kamal</h3>
+                <span>Website Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team5.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/yselim.selim.3"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: youssefselim2710@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Youssef Selim</h3>
+                <span>Head of PR</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team11.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/elham.khalid.12"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto:elham.1818109@stemmaadi.moe.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Elham Elshafie</h3>
+                <span>Vice Head of PR</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team13.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/hagar.exol.1"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto:hagar_atef@icloud.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Hager Atef</h3>
+                <span>Head of FR</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team4.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/fady.h.hakim"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18053@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Fady Hakim</h3>
+                <span>Head of OC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team9.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a
+                      href="https://www.facebook.com/profile.php?id=100004541678219"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18076@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Mohamed Badr</h3>
+                <span>Vice Head of OC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team10.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/rabab.mohamed.1004837"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto:rababmohamed2003@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Rabab Mohamed</h3>
+                <span>Vice Head of OC</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team6.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/philo.atef"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18055@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Philopater Atef</h3>
+                <span>Head of Social Media</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team12.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/hania.rouby"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="emailto:Haniarouby@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Hania Ruby</h3>
+                <span>Vice Head of Social Media</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team18.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/0markhattab"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto:okhattab07@gmail.com"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Omar khattab</h3>
+                <span>Media Coverage Director</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team15.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/moaaz.essam.52643"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18117@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Moaaz Essam</h3>
+                <span>Head of Media</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team14.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a
+                      href="https://www.facebook.com/abdelrahman.khaledmostafa1"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18034@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Abdulrahman Khater</h3>
+                <span>Vice Head of Media</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team7.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a href="https://www.facebook.com/farid.wahba.1"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18054@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Farid Wahba</h3>
+                <span>Head of HR</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="team">
+              <div class="team-img">
+                <img class="img-responsive" src="img/team8.jpg" alt="" />
+                <div class="overlay">
+                  <div class="team-social">
+                    <a
+                      href="https://www.facebook.com/profile.php?id=100016028950850"
+                      ><i class="fa fa-facebook"></i
+                    ></a>
+                    <a href="mailto: 18112@stemegypt.edu.eg"
+                      ><i class="fa fa-google-plus"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+              <div class="team-content">
+                <h3>Abdullah Selim</h3>
+                <span>Head of AC</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="contact" class="section md-padding">
+      <div class="container">
+        <div class="row">
+          <div class="section-header text-center">
+            <h2 class="title">Get in touch</h2>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="contact">
+              <i class="fa fa-phone"></i>
+              <h3>Phone</h3>
+              <a href="https://api.whatsapp.com/send?phone=201158234422" target="_blank">
+                <p>+20 115 823 4422</p>
+              </a>
+              <a href="https://api.whatsapp.com/send?phone=201003633071" target="_blank">
+                <p>+20 100 363 3071</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="contact">
+              <i class="fa fa-envelope"></i>
+              <h3>Email</h3>
+              <a href="mailto:stemmun@stemegypt.edu.eg" target="_blank">
+                <p>stemmun@stemegypt.edu.eg</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="contact">
+              <i class="fa fa-map-marker"></i>
+              <h3>Address</h3>
+              <a href="https://goo.gl/maps/hqrWhy9NDeJYRmg89" target="_blank">
+                <p>STEM High School for Boys, Cosmic Village.</p>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-8 col-md-offset-2">
+            <form class="contact-form" action="https://formspree.io/mnqgrvln" method="POST">
+              <input type="text" class="input" placeholder="Name" name="name"/>
+              <input type="email" class="input" placeholder="Email" name="e-mail"/>
+              <input type="text" class="input" placeholder="Subject" name="subject"/>
+              <textarea class="input" placeholder="Message" name="message"></textarea>
+              <button type="submit" class="main-btn">Send message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer" class="sm-padding bg-dark">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="footer-logo">
+              <a href="#home"><img src="img/logo-alt.png" alt="logo"/></a>
+            </div>
+
+            <ul class="footer-follow">
+              <li>
+                <a href="https://www.facebook.com/STEMMUN/" target="_blank">
+                  <i class="fa fa-facebook"></i
+                ></a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/stem_mun/" target="_blank">
+                  <i class="fa fa-instagram"></i
+                ></a>
+              </li>
+            </ul>
+
+            <div class="footer-copyright">
+              <p>
+                Copyright © <span id="demo"></span>. All Rights Reserved.
+                Designed by <a href="https://www.mirus.ml" target="_blank">Mirus</a>
+              </p>
+            </div>
+            <script>
+              var d = new Date()
+              document.getElementById("demo").innerHTML = d.getUTCFullYear()
+            </script>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="back-to-top"></div>
+
+    <div id="preloader">
+      <div class="preloader">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <script src="jss/compressed.js"></script>
+    <script
+      type="24b860a394b1c499bd546738-text/javascript"
+      src="js/jquery.min.js"
+    ></script>
+    <script
+      type="24b860a394b1c499bd546738-text/javascript"
+      src="js/bootstrap.min.js"
+    ></script>
+    <script
+      type="24b860a394b1c499bd546738-text/javascript"
+      src="js/owl.carousel.min.js"
+    ></script>
+    <script
+      type="24b860a394b1c499bd546738-text/javascript"
+      src="js/jquery.magnific-popup.js"
+    ></script>
+    <script
+      type="24b860a394b1c499bd546738-text/javascript"
+      src="js/main.js"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="24b860a394b1c499bd546738-|49"
+      defer=""
+    ></script>
+  </body>
+</html>

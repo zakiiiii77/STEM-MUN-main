@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Delegate Links</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/header.css" />
+    <link type="text/css" rel="stylesheet" href="css/header-enhancements.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            padding-top: 100px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #420c02;
+            margin-bottom: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        button {
+            background-color: #420c02;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #6b1203;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header placeholder that will be filled by include-header.js -->
+    <div id="header-placeholder"></div>
+    
+    <div class="container">
+        <h1>Delegate Link Checker</h1>
+        <p>This page checks if the "Become a Delegate" link in the header is correctly pointing to the MyMUN application page.</p>
+        
+        <button id="checkButton">Check Header Link</button>
+        
+        <div id="result" class="result"></div>
+    </div>
+    
+    <script src="js/jquery.min.js"></script>
+    <script src="js/preload-header.js"></script>
+    <script src="js/include-header.js"></script>
+    
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event to the check button
+            document.getElementById('checkButton').addEventListener('click', function() {
+                // Give some time for the header to load
+                setTimeout(checkDelegateLink, 500);
+            });
+        });
+        
+        function checkDelegateLink() {
+            const resultDiv = document.getElementById('result');
+            const delegateLink = document.querySelector('a[id="cta"]');
+            
+            if (!delegateLink) {
+                showError("Could not find the 'Become a Delegate' link in the header.");
+                return;
+            }
+            
+            const href = delegateLink.getAttribute('href');
+            const target = delegateLink.getAttribute('target');
+            
+            if (href === 'https://mymun.com/conferences/stem-model-united-nations-2025' && target === '_blank') {
+                showSuccess("Success! The 'Become a Delegate' link is correctly pointing to the MyMUN application page and will open in a new tab.");
+            } else if (href === 'https://mymun.com/conferences/stem-model-united-nations-2025') {
+                showWarning("Partial success. The link is pointing to the correct URL, but it's missing the target='_blank' attribute to open in a new tab.");
+            } else {
+                showError(`Error: The link is currently pointing to "${href}" instead of the MyMUN application page.`);
+            }
+        }
+        
+        function showSuccess(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result success';
+            resultDiv.textContent = message;
+            resultDiv.style.display = 'block';
+        }
+        
+        function showError(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result error';
+            resultDiv.textContent = message;
+            resultDiv.style.display = 'block';
+        }
+        
+        function showWarning(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result warning';
+            resultDiv.style.backgroundColor = '#fff3cd';
+            resultDiv.style.color = '#856404';
+            resultDiv.style.border = '1px solid #ffeeba';
+            resultDiv.textContent = message;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html> 
