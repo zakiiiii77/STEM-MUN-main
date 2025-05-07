@@ -121,21 +121,6 @@
       });
     }
     
-    // Handle Dropdowns on Mobile
-    const dropdownLinks = document.querySelectorAll('.main-nav li.has-dropdown > a');
-    dropdownLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-        if (window.innerWidth < 768) {
-          e.preventDefault();
-          this.parentElement.classList.toggle('open-drop');
-          const dropdown = this.nextElementSibling;
-          if (dropdown) {
-            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-          }
-        }
-      });
-    });
-    
     // Fixed header on scroll
     function handleScroll() {
       if (window.scrollY > 50) {

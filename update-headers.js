@@ -96,19 +96,8 @@ const inlineScript = `
               <ul class="main-nav nav navbar-nav navbar-right">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
-                <li class="has-dropdown">
-                  <a href="#">Events</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="events.html">All Events</a></li>
-                    <li><a href="conferences.html">Conferences</a></li>
-                  </ul>
-                </li>
-                <li class="has-dropdown">
-                  <a href="#">Programs</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="conferences.html">Conferences</a></li>
-                  </ul>
-                </li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="conferences.html">Conferences</a></li>
                 <li><a href="Team.html">Meet The Board</a></li>
                 <li><a href="newspaper.html">Newspaper</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -165,23 +154,6 @@ const inlineScript = `
           document.body.classList.toggle('nav-open');
         });
       }
-      
-      // Handle Dropdowns on Mobile
-      const dropdownLinks = document.querySelectorAll('.main-nav li.has-dropdown > a');
-      dropdownLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          if (window.innerWidth < 768) {
-            e.preventDefault();
-            this.parentElement.classList.toggle('open');
-            const dropdown = this.nextElementSibling;
-            if (dropdown.style.display === 'block') {
-              dropdown.style.display = 'none';
-            } else {
-              dropdown.style.display = 'block';
-            }
-          }
-        });
-      });
       
       // Fixed header on scroll
       window.addEventListener('scroll', function() {
