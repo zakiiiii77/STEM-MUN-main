@@ -133,7 +133,8 @@
         <input type="number" name="phone" required>
         <label>Age:</label>
         <input type="number" name="age" required>
-        </div>
+        <label>Country:</label>
+        <input type="text" name="Country" required>
         <label>Choose your research feild:</label>
         <select name="selectFeild" required>
             <option value="Bio">Bio </option>
@@ -142,14 +143,14 @@
             <option value="Public Health">Public Health </option>
             <option value="International Relations ">International Relations </option>
             <option value="Environment Studies">Environment Studies </option>
-            <option value="Scychology">Scychology</option>
+            <option value="Scychology">Psychology</option>
             <option value="Political Science">Political Science</option>
         </select>
-        <label>Why did you choose this area as your research field?</label>
+        <label>Why did you choose this area as your research field? (150-250 words)</label>
         <textarea name="essay1" minlength="800" maxlength="1500" required></textarea>
-        <label>In your point of view, how could you combine this field and politics in research?</label>
+        <label>In your point of view, how could you combine this field and politics in research? (150-250 words)</label>
         <textarea name="essay2" minlength="800" maxlength="1500" required></textarea>
-        <label>How could your research help society in this research area?</label>
+        <label>How could your research help society in this research area? (150-250 words)</label>
         <textarea name="essay3" minlength="800" maxlength="1500" required></textarea>
         <label>List your experience in research, if available</label>
         <textarea name="experience" required></textarea>
@@ -260,7 +261,7 @@
 
 
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxLJXxZmQCqur8dypS6IFNQoRJrObYxV-nIQcNG4f1zaWc-01SBxWpkSQK9lm4OX6R9/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwkdgsS8094mTQ2NeHlj7kBd-FyXsAhWnhod4vO7dzBSYshkigH4KnAICE6NaopMtXA/exec';
         const form = document.getElementById('contactForm');
 
         form.addEventListener('submit', e => {
