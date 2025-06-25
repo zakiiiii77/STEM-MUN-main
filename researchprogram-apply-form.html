@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Program Application</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/header-enhancements.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/magnific-popup.css">
+    <link rel="icon" type="image/png" href="icon.svg" />
+
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #45110b;
+        }
+
+        form {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            border: 1px solid #ebdec2;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px;
+            color: #45110b;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 5px 7px 15px rgba(201, 172, 110, 0.4);
+        }
+
+        #submit-btn {
+            width: 150px;
+            height: 40px;
+            color: white;
+            border-radius: 30px;
+            border: 1px solid #45110b;
+            background-color: rgb(66, 12, 2);
+        }
+
+        #submit-btn:hover {
+            background-color: #c9ac6e;
+            border: 1px solid #c9ac6e;
+        }
+
+        input {
+            height: 30px;
+            border-radius: 20px;
+            border: 1px solid #c9ac6e;
+        }
+
+        textarea {
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #c9ac6e;
+
+        }
+
+        select {
+            height: 33px;
+            border-radius: 20px;
+            border: 1px solid #c9ac6e;
+            padding: 4px;
+        }
+
+        #header-placeholder {
+            width: 100%;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        #form-title {
+            color: #c9ac6e;
+            margin-top: 140px !important;
+            font-weight: 700;
+            text-shadow: 0 0 5px #8e443b, 0 0 5px #8e443b;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                width: 90%;
+                font-size: 16px;
+            }
+
+            #form-title {
+                font-size: 24px;
+                margin-top: 120px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            form {
+                padding: 20px;
+            }
+
+            #form-title {
+                margin-top: 20px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+
+    <h1 id="form-title">APPLY FOR OUR PROGRAM</h1>
+    <form id="contactForm">
+        <label>Name:</label>
+        <input type="text" name="name" required />
+        <label>Email:</label>
+        <input type="email" name="email" required />
+        <label>Phone Number:</label>
+        <input type="number" name="phone" required>
+        <label>Age:</label>
+        <input type="number" name="age" required>
+        </div>
+        <label>Choose your research feild:</label>
+        <select name="selectFeild" required>
+            <option value="Bio">Bio </option>
+            <option value="Phy">Phy</option>
+            <option value="Engineering">Engineering </option>
+            <option value="Public Health">Public Health </option>
+            <option value="International Relations ">International Relations </option>
+            <option value="Environment Studies">Environment Studies </option>
+            <option value="Scychology">Scychology</option>
+            <option value="Political Science">Political Science</option>
+        </select>
+        <label>Why did you choose this area as your research field?</label>
+        <textarea name="essay1" minlength="800" maxlength="1500" required></textarea>
+        <label>In your point of view, how could you combine this field and politics in research?</label>
+        <textarea name="essay2" minlength="800" maxlength="1500" required></textarea>
+        <label>How could your research help society in this research area?</label>
+        <textarea name="essay3" minlength="800" maxlength="1500" required></textarea>
+        <label>List your experience in research, if available</label>
+        <textarea name="experience" required></textarea>
+        <label>Upload a sample of research you have worked on. (upload as a link) *Optional</label>
+        <textarea name="sampleOfWork"></textarea>
+
+        <button type="submit" id="submit-btn">Submit</button>
+    </form>
+
+
+    <footer class="modern-footer" style="width: 100%;">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>About Us</h4>
+                <ul>
+                    <li><a href="#about">Our Mission</a></li>
+                    <li><a href="Team-upgraded.html">The Board</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Our History</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="conferences.html">Conferences</a></li>
+                    <li><a href="delegates.html">Delegate Applications</a></li>
+                    <li><a href="events.html">Upcoming Events</a></li>
+                    <li><a href="newspaper.html">Newspaper</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fa fa-map-marker fa-solid fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            STEM Model United Nations<br>
+                            Cairo, Egypt
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fa fa-envelope fa-solid fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <a href="mailto:stemmun@stemegypt.edu.eg">stemmun@stemegypt.edu.eg</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fa fa-phone fa-solid fas fa-phone"></i>
+                        </div>
+                        <div class="info-text">
+                            <a href="tel:+20 111 269 0319">+20 111 269 0319</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Newsletter</h4>
+                <div class="footer-newsletter">
+                    <p>Subscribe to receive updates about our events and opportunities</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-logo-center">
+            <a href="index.html">
+                <img src="img/logo.svg" alt="STEM MUN Logo">
+            </a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.facebook.com/STEMModelUnitedNations/"><i
+                    class="fa fa-facebook fa-brands fab fa-facebook-f"></i></a>
+            <a href="https://x.com/stem_mun?t=e0Ofa19utwuIQs8VO3P3_w&s=08"><i
+                    class="fa fa-twitter fa-brands fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/stem_mun/"><i class="fa fa-instagram fa-brands fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/stem-model-united-nation-s/"><i
+                    class="fa fa-linkedin fa-brands fab fa-linkedin-in"></i></a>
+
+        </div>
+
+        <div class="footer-links-modern">
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+
+        <div class="copyright-text">
+            <p>&copy; 2023 STEM Model United Nations. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxLJXxZmQCqur8dypS6IFNQoRJrObYxV-nIQcNG4f1zaWc-01SBxWpkSQK9lm4OX6R9/exec';
+        const form = document.getElementById('contactForm');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: new FormData(form), // <-- Use FormData instead of JSON
+            })
+                .then(response => {
+                    alert("Form submitted successfully!");
+                    form.reset();
+                })
+                .catch(error => {
+                    alert("Error submitting form.");
+                    console.error('Error!', error.message);
+                });
+        });
+
+
+        const textareas = form.querySelectorAll('textarea');
+
+        // Load saved textarea data on page load
+        window.addEventListener('load', () => {
+            textareas.forEach(textarea => {
+                const saved = localStorage.getItem(textarea.name);
+                if (saved) {
+                    textarea.value = saved;
+                }
+            });
+        });
+
+        // Save textarea input changes
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', () => {
+                localStorage.setItem(textarea.name, textarea.value);
+            });
+        });
+
+        // Clear saved data on form submit
+        form.addEventListener('submit', () => {
+            textareas.forEach(textarea => {
+                localStorage.removeItem(textarea.name);
+            });
+        });
+
+
+    </script>
+    <script src="js/include-header.js"></script>
+
+
+</body>
+
+</html>
