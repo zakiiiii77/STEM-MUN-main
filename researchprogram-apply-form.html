@@ -95,6 +95,15 @@
             text-shadow: 0 0 5px #8e443b, 0 0 5px #8e443b;
         }
 
+        #form-message {
+            font-family: 'Poppins', sans-serif;
+            color: #45110b;
+            margin-top: 10px;
+            font-weight: 500;
+            font-size: 16px;
+            text-align: center;
+        }
+
         @media screen and (max-width: 768px) {
             form {
                 width: 90%;
@@ -259,32 +268,61 @@
     </footer>
 
 
-
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwkdgsS8094mTQ2NeHlj7kBd-FyXsAhWnhod4vO7dzBSYshkigH4KnAICE6NaopMtXA/exec';
         const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submit-btn');
+
+        // Create and append success message element
+        const messageDiv = document.createElement('div');
+        messageDiv.style.marginTop = '15px';
+        messageDiv.style.color = 'green';
+        messageDiv.style.fontWeight = '600';
+        form.appendChild(messageDiv);
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
 
             fetch(scriptURL, {
                 method: 'POST',
-                body: new FormData(form), // <-- Use FormData instead of JSON
+                body: new FormData(form),
             })
                 .then(response => {
-                    alert("Form submitted successfully!");
-                    form.reset();
+                    const messageDiv = document.createElement('div');
+                    messageDiv.id = 'form-message';
+                    messageDiv.textContent = "Form submitted successfully!";
+                    document.getElementById('submit-btn').insertAdjacentElement('afterend', messageDiv);
+
+                    const submitBtn = document.getElementById('submit-btn');
+                    submitBtn.textContent = "Submitted";
+
+                    submitBtn.disabled = true;
+
+                    form.querySelectorAll('input, textarea, select').forEach(field => {
+                        field.value = '';
+                    });
                 })
+
                 .catch(error => {
-                    alert("Error submitting form.");
+                    messageDiv.style.color = 'red';
+                    messageDiv.textContent = "✖ Error submitting the form. Please try again.";
                     console.error('Error!', error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit';
                 });
+
+
+            // Clear localStorage for textareas
+            const textareas = form.querySelectorAll('textarea');
+            textareas.forEach(textarea => {
+                localStorage.removeItem(textarea.name);
+            });
         });
 
-
+        // Restore textarea values
         const textareas = form.querySelectorAll('textarea');
-
-        // Load saved textarea data on page load
         window.addEventListener('load', () => {
             textareas.forEach(textarea => {
                 const saved = localStorage.getItem(textarea.name);
@@ -294,22 +332,17 @@
             });
         });
 
-        // Save textarea input changes
+        // Save textarea input to localStorage
         textareas.forEach(textarea => {
             textarea.addEventListener('input', () => {
                 localStorage.setItem(textarea.name, textarea.value);
             });
         });
-
-        // Clear saved data on form submit
-        form.addEventListener('submit', () => {
-            textareas.forEach(textarea => {
-                localStorage.removeItem(textarea.name);
-            });
-        });
-
-
     </script>
+
+
+
+
     <script src="js/include-header.js"></script>
 
 
