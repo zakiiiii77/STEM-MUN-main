@@ -104,6 +104,49 @@
             text-align: center;
         }
 
+        .after-form-info{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: solid 1px #fff;
+            /* height: 450px; */
+            padding: 50px;
+            margin: 150px;
+            border-radius: 50px;
+            box-shadow: 0 0 5px #ffe6e2, 0 0 5px #ffe6e2;
+            transition: transform 0.3s ease;
+        } 
+        .after-form-info:hover{
+            transform: scale(1.07);
+            background-color: #4e1914;
+        }
+        .after-form-info p{
+            font-size: 55px;
+            font-weight: 800;
+            transition: transform 0.3s ease;
+        }
+        .after-form-info p:hover{
+            transform: translateY(-10px) scale(1.1)
+        }
+        .after-form-info span{
+            color: #c9ac6e;
+            font-size: 20px;
+            font-weight: 800;
+            transition: transform 0.3s ease;
+        }
+        .after-form-info span:hover{
+            transform:  scale(1.2)
+        }
+        canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
         @media screen and (max-width: 768px) {
             form {
                 width: 90%;
@@ -124,6 +167,29 @@
             #form-title {
                 margin-top: 20px !important;
             }
+            .after-form-info{
+                height: 450px;
+                border:  #fff;
+                padding: 0px;
+                margin: 0px;
+                border-radius: 0px;
+                box-shadow: 0 0 0px #ffe6e2, 0 0 0px #ffe6e2;
+            }
+            .after-form-info:hover{
+                background-color: #ebdec2;
+            }
+            .after-form-info p{
+                font-size: 30px;
+                color: #8e443b !important;
+            }
+            .after-form-info span{
+                font-size: 15px;
+                color: #8e443b;
+            }
+            body{
+                background-color: #ebdec2;
+            }
+            
         }
     </style>
 </head>
@@ -132,7 +198,7 @@
     <div id="header-placeholder"></div>
 
 
-    <h1 id="form-title">APPLY FOR OUR PROGRAM</h1>
+    <!-- <h1 id="form-title">APPLY FOR OUR PROGRAM</h1>
     <form id="contactForm">
         <label>Name:</label>
         <input type="text" name="name" required />
@@ -176,7 +242,15 @@
         <textarea name="sampleOfWork"></textarea>
 
         <button type="submit" id="submit-btn">Submit</button>
-    </form>
+    </form> -->
+
+        <canvas id="canvas"></canvas>
+
+
+    <div class="after-form-info" >
+        <p style="color: #c9ac6e;">Issues Comming Soon</p>
+        <span>Stay Tuned...</span>
+    </div>
 
 
     <footer class="modern-footer" style="width: 100%;">
@@ -276,8 +350,8 @@
         </div>
     </footer>
 
-
-    <script>
+    <!-- linking code between the form and the excel sheet -->
+    <!-- <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyX4GOc9oGwBmcOy67dNAV96uMGwIUHb7oHkMlQncxXHR9V7NecxEFmhDrH8eEwuloo/exec';
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submit-btn');
@@ -348,8 +422,64 @@
             });
         });
     </script>
+ -->
 
+ <!-- mouse effect code -->
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 3; i++) {
+                particles.push({
+                    x: e.clientX,
+                    y: e.clientY,
+                    size: Math.random() * 1 + 0.3, // → size between 0.3 and 1.3
+                    speedX: (Math.random() - 0.5) * 1,
+                    speedY: (Math.random() - 0.5) * 1,
+                    life: 1
+                });
+            }
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((p, i) => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.life -= 0.015;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+
+                ctx.fillStyle = `rgba(255,255,255,${p.life})`;
+
+                // ✨ Add glow effect
+                ctx.shadowColor = 'rgba(255,255,255,0.7)';
+                ctx.shadowBlur = 10;
+
+                ctx.fill();
+
+                if (p.life <= 0) {
+                    particles.splice(i, 1);
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 
 
     <script src="js/include-header.js"></script>
