@@ -29,208 +29,658 @@
   <script src="js/fast-preloader.js"></script>
 
   <style>
-    /* Coming Soon Section Styles */
-    .coming-soon-section {
-      position: relative;
-      min-height: 80vh;
-      padding: 100px 0;
-      background-color: #f9f9f9;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
+    /* Newspaper Hero Section */
+     .newspaper-hero {
+        position: relative;
+        height: 70vh;
+        background: linear-gradient(135deg, var(--primary-color) 0%, #5a1a1a 50%, var(--primary-dark) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+     
+     .newspaper-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23cd9f6f" opacity="0.15"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+        z-index: 1;
+      }
+     
+     .hero-overlay {
+       position: absolute;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: rgba(0, 0, 0, 0.2);
+       z-index: 2;
+     }
+     
+     .hero-content {
+       position: relative;
+       z-index: 3;
+       text-align: center;
+       color: white;
+       max-width: 900px;
+       padding: 0 20px;
+       animation: fadeInUp 1s ease-out;
+     }
+     
+     .hero-title {
+       font-size: 4.5rem;
+       font-weight: 900;
+       margin-bottom: 25px;
+       text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+       background: linear-gradient(45deg, #ffffff, #f0f0f0);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+       letter-spacing: -2px;
+     }
+     
+     .hero-subtitle {
+       font-size: 1.4rem;
+       font-weight: 300;
+       opacity: 0.95;
+       line-height: 1.7;
+       margin-bottom: 30px;
+     }
+     
+     .hero-stats {
+       display: flex;
+       justify-content: center;
+       gap: 40px;
+       margin-top: 40px;
+     }
+     
+     .stat-item {
+       text-align: center;
+       color: white;
+     }
+     
+     .stat-number {
+       font-size: 2.5rem;
+       font-weight: 700;
+       display: block;
+       color: var(--secondary-warm);
+     }
+     
+     .stat-label {
+       font-size: 0.9rem;
+       opacity: 0.8;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+     }
+     
+     @keyframes fadeInUp {
+       from {
+         opacity: 0;
+         transform: translateY(30px);
+       }
+       to {
+         opacity: 1;
+         transform: translateY(0);
+       }
+     }
     
     /* Make header logo bigger */
     #nav .navbar-brand img.logo {
       height: auto;
-      width: 60px; /* Increased logo size */
+      width: 60px;
       max-width: none;
     }
     
-    .coming-soon-section:before {
-      content: "";
-      position: absolute;
-      right: -250px;
-      bottom: -250px;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(rgba(66, 12, 2, 0.03), transparent 70%);
-    }
+    /* Articles Section */
+     .articles-section {
+       padding: 100px 0;
+       background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+       position: relative;
+     }
+     
+     .articles-section::before {
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       height: 1px;
+       background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+     }
+     
+     .container {
+       max-width: 1300px;
+       margin: 0 auto;
+       padding: 0 30px;
+     }
+     
+     .section-header {
+       text-align: center;
+       margin-bottom: 80px;
+       position: relative;
+     }
+     
+     .section-title {
+       font-size: 3rem;
+       font-weight: 800;
+       color: var(--primary-color);
+       margin-bottom: 20px;
+       position: relative;
+       display: inline-block;
+     }
+     
+     .section-title::after {
+       content: '';
+       position: absolute;
+       bottom: -10px;
+       left: 50%;
+       transform: translateX(-50%);
+       width: 60px;
+       height: 4px;
+       background: linear-gradient(90deg, var(--secondary-warm), var(--primary-color));
+       border-radius: 2px;
+     }
+     
+     .section-subtitle {
+       font-size: 1.2rem;
+       color: var(--accent-color);
+       max-width: 700px;
+       margin: 0 auto;
+       line-height: 1.7;
+       font-weight: 400;
+     }
     
-    .coming-soon-container {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-      z-index: 2;
-    }
+    /* Articles Grid */
+     .articles-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+       gap: 40px;
+       margin-bottom: 80px;
+     }
+     
+     /* Article Card */
+     .article-card {
+       background: white;
+       border-radius: 20px;
+       overflow: hidden;
+       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+       transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       position: relative;
+       border: 1px solid rgba(0, 0, 0, 0.05);
+     }
+     
+     .article-card::before {
+       content: '';
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+       opacity: 0;
+       transition: opacity 0.3s ease;
+       pointer-events: none;
+       border-radius: 20px;
+     }
+     
+     .article-card:hover {
+       transform: translateY(-15px) scale(1.02);
+       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+     }
+     
+     .article-card:hover::before {
+       opacity: 1;
+     }
+     
+     .article-image {
+       position: relative;
+       height: 280px;
+       overflow: hidden;
+       background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+     }
+     
+     .article-image img {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+       transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+       filter: brightness(0.95);
+     }
+     
+     .article-card:hover .article-image img {
+       transform: scale(1.08);
+       filter: brightness(1.05);
+     }
+     
+     .article-category {
+       position: absolute;
+       top: 20px;
+       left: 20px;
+       background: linear-gradient(135deg, var(--secondary-warm), #d4a574);
+       color: white;
+       padding: 8px 16px;
+       border-radius: 25px;
+       font-size: 0.75rem;
+       font-weight: 700;
+       text-transform: uppercase;
+       letter-spacing: 1px;
+       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+       backdrop-filter: blur(10px);
+     }
+     
+     .article-content {
+       padding: 35px 30px 30px;
+       position: relative;
+     }
+     
+     .article-title {
+       font-size: 1.4rem;
+       font-weight: 800;
+       color: var(--primary-color);
+       margin-bottom: 18px;
+       line-height: 1.3;
+       transition: color 0.3s ease;
+     }
+     
+     .article-card:hover .article-title {
+       color: var(--secondary-warm);
+     }
+     
+     .article-excerpt {
+       font-size: 1rem;
+       color: var(--accent-color);
+       line-height: 1.7;
+       margin-bottom: 25px;
+       font-weight: 400;
+     }
+     
+     .article-meta {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       margin-bottom: 25px;
+       font-size: 0.9rem;
+       color: #888;
+       padding-bottom: 20px;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+     }
+     
+     .article-date {
+       font-weight: 600;
+       color: var(--primary-color);
+     }
+     
+     .article-read-time {
+       background: rgba(0, 0, 0, 0.05);
+       padding: 4px 12px;
+       border-radius: 15px;
+       font-size: 0.8rem;
+       font-weight: 500;
+     }
+     
+     .article-link {
+       display: inline-flex;
+       align-items: center;
+       color: var(--secondary-warm);
+       font-weight: 700;
+       text-decoration: none;
+       transition: all 0.4s ease;
+       padding: 12px 20px;
+       border-radius: 25px;
+       background: rgba(205, 176, 111, 0.1);
+       border: 2px solid transparent;
+     }
+     
+     .article-link:hover {
+       color: white;
+       background: var(--secondary-warm);
+       transform: translateX(8px);
+       border-color: var(--secondary-warm);
+     }
+     
+     .article-link i {
+       margin-left: 10px;
+       transition: transform 0.4s ease;
+       font-size: 0.9rem;
+     }
+     
+     .article-link:hover i {
+       transform: translateX(5px);
+     }
     
-    .coming-soon-headline {
-      font-size: 4rem;
-      font-weight: 800;
-      color: var(--primary-color);
-      margin-bottom: 30px;
-      position: relative;
-      display: inline-block;
-    }
-    
-    .coming-soon-headline:after {
-      content: "";
-      position: absolute;
-      bottom: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-color), var(--secondary-warm));
-    }
-    
-    .coming-soon-description {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: var(--accent-color);
-      margin-bottom: 40px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .newspaper-icon {
-      font-size: 5rem;
-      color: var(--secondary-warm);
-      margin-bottom: 30px;
-    }
-    
-    .newspaper-features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 50px;
-      gap: 30px;
-    }
-    
-    .newspaper-feature {
-      flex: 1;
-      min-width: 250px;
-      max-width: 280px;
-      padding: 30px 20px;
-      background-color: #fff;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: all 0.4s ease;
-    }
-    
-    .newspaper-feature:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-    
-    .feature-icon {
-      font-size: 2.5rem;
-      color: var(--secondary-warm);
-      margin-bottom: 20px;
-    }
-    
-    .feature-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-    }
-    
-    .feature-text {
-      font-size: 0.95rem;
-      color: var(--accent-color);
-      line-height: 1.7;
-    }
-    
-    .newsletter-form {
-      margin-top: 50px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .newsletter-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 20px;
-    }
-    
-    .newsletter-input {
-      width: 100%;
-      padding: 15px;
-      border: 2px solid rgba(0, 0, 0, 0.1);
-      border-radius: 50px;
-      font-size: 1rem;
-      margin-bottom: 15px;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-    
-    .newsletter-input:focus {
-      border-color: var(--secondary-warm);
-    }
-    
-    .newsletter-button {
-      background-color: var(--secondary-warm);
-      color: #fff;
-      border: none;
-      padding: 15px 35px;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 15px rgba(205, 176, 111, 0.3);
-    }
-    
-    .newsletter-button:hover {
-      background-color: var(--primary-color);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(66, 12, 2, 0.3);
-    }
-    
-    .coming-soon-decoration {
-      position: absolute;
-      z-index: 1;
-      opacity: 0.6;
-    }
-    
-    .coming-soon-decoration.dots {
-      top: 20%;
-      right: 10%;
-      width: 200px;
-      height: 200px;
-      background-image: radial-gradient(rgba(205, 176, 111, 0.3) 2px, transparent 2px);
-      background-size: 15px 15px;
-    }
-    
-    .coming-soon-decoration.circle {
-      bottom: 15%;
-      left: 5%;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      border: 2px solid rgba(66, 12, 2, 0.07);
-    }
-    
-    @media only screen and (max-width: 768px) {
-      .coming-soon-headline {
-        font-size: 2.8rem;
+    /* Search Bar Styles */
+      .search-container {
+        margin-top: 50px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        position: relative;
       }
       
-      .coming-soon-description {
+      .search-box {
+        position: relative;
+        max-width: 600px;
+        width: 100%;
+        display: flex;
+        background: white;
+        border-radius: 60px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border: 2px solid rgba(205, 176, 111, 0.2);
+      }
+      
+      .search-box:hover {
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+        border-color: var(--secondary-warm);
+      }
+      
+      .search-box:focus-within {
+        box-shadow: 0 25px 60px rgba(205, 176, 111, 0.3);
+        transform: translateY(-3px);
+        border-color: var(--secondary-warm);
+      }
+      
+      .search-input {
+        flex: 1;
+        padding: 20px 30px;
+        border: none;
+        outline: none;
         font-size: 1.1rem;
+        background: transparent;
+        color: var(--primary-color);
+        font-weight: 500;
       }
       
-      .newspaper-feature {
-        min-width: 100%;
+      .search-input::placeholder {
+        color: #aaa;
+        font-weight: 400;
       }
-    }
+      
+      .search-button {
+        background: linear-gradient(135deg, var(--secondary-warm), #d4a574);
+        border: none;
+        padding: 20px 30px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .search-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+      }
+      
+      .search-button:hover::before {
+        left: 100%;
+      }
+      
+      .search-button:hover {
+        background: linear-gradient(135deg, var(--primary-color), #4a0e0e);
+        transform: scale(1.05);
+      }
+      
+      .search-button i {
+        font-size: 1.2rem;
+        position: relative;
+        z-index: 1;
+      }
+     
+     /* Search Results */
+     .no-results {
+       text-align: center;
+       padding: 40px;
+       color: var(--accent-color);
+       font-size: 1.1rem;
+     }
+     
+     .article-card.hidden {
+       display: none;
+     }
+
+     /* Newsletter Section */
+      .newsletter-section {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 60px 50px;
+        border-radius: 25px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .newsletter-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(205, 176, 111, 0.05) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+      }
+      
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      
+      .newsletter-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .newsletter-description {
+        font-size: 1.1rem;
+        color: var(--accent-color);
+        margin-bottom: 40px;
+        line-height: 1.7;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .newsletter-form {
+        display: flex;
+        max-width: 500px;
+        margin: 0 auto;
+        gap: 20px;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .newsletter-input {
+        flex: 1;
+        padding: 18px 25px;
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        border-radius: 60px;
+        font-size: 1.1rem;
+        outline: none;
+        transition: all 0.4s ease;
+        background: white;
+        font-weight: 500;
+      }
+      
+      .newsletter-input:focus {
+        border-color: var(--secondary-warm);
+        box-shadow: 0 0 0 4px rgba(205, 176, 111, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      .newsletter-button {
+        background: linear-gradient(135deg, var(--secondary-warm), #d4a574);
+        color: white;
+        border: none;
+        padding: 18px 35px;
+        border-radius: 60px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .newsletter-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+      }
+      
+      .newsletter-button:hover::before {
+        left: 100%;
+      }
+      
+      .newsletter-button:hover {
+        background: linear-gradient(135deg, var(--primary-color), #4a0e0e);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+    
+    /* Responsive Design */
+      @media (max-width: 1024px) {
+        .container {
+          padding: 0 25px;
+        }
+        
+        .articles-grid {
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 35px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .newspaper-hero {
+          height: 60vh;
+        }
+        
+        .hero-title {
+          font-size: 3rem;
+          letter-spacing: -1px;
+        }
+        
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+        
+        .hero-stats {
+          gap: 25px;
+          margin-top: 30px;
+        }
+        
+        .stat-number {
+          font-size: 2rem;
+        }
+        
+        .section-title {
+          font-size: 2.5rem;
+        }
+        
+        .search-box {
+          max-width: 100%;
+          margin: 0 20px;
+        }
+        
+        .search-input {
+          padding: 16px 20px;
+          font-size: 1rem;
+        }
+        
+        .search-button {
+          padding: 16px 25px;
+        }
+        
+        .articles-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+        
+        .article-card {
+          margin: 0 10px;
+        }
+        
+        .newsletter-form {
+          flex-direction: column;
+          gap: 20px;
+          max-width: 100%;
+        }
+        
+        .newsletter-section {
+          padding: 40px 25px;
+          margin: 0 20px;
+        }
+        
+        .newsletter-title {
+          font-size: 1.8rem;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .hero-title {
+          font-size: 2.2rem;
+        }
+        
+        .hero-subtitle {
+          font-size: 1rem;
+        }
+        
+        .hero-stats {
+          flex-direction: column;
+          gap: 20px;
+        }
+        
+        .section-title {
+          font-size: 2rem;
+        }
+        
+        .search-input {
+          padding: 14px 18px;
+          font-size: 0.95rem;
+        }
+        
+        .search-button {
+          padding: 14px 20px;
+        }
+        
+        .article-content {
+          padding: 25px 20px;
+        }
+        
+        .newsletter-section {
+          padding: 30px 20px;
+        }
+      }
+    
+
   </style>
 
   <!-- Inline fallback script for header -->
@@ -356,47 +806,153 @@
   <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
 
-  <!-- Coming Soon Section -->
-  <section class="coming-soon-section">
-    <div class="coming-soon-decoration dots"></div>
-    <div class="coming-soon-decoration circle"></div>
-    
-    <div class="coming-soon-container" data-aos="fade-up">
-      <i class="newspaper-icon fas fa-newspaper"></i>
-      <h1 class="coming-soon-headline">Coming Soon</h1>
-      <p class="coming-soon-description">
-        The STEM MUN Newspaper is a dynamic platform that showcases student engagement with global issues through articles, research papers, and creative content. It highlights key debates, publishes opinion pieces on international affairs, and covers major activities from all STEM MUN Agencies—such as the WHO, UNEP, UNSC, and others. The newspaper also features special editions during conferences, organizes writing hackathons, and offers a space for delegates to publish analytical reflections, policy insights, and SDG-related articles. It serves as the voice of STEM MUN, connecting delegates through information, dialogue, and shared perspectives.
+  <!-- Newspaper Hero Section -->
+  <section class="newspaper-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title" data-aos="fade-up">STEM MUN Newspaper</h1>
+      <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+        Exploring Global Issues Through Student Perspectives
       </p>
       
-      <div class="newspaper-features">
-        <div class="newspaper-feature" data-aos="fade-up" data-aos-delay="100">
-          <i class="feature-icon fas fa-globe-americas"></i>
-          <h3 class="feature-title">Global Issues Coverage</h3>
-          <p class="feature-text">
-            Our platform showcases student engagement with global issues through research articles, opinion pieces, and in-depth analysis of key international debates and diplomatic discussions.
-          </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">5+</span>
+          <span class="stat-label">Articles</span>
         </div>
-        
-        <div class="newspaper-feature" data-aos="fade-up" data-aos-delay="200">
-          <i class="feature-icon fas fa-building"></i>
-          <h3 class="feature-title">Agency Activities</h3>
-          <p class="feature-text">
-            Comprehensive coverage of major activities from all STEM MUN Agencies including WHO, UNEP, UNSC, and others, with special editions published during conferences.
-          </p>
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Readers</span>
         </div>
+        <!-- <div class="stat-item">
+          <span class="stat-number">25+</span>
+          <span class="stat-label">Countries</span>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles Section -->
+  <section class="articles-section">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <h2 class="section-title">Latest Articles</h2>
+        <p class="section-subtitle">
+          In-depth analysis and coverage of current global conflicts and international affairs
+        </p>
         
-        <div class="newspaper-feature" data-aos="fade-up" data-aos-delay="300">
-          <i class="feature-icon fas fa-pen-nib"></i>
-          <h3 class="feature-title">Delegate Publications</h3>
-          <p class="feature-text">
-            A dedicated space for delegates to publish analytical reflections, policy insights, and SDG-related articles, connecting the STEM MUN community through shared perspectives.
-          </p>
+        <!-- Search Bar -->
+        <div class="search-container">
+          <div class="search-box">
+            <input type="text" id="articleSearch" class="search-input" placeholder="Search articles...">
+            <button class="search-button" onclick="searchArticles()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
         </div>
       </div>
       
-      <div class="newsletter-form" data-aos="fade-up" data-aos-delay="400">
-        <h3 class="newsletter-title">Be the first to know when we launch</h3>
-        <form>
+      <div class="articles-grid">
+        <!-- Article 1: Gaza Crisis - Most Recent -->
+        <article class="article-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="article-image">
+            <img src="img/magazine/Alter from Gaza.jpg" alt="Gaza Crisis Analysis">
+            <div class="article-category">Middle East</div>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Crisis in Gaza: A Humanitarian Perspective</h3>
+            <p class="article-excerpt">
+              An in-depth analysis of the ongoing humanitarian crisis in Gaza, examining the international response and the role of diplomatic negotiations in conflict resolution.
+            </p>
+            <div class="article-meta">
+              <span class="article-date">July 28, 2025</span>
+              <span class="article-read-time">3 min read</span>
+            </div>
+            <a href="https://medium.com/@stemmun/a-letter-from-gaza-295aa5e2e573" class="article-link" target="_blank">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 2: Iran vs Israel -->
+        <article class="article-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="article-image">
+            <img src="img/magazine/IRAN VS Israel.jpg" alt="Iran Israel Tensions">
+            <div class="article-category">Geopolitics</div>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Iran-Israel Relations: Regional Security Implications</h3>
+            <p class="article-excerpt">
+              Exploring the complex dynamics between Iran and Israel, their impact on Middle Eastern stability, and the international community's mediation efforts.
+            </p>
+            <div class="article-meta">
+              <span class="article-date">June 21, 2025</span>
+              <span class="article-read-time">4 min read</span>
+            </div>
+            <a href="https://medium.com/@stemmun/behind-the-veil-of-flames-unmasking-the-middle-eastern-inferno-72151f56f9ef" class="article-link" target="_blank">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 3: Libya Civil War -->
+        <article class="article-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="article-image">
+            <img src="img/magazine/Libyan Civil War.jpg" alt="Libyan Civil War">
+            <div class="article-category">Conflict Resolution</div>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Libya's Path to Peace: Challenges and Opportunities</h3>
+            <p class="article-excerpt">
+              Analyzing the ongoing civil conflict in Libya, international intervention efforts, and the prospects for sustainable peace and democratic governance.
+            </p>
+            <div class="article-meta">
+              <span class="article-date">July 8, 2025</span>
+              <span class="article-read-time">5 min read</span>
+            </div>
+            <a href="https://medium.com/@stemmun/the-ghost-of-gaddafi-libyas-struggle-for-identity-83f68f52044c" class="article-link" target="_blank">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 4: Russia Ukraine -->
+        <article class="article-card" data-aos="fade-up" data-aos-delay="400">
+          <div class="article-image">
+            <img src="img/magazine/Russia vs Ukrine.jpg" alt="Russia Ukraine Conflict">
+            <div class="article-category">International Security</div>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Russia-Ukraine Conflict: Global Implications</h3>
+            <p class="article-excerpt">
+              Examining the broader implications of the Russia-Ukraine conflict on international law, global security architecture, and humanitarian principles.
+            </p>
+            <div class="article-meta">
+              <span class="article-date">June 21, 2025</span>
+              <span class="article-read-time">3 min read</span>
+            </div>
+            <a href="https://medium.com/@stemmun/the-valley-of-dawn-between-the-bears-claws-and-the-eagle-s-flight-a3efb8108a73" class="article-link" target="_blank">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Article 5: Yemen Civil War - Oldest -->
+        <article class="article-card" data-aos="fade-up" data-aos-delay="500">
+          <div class="article-image">
+            <img src="img/magazine/Yemeni Civil war.jpg" alt="Yemen Civil War">
+            <div class="article-category">Humanitarian Crisis</div>
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">Yemen's Humanitarian Crisis: A Call for Action</h3>
+            <p class="article-excerpt">
+              Investigating the devastating humanitarian impact of Yemen's civil war and the international community's response to one of the world's worst crises.
+            </p>
+            <div class="article-meta">
+              <span class="article-date">July 10, 2025</span>
+              <span class="article-read-time">4 min read</span>
+            </div>
+            <a href="https://medium.com/@stemmun/yemens-wound-a-war-the-world-forgot-543d6570d488" class="article-link" target="_blank">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+      
+      <div class="newsletter-section" data-aos="fade-up" data-aos-delay="600">
+        <h3 class="newsletter-title">Stay Updated</h3>
+        <p class="newsletter-description">Subscribe to receive the latest articles and updates from STEM MUN Newspaper</p>
+        <form class="newsletter-form">
           <input type="email" class="newsletter-input" placeholder="Your email address">
           <button type="submit" class="newsletter-button">Notify Me</button>
         </form>
@@ -519,6 +1075,135 @@
       once: true
     });
     
+    // Counter animation for hero stats
+    function animateCounter(element, target, duration = 2000) {
+      let start = 0;
+      const increment = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= target) {
+          element.textContent = target + '+';
+          clearInterval(timer);
+        } else {
+          element.textContent = Math.floor(start) + '+';
+        }
+      }, 16);
+    }
+    
+    // Function to automatically sort articles by date
+     function sortArticlesByDate() {
+       const articlesGrid = document.querySelector('.articles-grid');
+       const articles = Array.from(articlesGrid.querySelectorAll('.article-card'));
+       
+       // Sort articles by date (newest first)
+       articles.sort((a, b) => {
+         const dateA = new Date(a.querySelector('.article-date').textContent.trim());
+         const dateB = new Date(b.querySelector('.article-date').textContent.trim());
+         return dateB - dateA; // Descending order (newest first)
+       });
+       
+       // Clear the grid and re-append sorted articles
+       articlesGrid.innerHTML = '';
+       articles.forEach(article => {
+         articlesGrid.appendChild(article);
+       });
+     }
+     
+     // Initialize counters when page loads
+      window.addEventListener('load', function() {
+        // Sort articles by date first
+        sortArticlesByDate();
+        
+        setTimeout(() => {
+          const counters = document.querySelectorAll('.stat-number');
+          const targets = [5, 500]; // Articles, Readers (in K), Countries
+          const suffixes = ['+', '+']; // Corresponding suffixes
+          
+          counters.forEach((counter, index) => {
+            if (targets[index]) {
+              let start = 0;
+              const target = targets[index];
+              const increment = target / (2000 / 16);
+              const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                  counter.textContent = target + suffixes[index];
+                  clearInterval(timer);
+                } else {
+                  counter.textContent = Math.floor(start) + suffixes[index];
+                }
+              }, 16);
+            }
+          });
+        }, 1000);
+      });
+    
+    // Search functionality
+    function searchArticles() {
+      const searchTerm = document.getElementById('articleSearch').value.toLowerCase();
+      const articles = document.querySelectorAll('.article-card');
+      const articlesGrid = document.querySelector('.articles-grid');
+      let visibleCount = 0;
+      
+      articles.forEach(article => {
+        const title = article.querySelector('.article-title').textContent.toLowerCase();
+        const excerpt = article.querySelector('.article-excerpt').textContent.toLowerCase();
+        const category = article.querySelector('.article-category').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || excerpt.includes(searchTerm) || category.includes(searchTerm)) {
+          article.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          article.classList.add('hidden');
+        }
+      });
+      
+      // Remove existing no-results message
+      const existingNoResults = document.querySelector('.no-results');
+      if (existingNoResults) {
+        existingNoResults.remove();
+      }
+      
+      // Show no results message if needed
+      if (visibleCount === 0 && searchTerm.trim() !== '') {
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'no-results';
+        noResultsDiv.innerHTML = `
+          <i class="fa fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 20px;"></i>
+          <p>No articles found for "${searchTerm}"</p>
+          <p style="font-size: 0.9rem; margin-top: 10px;">Try searching with different keywords</p>
+        `;
+        articlesGrid.appendChild(noResultsDiv);
+      }
+    }
+    
+    // Real-time search as user types
+    document.getElementById('articleSearch').addEventListener('input', function() {
+      searchArticles();
+    });
+    
+    // Clear search when input is empty
+    document.getElementById('articleSearch').addEventListener('input', function() {
+      if (this.value.trim() === '') {
+        const articles = document.querySelectorAll('.article-card');
+        articles.forEach(article => {
+          article.classList.remove('hidden');
+        });
+        
+        const existingNoResults = document.querySelector('.no-results');
+        if (existingNoResults) {
+          existingNoResults.remove();
+        }
+      }
+    });
+    
+    // Enter key support
+    document.getElementById('articleSearch').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchArticles();
+      }
+    });
+    
     // Back to top button functionality
     $(document).ready(function() {
       $(window).scroll(function() {
@@ -536,4 +1221,4 @@
     });
   </script>
 </body>
-</html> 
+</html>
