@@ -154,4 +154,20 @@ select {
     font-size: 18px;
     font-weight: 700;
 }
-
+@media screen and (max-width: 480px){
+    .page-heading{
+        margin-top: 20px;
+        padding: 5px;
+    }
+    .contactForm{
+        width: 90% !important;
+    }
+    .sectionTitle{
+        font-size: 22px;
+    }
+    label{
+        font-weight: 700;
+        font-size: 18px;
+        margin: 4px;
+    }
+}
