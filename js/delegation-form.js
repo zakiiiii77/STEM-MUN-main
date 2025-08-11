@@ -623,6 +623,9 @@ textareas.forEach(textarea => {
   const form = document.getElementById('contactForm');
   if(!form) return;
 
+  // Flag to track user interaction to prevent auto-scroll on page load
+  let hasUserInteracted = false;
+
   const steps = Array.from(document.querySelectorAll('.form-step'));
   const stepIndicatorEls = Array.from(document.querySelectorAll('.step-indicator .step'));
   const progressFill = document.querySelector('.progressbar-fill');
@@ -648,15 +651,17 @@ textareas.forEach(textarea => {
     const pct = ((currentIndex) / Math.max(steps.length - 1, 1)) * 100;
     if(progressFill) progressFill.style.width = `${pct}%`;
     
-    // Scroll to form smoothly
-    setTimeout(() => {
-      const activeStep = steps[currentIndex];
-      if(activeStep){
-        const rect = activeStep.getBoundingClientRect();
-        const top = window.pageYOffset + rect.top - 120;
-        window.scrollTo({ top, behavior: 'smooth' });
-      }
-    }, 100);
+    // Only scroll to form after user interaction, not on initial page load
+    if (hasUserInteracted) {
+        setTimeout(() => {
+          const activeStep = steps[currentIndex];
+          if(activeStep){
+            const rect = activeStep.getBoundingClientRect();
+            const top = window.pageYOffset + rect.top - 120;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }, 100);
+    }
   }
 
   function validateStep(index){
@@ -712,6 +717,7 @@ textareas.forEach(textarea => {
 
   // Hook navigation buttons
   nextBtns.forEach(btn => btn.addEventListener('click', () => {
+    hasUserInteracted = true; // Enable auto-scroll for user-initiated navigation
     const target = Number(btn.dataset.next) - 1;
     const ok = validateStep(currentIndex);
     if(!ok){
@@ -726,12 +732,14 @@ textareas.forEach(textarea => {
   }));
 
   backBtns.forEach(btn => btn.addEventListener('click', () => {
+    hasUserInteracted = true; // Enable auto-scroll for user-initiated navigation
     const target = Number(btn.dataset.back) - 1;
     goTo(target);
   }));
 
   // Clicking indicator steps
   stepIndicatorEls.forEach((el, i) => el.addEventListener('click', () => {
+    hasUserInteracted = true; // Enable auto-scroll for user-initiated navigation
     if(i <= currentIndex || validateStep(currentIndex)){
       goTo(i);
     }
@@ -739,4 +747,11 @@ textareas.forEach(textarea => {
 
   // Initialize - show only first step
   updateUI();
+
+  // Add event listeners for form field interactions
+  document.querySelectorAll('input, select, textarea').forEach(field => {
+    field.addEventListener('focus', () => {
+      hasUserInteracted = true; // Enable auto-scroll for form field interactions
+    });
+  });
 })();
