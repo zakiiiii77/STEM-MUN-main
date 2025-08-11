@@ -16,8 +16,10 @@
     <link rel="icon" type="image/png" href="./icon.svg" />
     <link rel="stylesheet" href="./css/delegation-form.css">
 
-
+    
     <script src="./js/preload-header.js"></script>
+    <!-- Added AOS CSS for smooth reveal animations -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
 </head>
 
 <body>
@@ -29,10 +31,66 @@
 
 
         <h1 class="page-heading">APPLY NOW</h1>
+        <!-- New: Intro + Step Indicator -->
+        <div class="form-intro" data-aos="fade-up">
+            <p class="form-subtitle">Join STEM MUN and experience world-class diplomacy, leadership, and public speaking. Fill out the application below to get started.</p>
+            
+            <!-- Countdown Timer -->
+            <div class="countdown-container" data-aos="fade-up" data-aos-delay="200">
+                <div class="countdown-header">
+                    <h3>Registration Deadline</h3>
+                    <p>Applications close on August 20, 2025 at 12:00 PM (Egypt Time)</p>
+                </div>
+                <div class="countdown-timer" id="countdown-timer">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+                <div class="deadline-warning" id="deadline-warning" style="display: none;">
+                    <h3>⚠️ Registration Closed</h3>
+                    <p>The deadline for applications has passed. Please contact us for more information.</p>
+                </div>
+            </div>
+            
+            <div class="step-indicator">
+                <div class="step active" data-step="1">
+                    <span class="step-index">1</span>
+                    <small>Personal</small>
+                </div>
+                <div class="divider"></div>
+                <div class="step" data-step="2">
+                    <span class="step-index">2</span>
+                    <small>Essays</small>
+                </div>
+                <div class="divider"></div>
+                <div class="step" data-step="3">
+                    <span class="step-index">3</span>
+                    <small>Agreement</small>
+                </div>
+            </div>
+            <!-- New: progress bar -->
+            <div class="progressbar">
+                <div class="progressbar-fill" style="width: 0%"></div>
+            </div>
+        </div>
 
-        <form id="contactForm" name="contactForm" class="whole-form">
+        <!-- Add novalidate to manage custom step validation -->
+        <form id="contactForm" name="contactForm" class="whole-form" novalidate>
 
-            <div class="contactForm" class="form-step active">
+            <div id="step-1" class="contactForm form-step" data-step="1" data-aos="fade-up" data-aos-delay="50">
                 <h2 class="sectionTitle">Personal Information</h2>
                 <label>Full Name:</label>
                 <input class="inputs" type="text" name="name" required />
@@ -267,11 +325,14 @@
                     <option value="Zimbabwe">Zimbabwe</option>
                 </select>
 
-    
+                <!-- New: Navigation -->
+                <div class="form-nav">
+                    <button type="button" class="nav-btn next-btn" data-next="2" aria-label="Next step to Essays">Next: Essays</button>
+                </div>
             </div>
 
 
-            <div class="contactForm" class="form-step">
+            <div id="step-2" class="contactForm form-step" data-step="2" data-aos="fade-up" data-aos-delay="100">
                 <h2 class="sectionTitle">Essays Questions</h2>
                 <label class="essays">What motivates you to participate in this MUN conference, and how do you think it
                     will contribute to your personal and academic development? (Max: 150 words)</label>
@@ -280,10 +341,15 @@
                 <label class="essays">Describe a global issue you care about and explain how you would approach solving
                     it if you were a delegate at the UN.(Max: 150 words) </label>
                 <textarea class="inputs" type="text" name="Essay2" maxlength="825" required></textarea>
-            
+
+                <!-- New: Navigation -->
+                <div class="form-nav">
+                    <button type="button" class="nav-btn ghost back-btn" data-back="1" aria-label="Back to Personal">Back</button>
+                    <button type="button" class="nav-btn next-btn" data-next="3" aria-label="Next step to Agreement">Next: Agreement</button>
+                </div>
             </div>
 
-            <div class="contactForm" class="form-step">
+            <div id="step-3" class="contactForm form-step" data-step="3" data-aos="fade-up" data-aos-delay="150">
                 <h2 class="sectionTitle">Confirmation & Agreement</h2>
                 <label>Please read the following statements carefully and confirm your agreement:</label>
                 <p class="confirmations">- I confirm that all the information provided in this application is accurate
@@ -306,8 +372,14 @@
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
+
+                <!-- New: Navigation -->
+                <div class="form-nav">
+                    <button type="button" class="nav-btn ghost back-btn" data-back="2" aria-label="Back to Essays">Back</button>
+                    <button type="submit" id="submit-btn">Submit</button>
+                </div>
             </div>
-            <button type="submit" id="submit-btn">Submit</button>
+            <!-- Removed standalone submit button; now inside step 3 nav -->
         </form>
 
 
@@ -413,6 +485,68 @@
     </div>
 
     <script src="./js/include-header.js"></script>
+    <script src="./js/countdown-timer.js"></script>
+    <script src="./js/dropdown-enhancement.js"></script>
+    <script src="./js/dropdown-fixes.js"></script>
     <script src="./js/delegation-form.js"></script>
+    <!-- AOS Script -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations with enhanced settings
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-quart',
+            once: true,
+            offset: 50,
+            delay: 100
+        });
+        
+        // Enhanced page loading animation
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+            
+            // Stagger form element animations
+            const formElements = document.querySelectorAll('.form-step .input-group, .form-step .form-nav');
+            formElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    element.style.transition = 'all 0.6s ease-out';
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+        
+        // Add smooth hover effects to interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const interactiveElements = document.querySelectorAll('.inputs, .btn, .step');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                element.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Enhanced form focus management
+            const inputs = document.querySelectorAll('.inputs');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+            });
+        });
+      if (window.AOS) {
+        AOS.init({ duration: 900, easing: 'ease-in-out', once: true });
+      }
+    </script>
 
 </body>
+</html>
