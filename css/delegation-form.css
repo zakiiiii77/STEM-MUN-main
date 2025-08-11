@@ -42,6 +42,11 @@ body {
     /* border: solid 4px #45110b; */
     border-radius: 30px;
     box-shadow: 0 6px 20px rgba(150, 79, 69, 0.6) !important;
+    transition: transform 0.3s ease;
+}
+.contactForm:hover{
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 6px 20px rgba(230, 226, 226, 0.6) !important;
 }
 
 input.inputs,
@@ -87,6 +92,11 @@ label {
     margin-bottom: 0px;
     color: white;
     align-self: center;
+    text-shadow: 0 0 5px #986761, 0 0 5px #986761;
+    transition: transform 0.3s ease;
+}
+.page-heading:hover{
+    transform: translateY(-10px) scale(1.1)
 }
 
 .middle-layer {
