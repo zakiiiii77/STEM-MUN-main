@@ -1,0 +1,13 @@
+/* Main CSS File - Imports all modular CSS files */
+
+/* Import Variables and Base Styles */
+@import url('variables.css');
+
+/* Import Header Styles */
+@import url('header.css');
+
+/* Import Footer Styles */
+@import url('footer.css');
+
+/* Import Utility Classes */
+@import url('utilities.css'); 

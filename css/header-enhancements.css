@@ -1,0 +1,391 @@
+/* 
+ * STEM MUN - Advanced Header Enhancements
+ * Modern animations and visual effects for the header
+ */
+
+/* Advanced Header Transitions */
+header {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease !important;
+  will-change: transform, background-color;
+}
+
+/* Header hide/show on scroll */
+header.header-hidden {
+  transform: translateY(-100%) !important;
+}
+
+/* Improved navigation spacing and alignment */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-header {
+  padding: 5px 0;
+}
+
+#nav {
+  padding: 0 30px !important;
+}
+
+/* Subtle animations for menu items */
+.main-nav > li {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0 5px;
+}
+
+/* Navigation link styles */
+.main-nav > li > a {
+  padding: 20px 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px;
+}
+
+/* CTA button pulse animation */
+@keyframes ctaPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(205, 176, 111, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(205, 176, 111, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(205, 176, 111, 0);
+  }
+}
+
+#cta.pulse {
+  animation: ctaPulse 1s ease-out;
+}
+
+/* Mobile menu staggered animation */
+@media only screen and (max-width: 767px) {
+  .nav.open .main-nav li {
+    animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* Scroll progress indicator */
+.scroll-progress-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--secondary-warm), #e9d8ad);
+  transition: width 0.15s ease;
+  z-index: 1000;
+  box-shadow: 0 0 10px rgba(205, 176, 111, 0.5);
+}
+
+/* Notification badge */
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  width: 18px;
+  height: 18px;
+  background-color: var(--secondary-warm);
+  color: white;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.2);
+  }
+  20% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Menu overlay for mobile */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 98;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Desktop menu hover effects */
+@media only screen and (min-width: 768px) {
+  /* Better spacing for navigation */
+  .navbar-right {
+    margin-right: 0 !important;
+  }
+  
+  .main-nav > li > a {
+    position: relative;
+    overflow: hidden;
+    padding: 22px 12px !important;
+  }
+  
+  .main-nav > li > a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-warm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  
+  .main-nav > li > a:hover::after,
+  .main-nav > li.active > a::after {
+    width: 100%;
+    opacity: 1;
+  }
+  
+  /* Enhanced dropdown menu effects */
+  .main-nav li.has-dropdown {
+    position: relative;
+  }
+  
+  .main-nav li.has-dropdown:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -3px;
+    left: 0;
+    background-color: transparent;
+    z-index: 1001;
+    transition: background-color 0.3s ease;
+  }
+  
+  .main-nav li.has-dropdown:hover:before {
+    background-color: var(--secondary-warm);
+  }
+  
+  /* Advanced dropdown animation */
+  .dropdown-menu {
+    transform-origin: top center;
+    transform: perspective(800px) rotateX(-15deg) translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+    clip-path: inset(0 0 100% 0);
+    pointer-events: none;
+    padding: 10px 0 !important;
+    min-width: 220px !important;
+  }
+  
+  .main-nav li.has-dropdown:hover .dropdown-menu {
+    transform: perspective(800px) rotateX(0deg) translateY(0);
+    opacity: 1;
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    pointer-events: auto;
+  }
+  
+  /* Dropdown item hover effects */
+  .dropdown-menu li a {
+    display: block;
+    position: relative;
+    padding: 12px 25px;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+  
+  .dropdown-menu li a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--secondary-warm);
+    transform: scaleY(0);
+    transition: transform 0.3s ease, width 0.3s ease;
+    z-index: -1;
+    transform-origin: bottom;
+  }
+  
+  .dropdown-menu li a:hover:before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+  
+  /* Shimmer effect on nav items */
+  .main-nav > li > a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.7s ease;
+  }
+  
+  .main-nav > li > a:hover::before {
+    left: 100%;
+  }
+  
+  /* Dropdown indicators with animations */
+  .main-nav li.has-dropdown > a::after {
+    content: "\f107";
+    font-family: "FontAwesome";
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+  }
+  
+  .main-nav li.has-dropdown:hover > a::after {
+    transform: rotate(180deg);
+  }
+  
+  /* Text scale animation on hover */
+  .main-nav > li > a {
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: inline-block;
+  }
+  
+  .main-nav > li > a:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Subtle nav spacing changes on hover */
+  .main-nav {
+    transition: gap 0.3s ease;
+  }
+  
+  .main-nav:hover li {
+    margin-right: 2px;
+  }
+  
+  .main-nav:hover li:hover {
+    margin-right: 0;
+  }
+  
+  /* CTA button specific styling */
+  #cta {
+    margin-left: 10px !important;
+    padding: 10px 25px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Logo 3D rotation */
+@media (prefers-reduced-motion: no-preference) {
+  .logo {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .logo:hover {
+    transform: rotateY(15deg) rotateX(5deg) scale(1.1);
+  }
+}
+
+/* Improved mobile menu transitions */
+@media only screen and (max-width: 767px) {
+  .dropdown-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.3s ease;
+    opacity: 0;
+    padding: 0 15px;
+  }
+  
+  .main-nav li.open-drop .dropdown-menu {
+    opacity: 1;
+    padding: 10px 15px;
+  }
+  
+  /* Fix mobile navigation height */
+  #nav {
+    height: 60px !important;
+    padding: 0 15px !important;
+  }
+  
+  .navbar-header {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  
+  /* Mobile menu hamburger animation */
+  .nav-collapse:hover span,
+  .nav-collapse:hover span:before,
+  .nav-collapse:hover span:after {
+    background-color: var(--secondary-warm);
+  }
+  
+  .nav-collapse span,
+  .nav-collapse span:before,
+  .nav-collapse span:after {
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+}
+
+/* Special active state for current page */
+.main-nav > li.active > a {
+  position: relative;
+}
+
+.main-nav > li.active > a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-warm);
+  animation: activeIndicatorPulse 2s infinite;
+}
+
+@keyframes activeIndicatorPulse {
+  0% {
+    box-shadow: 0 0 2px rgba(205, 176, 111, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 10px rgba(205, 176, 111, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 2px rgba(205, 176, 111, 0.2);
+  }
+} 

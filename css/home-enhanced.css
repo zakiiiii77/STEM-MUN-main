@@ -1,0 +1,276 @@
+/* Additional Home Page Enhancements - STEM MUN */
+
+/* Back to top button improvements */
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--secondary-warm);
+  color: var(--neutral-color);
+  border-radius: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 15px rgba(205, 176, 111, 0.3);
+  z-index: 99;
+  cursor: pointer;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+#back-to-top:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(66, 12, 2, 0.3);
+}
+
+/* Fancy underline animation for menu items */
+.main-nav li a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.main-nav li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--secondary-warm);
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.main-nav li a:hover::after {
+  visibility: visible;
+  width: 100%;
+}
+
+.main-nav li.active a::after,
+.main-nav li:hover a::after {
+  visibility: visible;
+  width: 100%;
+}
+
+/* Advanced section transitions */
+.section-transition {
+  position: relative;
+  height: 100px;
+  background: linear-gradient(to bottom right, 
+    transparent 49.5%, 
+    var(--neutral-color) 50%);
+  margin-top: -100px;
+  z-index: 10;
+}
+
+.section-transition.reverse {
+  background: linear-gradient(to top right, 
+    transparent 49.5%, 
+    var(--neutral-color) 50%);
+  margin-bottom: -100px;
+  margin-top: 0;
+}
+
+/* Text highlight effects */
+.text-highlight {
+  position: relative;
+  display: inline-block;
+}
+
+.text-highlight::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(205, 176, 111, 0.2);
+  transform: skewX(-15deg);
+  z-index: -1;
+  transition: height 0.3s ease;
+}
+
+.text-highlight:hover::before {
+  height: 50%;
+}
+
+/* Card hover effects */
+.hover-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-card::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, var(--secondary-warm), var(--primary-color));
+  z-index: -2;
+  transform: scale(0.95);
+  opacity: 0;
+  border-radius: inherit;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hover-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.hover-card:hover::before {
+  opacity: 0.5;
+  transform: scale(1);
+}
+
+/* Floating animation */
+@keyframes floating {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.float-animation {
+  animation: floating 6s ease-in-out infinite;
+}
+
+/* Enhanced image hover effects */
+.image-hover {
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-hover img {
+  transition: all 0.5s ease;
+}
+
+.image-hover:hover img {
+  transform: scale(1.05);
+}
+
+.image-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(66, 12, 2, 0) 0%, rgba(66, 12, 2, 0.6) 100%);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.image-hover:hover::after {
+  opacity: 1;
+}
+
+/* Text reveal animations */
+@keyframes revealFromLeft {
+  0% { transform: translateX(-50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes revealFromRight {
+  0% { transform: translateX(50px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes revealFromBottom {
+  0% { transform: translateY(50px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.reveal-left {
+  animation: revealFromLeft 1s forwards;
+}
+
+.reveal-right {
+  animation: revealFromRight 1s forwards;
+}
+
+.reveal-bottom {
+  animation: revealFromBottom 1s forwards;
+}
+
+/* Pulsating effect */
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(205, 176, 111, 0.4); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(205, 176, 111, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(205, 176, 111, 0); }
+}
+
+.pulse-effect {
+  animation: pulse 2s infinite;
+}
+
+/* Typing text animation */
+.typing-animation {
+  overflow: hidden;
+  border-right: .15em solid var(--secondary-warm);
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--secondary-warm) }
+}
+
+/* 3D card effect */
+.card-3d {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, var(--secondary-warm), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-warm);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+} 

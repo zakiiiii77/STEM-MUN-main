@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+ 
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>STEM Model United Nations</title>
+  <meta description="Model United Nations is a Global Student
+    Activity that gained Popularity among thousands of
+    students from universities and high schools all
+    around the globe. Students get the opportunity to
+    experience the role of UN representatives, and run
+    a simulation for a typical UN conference. An MUN
+    conference is centered on a specified topic: a war,
+    conflict, famine, or humanitarian crisis somewhere
+    in the world. The topic is related to different parties
+    and countries. Accordingly, the topic is discussed
+    throughout the conference by delegates-the
+    representatives assigned for a specific country,
+    who talks from its perspective-. Throughout the
+    season, delegates engage in debates, academic
+    support sessions, and various activities that
+    contribute to enhancing social, academic, and intellectual skills." />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet" />
+
+  <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
+  <link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+  <link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+  <link rel="stylesheet" href="css/font-awesome.min.css" />
+  <link type="text/css" rel="stylesheet" href="css/style.css" />
+  <link type="text/css" rel="stylesheet" href="css/footer.css" />
+  <link rel="icon" type="image/png" href="icon.svg" />
+  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="https://kit.fontawesome.com/0d89f9ac34.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+  <link rel="stylesheet" href="css/animations.css" />
+  <script src="js/fast-preloader.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: Poppins;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        opacity: 1;
+        text-align: left;
+        padding: 15% 5% 5% 5%;
+        width: 100%;
+        height: auto;
+        background-position: bottom;
+        background-blend-mode: luminosity;
+        background-repeat: no-repeat;
+        margin-bottom: 0;
+        background-color: #a1c2ff;
+        color: white;
+        text-align: center;
+    }
+
+    .flex-container h1 {
+        margin: 1rem;
+        color: #0f5c8f;
+    }
+
+    .flex-container p {
+        font-size: 2rem;
+    }
+
+    .highboard {
+        padding: 2rem;
+    }
+
+    .shelf {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 3.5rem 0;
+    }
+
+    .highboard h2 {
+        text-align: center;
+        margin: 1.5rem;
+        position: relative;
+    }
+
+    .highboard h2 span {
+        font-size: 65%;
+        position: absolute;
+        left: -30px;
+        top: -22px;
+        width: 100%;
+        height: 100%;
+        color: #e3e3e3e8;
+    }
+
+    .profile-card {
+        background-position: center;
+        position: relative;
+        width: 240px;
+        height: 240px;
+        background-color: #6495ed42;
+        padding: 15px;
+        border-radius: 50%;
+        box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
+        transition: all .4s;
+        margin: 4rem 1.5rem;
+    }
+
+    .profile-card:hover {
+        border-radius: 10px;
+        height: 260px;
+    }
+
+    .profile-card .img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .profile-card:hover img {
+        border-radius: 10px;
+        transform: translateY(-80px);
+    }
+
+    .img img {
+        object-fit: cover;
+        object-position: top;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        transition: all .4s;
+        z-index: 99;
+    }
+
+    .caption {
+        text-align: center;
+        transform: translateY(-80px);
+        opacity: 0;
+        pointer-events: none;
+        transition: all .5s;
+    }
+
+    .profile-card:hover .caption {
+        opacity: 1;
+        pointer-events: all;
+        padding-top: 1rem;
+    }
+
+    .caption h3 {
+        font-size: 19px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .caption p {
+        font-size: 12px;
+        font-weight: 500;
+        margin: 2px 0 12px 0;
+    }
+
+    .caption .social-links i {
+        font-size: 21px;
+        margin: 0 3px;
+        cursor: pointer;
+        color: #333;
+        transition: all .4s;
+    }
+
+    .caption .social-links i:hover {
+        color: #0c52a1;
+    }
+
+    @media only screen and (max-width: 567px) {
+        .flex-container h1 {
+            font-size: 3.5rem;
+            margin: 1.5rem;
+        }
+
+        .flex-container p {
+            font-size: 1.5rem;
+        }
+
+        .highboard h2 span {
+            font-size: 65%;
+            position: absolute;
+            left: -30px;
+            top: -22px;
+        }
+    }
+
+    .send {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 10%;
+        margin-bottom: 20px;
+        background: #a1c2ff;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Programs Section Styles */
+    .programs-section {
+      padding: 100px 0;
+      background-color: #f9f9f9;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .programs-section:before {
+      content: "";
+      position: absolute;
+      right: -250px;
+      bottom: -250px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(rgba(66, 12, 2, 0.03), transparent 70%);
+    }
+    #nav .navbar-brand img.logo {
+      height: auto;
+      width: 65px;
+      height: 65px; /* Increased logo size */
+      max-width: none;
+    }
+    
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #420c02;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-header h2:after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #420c02, #cdb06f);
+    }
+    
+    .section-header p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #666;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .programs-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+      padding: 0 20px;
+    }
+    
+    .program-card {
+      flex: 1;
+      min-width: 300px;
+      max-width: 380px;
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(240, 240, 240, 1);
+    }
+    
+    .program-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border-color: rgba(205, 176, 111, 0.3);
+    }
+    
+    .program-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, #cdb06f 0%, #420c02 100%);
+      transition: all 0.4s ease;
+    }
+    
+    .program-card:hover:before {
+      width: 100%;
+      opacity: 0.05;
+    }
+    
+    .program-icon {
+      font-size: 3rem;
+      color: #cdb06f;
+      margin-bottom: 25px;
+      transition: all 0.3s ease;
+    }
+    
+    .program-card:hover .program-icon {
+      transform: translateY(-10px);
+      color: #420c02;
+    }
+    
+    .program-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #420c02;
+      margin-bottom: 20px;
+    }
+    
+    .program-card p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    
+    .program-btn {
+      display: inline-block;
+      padding: 10px 25px;
+      background-color: transparent;
+      border: 2px solid #cdb06f;
+      color: #420c02;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .program-btn:hover {
+      background-color: #cdb06f;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(205, 176, 111, 0.3);
+    }
+    
+    @media only screen and (max-width: 992px) {
+      .program-card {
+        min-width: 45%;
+      }
+    }
+    
+    @media only screen and (max-width: 768px) {
+      .program-card {
+        min-width: 100%;
+        margin-bottom: 30px;
+      }
+      
+      .section-header h2 {
+        font-size: 2.2rem;
+      }
+    }
+      #apply-btn{
+        background-color: #cdb06f; 
+        border: 1px solid #cdb06f; 
+        border-radius: 30px; 
+        height: 40px; 
+        width: 110px; 
+        color: #f9f9f9;
+        position: relative;
+      }
+      #apply-btn:hover{
+        background-color: #420c02 ;
+        border: 1px solid #420c02 ;
+      }
+  </style>
+  <link type="text/css" rel="stylesheet" href="css/header.css" />
+  <link type="text/css" rel="stylesheet" href="css/header-enhancements.css" />
+  <link type="text/css" rel="stylesheet" href="css/variables.css" />
+  <link type="text/css" rel="stylesheet" href="css/utilities.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link type="text/css" rel="stylesheet" href="css/events-enhanced.css" />
+  <link type="text/css" rel="stylesheet" href="css/lazy-loading.css" />
+  
+  <!-- Inline fallback script for header -->
+  <script>
+    // Wait for the DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set a timeout to check if the header was loaded by include-header.js
+      setTimeout(function() {
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        const headerContent = headerPlaceholder.innerHTML;
+        
+        // If the header is still empty or only contains an error message after 2 seconds,
+        // add the inline header as fallback
+        if (!headerContent || headerContent.includes('Error loading header')) {
+          console.log('Using inline header as fallback');
+          
+          // Load the header inline (copy of the header.html content)
+          headerPlaceholder.innerHTML = `
+          <header>
+            <nav id="nav" class="navbar nav">
+              <div class="navbar-header">
+                <div id="svg-icon" class="navbar-brand">
+                  <a href="index.html">
+                    <img class="logo" src="img/logo.svg" alt="logo" />
+                  </a>
+                </div>
+              </div>
+              <div class="nav-collapse">
+                <span></span>
+              </div>
+              <ul class="main-nav nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li class="has-dropdown">
+                  <a href="#">Events</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="events.html">All Events</a></li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                  </ul>
+                </li>
+                <li class="has-dropdown">
+                  <a href="#">Programs</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="conferences.html">Conferences</a></li>
+                  </ul>
+                </li>
+                <li><a href="Team.html">Meet The Board</a></li>
+                <li><a href="newspaper.html">Newspaper</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="delegates.html" id="cta">Become a Delegate</a></li>
+              </ul>
+            </nav>
+          </header>
+          `;
+          
+          // Initialize navigation functionality
+          initNavFunctionalityFallback();
+        }
+      }, 2000); // Check after 2 seconds
+    });
+    
+    // Fallback navigation functionality
+    function initNavFunctionalityFallback() {
+      // Mobile Menu Toggle
+      const navCollapse = document.querySelector('.nav-collapse');
+      if (navCollapse) {
+        navCollapse.addEventListener('click', function() {
+          document.getElementById('nav').classList.toggle('open');
+          document.body.classList.toggle('nav-open');
+        });
+      }
+      
+      // Handle Dropdowns on Mobile
+      const dropdownLinks = document.querySelectorAll('.main-nav li.has-dropdown > a');
+      dropdownLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (window.innerWidth < 768) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('open');
+            const dropdown = this.nextElementSibling;
+            if (dropdown.style.display === 'block') {
+              dropdown.style.display = 'none';
+            } else {
+              dropdown.style.display = 'block';
+            }
+          }
+        });
+      });
+      
+      // Fixed header on scroll
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+          document.getElementById('nav').classList.add('fixed-nav');
+          document.querySelector('header').classList.add('scrolled');
+        } else {
+          document.getElementById('nav').classList.remove('fixed-nav');
+          document.querySelector('header').classList.remove('scrolled');
+        }
+      });
+    }
+  </script>
+
+ 
+    <!-- Fast preloader script -->
+    <script src="js/fast-preloader.js"></script>
+    <script src="js/fix-header-color.js"></script>
+</head>
+
+<body>
+
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Events Hero Section -->
+  <section class="events-hero">
+    <div class="events-hero-decoration circle-1"></div>
+    <div class="events-hero-decoration circle-2"></div>
+    <div class="events-hero-content">
+      <span class="events-hero-tag">STEM Model United Nations</span>
+      <h1 class="events-hero-headline">Discover Our <span>Events</span> and Activities</h1>
+      <p class="events-hero-description">Join us for conferences, competitions, and community activities that foster diplomacy, leadership, and global awareness.</p>
+    </div>
+  </section>
+
+  <!-- Section Divider -->
+  <div class="section-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+      <path fill="#f9f9f9" fill-opacity="1" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,100L1360,100C1280,100,1120,100,960,100C800,100,640,100,480,100C320,100,160,100,80,100L0,100Z"></path>
+    </svg>
+  </div>
+
+  <!-- Events Section -->
+  <section class="events-section">
+    <div class="events-container">
+      <!-- Event Card 1: Outing -->
+      <div class="event-card">
+        <span class="event-card-tag">Outing</span>
+        <div class="event-card-inner">
+          <div class="event-card-content">
+            <span class="event-card-date"><i class="fas fa-calendar-alt"></i> Recent Event</span>
+            <h3 class="event-card-title">MUN Community Outing</h3>
+            <p class="event-card-text">
+              Let's rap up what our young diplomats have successfully done in this season's outing!
+              It was such a fantastic opportunity for them to break the ice and improve their networks and connections.
+              In addition to the jumping rope competition, playing cards, and the football match, which generally provided them with a mix of quality time and enjoyment provided to them with their peers, it also provided a good way for our theme "mental well-being" to be clearly introduced to them.
+            </p>
+            <p class="event-card-text">
+              It was a fruitful opportunity and a breathtaking competition for the amazing talents in our community. We want to express profound gratitude to all the talents who stood out for their aptitude, making this experience enjoyable and ensuring a mental well-being theme for this season.
+            </p>
+          </div>
+          <div class="event-card-media">
+            <div id="about-slider" class="owl-carousel owl-theme">
+              <img src="img/outing/o1.jpeg" alt="MUN Outing Event" />
+              <img data-src="img/outing/o2.jpeg" alt="MUN Outing Activities" />
+              <img data-src="img/outing/o3.jpeg" alt="MUN Outing Group" />
+              <img data-src="img/outing/o6.jpeg" alt="MUN Outing" />
+              <img data-src="img/outing/o7.jpeg" alt="MUN Outing Participants" />
+            </div>
+            <div class="custom-nav custom-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="custom-nav custom-next"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Card 2: Sports Event -->
+      <div class="event-card">
+        <span class="event-card-tag">Sports</span>
+        <div class="event-card-inner">
+          <div class="event-card-content">
+            <span class="event-card-date"><i class="fas fa-calendar-alt"></i> July 22, 2024</span>
+            <h3 class="event-card-title">Kayaking Sports Event</h3>
+            <p class="event-card-text">
+              Completing what STEM MUN has started with the theme of mental well-being, our young diplomats had a special experience with the sports event held on Monday, 22/7/2024.
+              In this event, they explored how mental health gets affected by doing sports, but today's sport was a bit different. They went kayaking in El Zamalk with their peers, and in addition to that, they had a good discussion with Dr. Mina Nasser and Abanoub Gamil, who also experienced kayaking with them.
+            </p>
+            <p class="event-card-text">
+              And now that's your turn, share with us how the sports you do affect your mental health.
+            </p>
+          </div>
+          <div class="event-card-media">
+            <div id="event-slider" class="owl-carousel owl-theme">
+              <img src="img/sports/s1.jpeg" alt="MUN Sports Event" />
+              <img data-src="img/sports/s2.jpeg" alt="MUN Kayaking" />
+              <img data-src="img/sports/s3.jpeg" alt="MUN Sports Activities" />
+              <img data-src="img/sports/s5.jpeg" alt="MUN Sports and Mental Health" />
+              <img data-src="img/sports/s7.jpeg" alt="MUN Sports Participants" />
+            </div>
+            <div class="custom-nav custom-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="custom-nav custom-next"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Card 3: Glimpse from the Past -->
+      <div class="event-card">
+        <span class="event-card-tag">Community</span>
+        <div class="event-card-inner">
+          <div class="event-card-content">
+            <span class="event-card-date"><i class="fas fa-calendar-alt"></i> Past Event</span>
+            <h3 class="event-card-title">Park Preservation Campaign</h3>
+            <p class="event-card-text">
+              As a follow up to our Public Park - preserving campaign, we paid a visit to the wonderful El Horreya park, where we an event dedicated to cleaning the park. Most MUN members participated in the cleaning and showed great diligence. By the end of the day, we were able to clean most of the park. This event was also a great opportunity for members to catch up and know more about each other. Members also participated in a number of fun activities.
+            </p>
+          </div>
+          <div class="event-card-media">
+            <div id="glimpse-slider" class="owl-carousel owl-theme">
+              <img src="img/glimpse/g1.jpg" alt="Park Preservation" />
+              <img data-src="img/glimpse/g2.jpg" alt="Park Cleaning Event" />
+              <img data-src="img/glimpse/g3.jpg" alt="MUN Park Event" />
+              <img data-src="img/glimpse/g4.jpg" alt="El Horreya Park" />
+              <img data-src="img/glimpse/g5.jpg" alt="MUN Community Service" />
+              <img data-src="img/glimpse/g6.jpg" alt="MUN Park Preservation" />
+            </div>
+            <div class="custom-nav custom-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="custom-nav custom-next"><i class="fas fa-chevron-right"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs Section -->
+  <section class="programs-section">
+    <div class="section-header">
+      <h2>Our Programs</h2>
+      <p>Explore our specialized educational tracks designed to enhance your MUN experience</p>
+    </div>
+    <div class="programs-container">
+      <!-- Political Science Program -->
+      <div class="program-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="program-icon">
+          <i class="fas fa-landmark"></i>
+        </div>
+        <h3>Political Science Program</h3>
+        <p>
+          The Political Science Program introduces students to the fundamental principles of political theory, diplomacy, governance systems, and international affairs. Through interactive workshops and simulations, participants explore how political decisions are made on both national and global scales, preparing them for effective debate, negotiation, and leadership in MUN conferences.
+        </p>
+       
+      </div>
+      
+      <!-- SDGs Program -->
+      <div class="program-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="program-icon">
+          <i class="fas fa-globe-americas"></i>
+        </div>
+        <h3>SDGs Program</h3>
+        <p>
+          The SDGs (Sustainable Development Goals) Program educates students on the 17 global goals set by the United Nations. Participants dive into challenges such as poverty, climate change, education, and gender equality, learning how to incorporate SDG targets into MUN discussions and resolutions. It empowers delegates to advocate for sustainable development through diplomatic dialogue.
+        </p>
+      
+      </div>
+      
+      <!-- Research Track -->
+      <div class="program-card" data-aos="fade-up"  style="position: relative; overflow: hidden;">
+        <div class="program-icon">
+          <i class="fas fa-search"></i>
+        </div>
+        <h3>Research Track</h3>
+        <p>
+          The Research Track in STEM MUN is designed to enhance delegates' understanding of global issues by guiding them through in-depth research processes. Participants learn how to write policy papers, understand international relations frameworks, analyze real-world conflicts, and formulate well-informed positions based on their assigned countries' perspectives. It builds the foundation for confident and accurate MUN performance.
+        </p>
+         <button id="apply-btn"><a href="./researchprogram-apply-form.html" style="color: #f9f9f9;">Explore Now</a></button>
+       
+      </div>
+    </div>
+  </section>
+
+  <!-- Events CTA Section -->
+  <section class="events-cta">
+    <div class="events-cta-container">
+      <h2>Ready to Join Our Next Event?</h2>
+      <p>Become a delegate and be part of our transformative events that will enhance your leadership skills and global awareness.</p>
+      <a href="delegates.html" class="events-cta-btn">Become a Delegate</a>
+    </div>
+  </section>
+
+  <div id="back-to-top"><i class="fas fa-arrow-up"></i></div>
+
+  <!-- Modern Footer -->
+  <footer class="modern-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#about">Our Mission</a></li>
+          <li><a href="Team-upgraded.html">The Board</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#">Our History</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="conferences.html">Conferences</a></li>
+          <li><a href="delegates.html">Delegate Applications</a></li>
+          <li><a href="events.html">Upcoming Events</a></li>
+          <li><a href="newspaper.html">Newspaper</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-map-marker fa-solid fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-text">
+              STEM Model United Nations<br>
+              Cairo, Egypt
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-envelope fa-solid fas fa-envelope"></i>
+            </div>
+            <div class="info-text">
+              <a href="mailto:stemmun@stemegypt.edu.eg">stemmun@stemegypt.edu.eg</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-phone fa-solid fas fa-phone"></i>
+            </div>
+            <div class="info-text">
+              <a href="tel:+20 111 269 0319">+20 111 269 0319</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Newsletter</h4>
+        <div class="footer-newsletter">
+          <p>Subscribe to receive updates about our events and opportunities</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Your email address">
+            <button type="submit" class="newsletter-button">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-logo-center">
+      <a href="index.html">
+        <img src="img/logo.svg" alt="STEM MUN Logo">
+      </a>
+    </div>
+    
+    <div class="social-icons">
+      <a href="https://www.facebook.com/STEMModelUnitedNations/"><i class="fa fa-facebook fa-brands fab fa-facebook-f"></i></a>
+      <a href="https://x.com/stem_mun?t=e0Ofa19utwuIQs8VO3P3_w&s=08"><i class="fa fa-twitter fa-brands fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/stem_mun/"><i class="fa fa-instagram fa-brands fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/stem-model-united-nation-s/"><i class="fa fa-linkedin fa-brands fab fa-linkedin-in"></i></a>
+    
+    </div>
+    
+    <div class="footer-links-modern">
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </div>
+    
+    <div class="copyright-text">
+      <p>&copy; 2023 STEM Model United Nations. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/remove-dark-toggle.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.js"></script>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <script src="js/main.js"></script>
+  <script src="js/include-header.js"></script>
+  <script src="js/header-enhancements.js" defer></script>
+  <script src="js/rocket-loader.min.js" data-cf-settings="8897b1bdea9f49f4b6c71c6b-|49" defer=""></script>
+  <script src="js/modern-lazy-load.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true
+    });
+    
+    // Initialize owl carousels
+    $(document).ready(function() {
+      // About slider
+      $("#about-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        smartSpeed: 1000,
+        responsive: {
+          0: {
+            items: 1
+          }
+        },
+        onInitialized: function(e) {
+          // Make custom navigation work
+          $('.custom-prev').click(function() {
+            $(this).closest('.event-card-media').find('.owl-carousel').trigger('prev.owl.carousel');
+          });
+          $('.custom-next').click(function() {
+            $(this).closest('.event-card-media').find('.owl-carousel').trigger('next.owl.carousel');
+          });
+        }
+      });
+      
+      // Event slider
+      $("#event-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        smartSpeed: 1000,
+        responsive: {
+          0: {
+            items: 1
+          }
+        }
+      });
+      
+      // Glimpse slider
+      $("#glimpse-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        smartSpeed: 1000,
+        responsive: {
+          0: {
+            items: 1
+          }
+        }
+      });
+      
+      // Back to top button
+      $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+          $('#back-to-top').addClass('visible');
+        } else {
+          $('#back-to-top').removeClass('visible');
+        }
+      });
+      
+      $('#back-to-top').click(function() {
+        $('html, body').animate({scrollTop : 0}, 800);
+        return false;
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

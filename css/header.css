@@ -1,0 +1,556 @@
+/* Modern Advanced Header with Glass-Morphism - STEM MUN */
+header {
+  position: fixed;
+  height: auto;
+  width: 100%;
+  padding: 0;
+  background: rgba(66, 12, 2, 0.85) !important;
+  background-color: var(--primary-color) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  z-index: 999;
+  display: flex;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Add scrolled class to header - sleeker design when scrolled */
+header.scrolled {
+  padding: 0;
+  background: rgba(66, 12, 2, 0.98) !important;
+  background-color: rgba(66, 12, 2, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Enhanced Logo Styles with 3D effects */
+.logo {
+  width: 65px; 
+  height: 54px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.logo:hover {
+  transform: scale(1.08) rotate(2deg);
+  filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+.navbar-brand {
+  padding: 5px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.navbar-brand::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(205, 176, 111, 0.2), transparent 70%);
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.navbar-brand:hover::after {
+  opacity: 1;
+}
+
+#logo-img {
+  height: 54px;
+  width: 65px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+#logo-img:hover {
+  transform: scale(1.08) rotate(2deg);
+  filter: brightness(1.2) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* Modern Navigation Styles with glass morphism */
+#nav {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 99;
+  background-color: rgba(66, 12, 2, 0.85) !important;
+  background: rgba(66, 12, 2, 0.85) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  padding: 5px 40px;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#nav.navbar {
+  border: none !important;
+  border-radius: 0;
+  margin-bottom: 0px;
+  background-color: rgba(66, 12, 2, 0.85) !important;
+  background: rgba(66, 12, 2, 0.85) !important;
+}
+
+#nav.fixed-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding: 0 40px;
+  background-color: rgba(66, 12, 2, 0.98) !important;
+  background: rgba(66, 12, 2, 0.98) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.25);
+}
+
+#nav.nav-transparent {
+  background-color: rgba(66, 12, 2, 0.85) !important;
+  background: rgba(66, 12, 2, 0.85) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  padding: 5px 40px;
+}
+
+/* Overrides for any Bootstrap blue colors */
+.navbar-default {
+  background-color: rgba(66, 12, 2, 0.85) !important;
+  background: rgba(66, 12, 2, 0.85) !important;
+  border: none !important;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:focus,
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: transparent !important;
+  color: var(--secondary-warm) !important;
+}
+
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > .active > a:hover {
+  background-color: var(--secondary-warm) !important;
+  color: var(--neutral-color) !important;
+}
+
+nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+  text-transform: uppercase;
+  font: bold 10pt organetto;
+  cursor: default;
+}
+
+.nav::after, .nav::before {
+  display: none !important;
+}
+
+/* Advanced hover effects for nav items */
+.main-nav li a {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--neutral-color);
+  padding: 20px 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.main-nav li a:before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-warm);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  box-shadow: 0 0 10px rgba(205, 176, 111, 0.5);
+}
+
+.main-nav li a:hover:before, 
+.main-nav li.active a:before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus,
+.nav > li.active > a {
+  color: var(--secondary-warm) !important;
+  background: transparent;
+  text-shadow: 0 0 15px rgba(205, 176, 111, 0.6);
+}
+
+/* Interactive CTA Button with smooth hover effects */
+@media only screen and (min-width: 767px) {
+  #cta {
+    padding: 10px 25px;
+    border: 2px solid var(--secondary-warm);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--secondary-warm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-left: 15px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  #cta:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--secondary-warm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: -1;
+    transform: skewX(-20deg);
+  }
+
+  #cta:hover:before, #cta.active:before {
+    width: 100%;
+  }
+
+  #cta:hover, #cta.active {
+    color: white !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(205, 176, 111, 0.3);
+    opacity: 1;
+  }
+}
+
+/* Advanced Dropdown Menu with glass effect */
+.dropdown-menu {
+  padding: 15px 0;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  background: rgba(66, 12, 2, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  min-width: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateY(30px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  visibility: hidden;
+  display: block;
+}
+
+.main-nav li:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu li a {
+  padding: 12px 25px;
+  color: var(--neutral-color) !important;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.dropdown-menu li a:hover {
+  background: rgba(205, 176, 111, 0.15);
+  color: var(--secondary-warm) !important;
+  padding-left: 30px;
+}
+
+.dropdown-menu li a:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, rgba(205, 176, 111, 0.15), transparent);
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+
+.dropdown-menu li a:hover:before {
+  width: 100%;
+}
+
+/* Improved Mobile Navigation */
+@media only screen and (max-width: 767px) {
+  header {
+    padding: 0 15px;
+    height: 60px;
+  }
+  
+  #nav {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  
+  /* Modern mobile menu with smooth animations */
+  .main-nav {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+    padding: 80px 20px 30px;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
+    margin: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  #nav.open .main-nav {
+    transform: translateX(0%);
+  }
+  
+  .main-nav li {
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0;
+    display: block;
+    width: 100%;
+    transform: translateX(50px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i) * 0.05s);
+  }
+  
+  #nav.open .main-nav li {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .main-nav li a {
+    display: block;
+    padding: 15px 0;
+    color: var(--neutral-color);
+    transition: all 0.3s ease;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Enhanced mobile CTA button */
+  #cta {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 20px;
+    border: 2px solid var(--secondary-warm);
+    border-radius: 50px;
+    color: var(--secondary-warm);
+    background-color: transparent;
+    transition: all 0.4s ease;
+    text-align: center;
+    width: 100%;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #cta:before {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: var(--secondary-warm);
+    left: 0;
+    top: 0;
+    transition: width 0.4s ease;
+    z-index: -1;
+    border-radius: 50px;
+  }
+  
+  #cta:hover:before {
+    width: 100%;
+  }
+  
+  #cta:hover, #cta.active {
+    color: var(--neutral-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Improved mobile menu toggle animation */
+  .nav-collapse {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin-left: auto;
+    cursor: pointer;
+    display: block;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-collapse span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: var(--neutral-color);
+    border-radius: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+  
+  .nav-collapse span,
+  .nav-collapse span:before,
+  .nav-collapse span:after {
+    background-color: var(--neutral-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: absolute;
+    left: 0;
+    height: 3px;
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+  
+  .nav-collapse span:before {
+    content: '';
+    top: -9px;
+    width: 80%;
+  }
+  
+  .nav-collapse span:after {
+    content: '';
+    bottom: -9px;
+    width: 60%;
+  }
+  
+  .nav-collapse:hover span:before {
+    width: 100%;
+  }
+  
+  .nav-collapse:hover span:after {
+    width: 100%;
+  }
+  
+  #nav.open .nav-collapse span {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  
+  #nav.open .nav-collapse span:before {
+    transform: rotate(45deg);
+    top: 0;
+    width: 100%;
+  }
+  
+  #nav.open .nav-collapse span:after {
+    transform: rotate(-45deg);
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+/* Dark Mode Toggle - Removed as requested */
+
+/* Dark Mode Toggle */
+.dark-toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.dark-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dark-toggle .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  transition: 0.4s;
+}
+
+.dark-toggle .slider:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+.dark-toggle input:checked + .slider {
+  background-color: var(--secondary-warm);
+}
+
+.dark-toggle input:checked + .slider:before {
+  transform: translateX(25px);
+}
+
+.dark-toggle .icon {
+  position: absolute;
+  top: 5px;
+  transition: 0.4s;
+  color: var(--primary-dark);
+  font-size: 12px;
+  z-index: 1;
+}
+
+.dark-toggle .moon-icon {
+  left: 7px;
+  opacity: 0;
+}
+
+.dark-toggle .sun-icon {
+  right: 7px;
+  opacity: 1;
+}
+
+.dark-toggle input:checked + .slider .moon-icon {
+  opacity: 1;
+}
+
+.dark-toggle input:checked + .slider .sun-icon {
+  opacity: 0;
+} 

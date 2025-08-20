@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet The Board | Model United Nations</title>
+    <meta description="Model United Nations is a Global Student
+    Activity that gained Popularity among thousands of
+    students from universities and high schools all
+    around the globe. Students get the opportunity to
+    experience the role of UN representatives, and run
+    a simulation for a typical UN conference. An MUN
+    conference is centered on a specified topic: a war,
+    conflict, famine, or humanitarian crisis somewhere
+    in the world." />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CVarela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Core CSS -->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/owl.carousel.css" />
+    <link type="text/css" rel="stylesheet" href="css/owl.theme.default.css" />
+    <link type="text/css" rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/header.css" />
+    <link type="text/css" rel="stylesheet" href="css/header-enhancements.css" />
+    <link type="text/css" rel="stylesheet" href="css/footer.css" />
+    
+    <!-- Team-specific CSS (extracted from the original file) -->
+    <link type="text/css" rel="stylesheet" href="team-styles.css" />
+    
+    <!-- Other CSS -->
+    <link type="text/css" rel="stylesheet" href="css/variables.css" />
+    <link type="text/css" rel="stylesheet" href="css/animations.css" />
+    <link type="text/css" rel="stylesheet" href="css/utilities.css" />
+    
+    <link rel="icon" type="image/png" href="icon.svg" />
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <!-- Inline fallback script for header -->
+    <script>
+      // Wait for the DOM to be ready
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set a timeout to check if the header was loaded by include-header.js
+        setTimeout(function() {
+          const headerPlaceholder = document.getElementById('header-placeholder');
+          if (!headerPlaceholder) return;
+          
+          const headerContent = headerPlaceholder.innerHTML;
+          
+          // If the header is still empty or only contains an error message after 2 seconds,
+          // add the inline header as fallback
+          if (!headerContent || headerContent.includes('Error loading header')) {
+            console.log('Using inline header as fallback');
+            
+            // Load the header inline (copy of the header.html content)
+            headerPlaceholder.innerHTML = `
+            <header>
+              <nav id="nav" class="navbar nav">
+                <div class="navbar-header">
+                  <div id="svg-icon" class="navbar-brand">
+                    <a href="index.html">
+                      <img class="logo" src="img/logo.svg" alt="logo" />
+                    </a>
+                  </div>
+                </div>
+                <div class="nav-collapse">
+                  <span></span>
+                </div>
+                <ul class="main-nav nav navbar-nav navbar-right">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="index.html#about">About</a></li>
+                  <li class="has-dropdown">
+                    <a href="#">Events</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="events.html">All Events</a></li>
+                      <li><a href="conferences.html">Conferences</a></li>
+                    </ul>
+                  </li>
+                  <li class="has-dropdown">
+                    <a href="#">Programs</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="conferences.html">Conferences</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="Team.html">Meet The Board</a></li>
+                  <li><a href="newspaper.html">Newspaper</a></li>
+                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="delegates.html" id="cta">Become a Delegate</a></li>
+                </ul>
+              </nav>
+            </header>
+            `;
+            
+            // Add active class to current page
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const links = document.querySelectorAll('#nav a');
+            
+            links.forEach(link => {
+              const href = link.getAttribute('href');
+              if (href === currentPage) {
+                link.parentElement.classList.add('active');
+              }
+            });
+            
+            // Initialize navigation functionality
+            initNavFunctionalityFallback();
+          }
+        }, 2000); // Check after 2 seconds
+      });
+      
+      // Fallback navigation functionality
+      function initNavFunctionalityFallback() {
+        // Mobile Menu Toggle
+        const navCollapse = document.querySelector('.nav-collapse');
+        if (navCollapse) {
+          navCollapse.addEventListener('click', function() {
+            document.getElementById('nav').classList.toggle('open');
+            document.body.classList.toggle('nav-open');
+          });
+        }
+        
+        // Handle Dropdowns on Mobile
+        const dropdownLinks = document.querySelectorAll('.main-nav li.has-dropdown > a');
+        dropdownLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            if (window.innerWidth < 768) {
+              e.preventDefault();
+              this.parentElement.classList.toggle('open');
+              const dropdown = this.nextElementSibling;
+              if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+              } else {
+                dropdown.style.display = 'block';
+              }
+            }
+          });
+        });
+        
+        // Fixed header on scroll
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 100) {
+            document.getElementById('nav').classList.add('fixed-nav');
+            document.querySelector('header').classList.add('scrolled');
+          } else {
+            document.getElementById('nav').classList.remove('fixed-nav');
+            document.querySelector('header').classList.remove('scrolled');
+          }
+        });
+      }
+    </script>
+
+    <!-- Fast preloader scripts -->
+    <script src="js/preload-header.js"></script>
+    <script src="js/fast-preloader.js"></script>
+    <script src="js/fix-header-color.js"></script>
+
+    <!-- Advanced Hero Section with Canvas Background -->
+    <style>
+        /* Advanced Hero Section Styles with proper fallbacks */
+        .flex-container {
+            position: relative;
+            min-height: 90vh;
+            background: linear-gradient(135deg, #420c02 0%, #652211 100%);
+            padding: 12% 5% 10% 5%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        /* Canvas background will be positioned absolutely */
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
+        /* Advanced glass morphism container */
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            max-width: 900px;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 3.5rem;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        /* Progressive enhancement for backdrop filter */
+        @supports ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+            .hero-content {
+                -webkit-backdrop-filter: blur(10px);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        /* Fallback for browsers that don't support backdrop-filter */
+        @supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+            .hero-content {
+                background: rgba(0, 0, 0, 0.6);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        /* Hero decorations styles */
+        .hero-decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .hero-decoration {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .decoration-1 {
+            top: 20%;
+            left: 15%;
+            width: 300px;
+            height: 300px;
+            opacity: 0.3;
+            background: radial-gradient(circle, rgba(205, 176, 111, 0.2) 0%, rgba(205, 176, 111, 0) 70%);
+            filter: blur(20px);
+        }
+        
+        .decoration-2 {
+            bottom: 15%;
+            right: 10%;
+            width: 400px;
+            height: 400px;
+            opacity: 0.2;
+            background: radial-gradient(circle, rgba(66, 12, 2, 0.3) 0%, rgba(66, 12, 2, 0) 70%);
+            filter: blur(30px);
+        }
+        
+        /* Premium title styling */
+        .flex-container h1 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            /* Advanced text gradient */
+            background: linear-gradient(
+                45deg, 
+                #ffffff 0%,
+                #f5f5f5 25%,
+                #cdb06f 50%,
+                #f5f5f5 75%,
+                #ffffff 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #ffffff; /* Fallback */
+            background-size: 200% auto;
+            animation: shine 5s linear infinite;
+        }
+        
+        /* Shine animation for the title */
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+        
+        /* Modern decorative line */
+        .flex-container h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #cdb06f, transparent);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { width: 120px; opacity: 0.8; }
+            50% { width: 180px; opacity: 1; }
+        }
+        
+        /* Enhanced paragraph styling */
+        .flex-container p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin: 2.5rem auto;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            text-align: center;
+            color: #f5f5f5;
+        }
+        
+        /* Premium 3D toggle container */
+        .year-toggle {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-top: 2.5rem;
+            perspective: 800px;
+        }
+        #nav .navbar-brand img.logo {
+      height: auto;
+      width: 65px;
+      height: 65px; /* Increased logo size */
+      max-width: none;
+    }
+    
+        
+        /* Toggle background with refined gradient */
+        .year-toggle::before {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 65px;
+            background: linear-gradient(
+                to right, 
+                rgba(66, 12, 2, 0.5),
+                rgba(66, 12, 2, 0.8) 50%,
+                rgba(66, 12, 2, 0.5)
+            );
+            border-radius: 35px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            box-shadow: 
+                inset 0 2px 10px rgba(0, 0, 0, 0.3),
+                0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modern 3D buttons with fixed dimensions */
+        .year-btn {
+            background: rgba(255, 255, 255, 0.95);
+            color: #420c02;
+            border: none;
+            width: 120px;
+            height: 55px;
+            margin: 0 10px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 35px;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+            /* Prevent text selection */
+            user-select: none;
+            /* Prevent content shifts */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Enhanced border */
+            border: 1px solid rgba(205, 176, 111, 0.2);
+        }
+        
+        /* Button shine effect */
+        .year-btn::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(
+                to right,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.3) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+            z-index: 2;
+        }
+        
+        .year-btn:hover::before {
+            left: 100%;
+            top: 100%;
+            opacity: 1;
+        }
+        
+        /* Active button state */
+        .year-btn.active {
+            background: linear-gradient(135deg, #5a1503 0%, #420c02 100%);
+            color: white;
+            transform: scale(1.05) translateZ(10px);
+            box-shadow: 
+                0 15px 30px rgba(66, 12, 2, 0.5),
+                0 0 20px rgba(205, 176, 111, 0.5);
+            pointer-events: none;
+            border: 1px solid rgba(205, 176, 111, 0.5);
+            /* Add subtle text glow for active button */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Hover state */
+        .year-btn:hover:not(.active) {
+            transform: translateY(-5px) scale(1.02) translateZ(5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            /* Gold tint on hover */
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 240, 218, 1) 100%);
+            border: 1px solid rgba(205, 176, 111, 0.4);
+        }
+        
+        .year-btn .btn-content {
+            position: relative;
+            z-index: 3;
+            /* Prevent text from moving */
+            display: block;
+            /* Enhanced font */
+            letter-spacing: 1px;
+        }
+        
+        /* Add subtle shimmer to button content */
+        .year-btn .btn-content::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(205, 176, 111, 0.6), transparent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .year-btn:hover .btn-content::after,
+        .year-btn.active .btn-content::after {
+            transform: scaleX(1);
+        }
+        
+        /* Team containers transitions */
+        .team-container {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            will-change: opacity, transform;
+        }
+        
+        .team-container.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Ripple effect styles */
+        .btn-ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        /* Advanced responsive adjustments */
+        @media (max-width: 992px) {
+            .flex-container {
+                padding: 15% 5%;
+            }
+            
+            .flex-container h1 {
+                font-size: 4.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .flex-container h1 {
+                font-size: 3.5rem;
+            }
+            
+            .flex-container p {
+                font-size: 1.2rem;
+            }
+            
+            .year-toggle::before {
+                width: 280px;
+                height: 60px;
+            }
+            
+            .year-btn {
+                padding: 14px 30px;
+                font-size: 18px;
+            }
+            
+            .hero-content {
+                padding: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 567px) {
+            .flex-container h1 {
+                font-size: 2.8rem;
+            }
+            
+            .flex-container p {
+                font-size: 1rem;
+            }
+            
+            .year-toggle::before {
+                width: 240px;
+                height: 55px;
+            }
+            
+            .year-btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+
+    <button id="back-to-top" style="position: fixed; bottom: 30px; right: 30px; background-color: var(--primary-color); color: white; border: none; border-radius: 50%; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; font-size: 24px; cursor: pointer; opacity: 0; transition: opacity 0.3s, transform 0.3s; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="scroll-progress" style="position: fixed; top: 0; left: 0; height: 4px; width: 0%; background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); z-index: 9999; transition: width 0.2s;"></div>
+
+    <div id="header-placeholder"></div>
+
+    <!-- Main hero section with canvas background -->
+    <div class="flex-container">
+        <canvas id="heroCanvas"></canvas>
+        
+        <div class="hero-content">
+            <h1>MEET THE BOARD</h1>
+            <p>Meet the talented and dedicated individuals who make up our incredible leadership team. Each member brings unique skills and passion to our Model United Nations program.</p>
+            
+            <!-- Year toggle buttons with improved structure -->
+            <div class="year-toggle">
+                <button class="year-btn" data-year="2024">
+                    <span class="btn-content">2024</span>
+                </button>
+                <button class="year-btn active" data-year="2025">
+                    <span class="btn-content">2025</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team section -->
+    <div class="team-section">
+        <!-- 2025 Team Container -->
+        <div id="team2025" class="team-container active">
+            <div class="highboard">
+                <h2><span>Guiding with Vision</span>Secretariat Board</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\board 2025\mr president.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Abdelaziz Ahmed</h3>
+                            <p>President</p>
+                            <div class="social-links">
+                                <a href="mailto:abdelaziz.ahmed2026@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\board 2025\marwan vice pres.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Marwan Ahmed</h3>
+                            <p>Vice-President</p>
+                            <div class="social-links">
+                                <a href="mailto:mcmarofromwish.com@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\board 2025\salma vice.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Salma Said</h3>
+                            <p>Vice-President</p>
+                            <div class="social-links">
+                                <a href="mailto:Salma.1123561@stemmaadi.moe.edu.eg" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\board 2025\Secretary.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Maya Fahmy</h3>
+                            <p>Secretary</p>
+                            <div class="social-links">
+                                <a href="mailto:mayamahmoud918@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><span>Connecting Voices Harmoniously</span>Economics & Social Council</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/muhab head eco.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mohab Ahmed</h3>
+                            <p>Head of Economics & Social Council</p>
+                            <div class="social-links">
+                                <a href="mailto:mohab.6800000@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/suha head eco.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Suha Ahmed</h3>
+                            <p>Head of Economics & Social Council</p>
+                            <div class="social-links">
+                                <a href="mailto:sohaaahmedd123@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/maryam vice eco.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Maryam Ayman</h3>
+                            <p>Vice-Head of Economics & Social Council</p>
+                            <div class="social-links">
+                                <a href="mailto:mariamayman20008@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/ethar vice eco.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Ethar Mohamed</h3>
+                            <p>Vice-Head of Economics & Social Council</p>
+                            <div class="social-links">
+                                <a href="mailto:ethar.1123502@stemmaadi.moe.edu.eg" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><span>Efficiency in Execution</span>UN Documents</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/renad head un doc.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Renad Shady</h3>
+                            <p>Head of UN Documents</p>
+                            <div class="social-links">
+                                <a href="mailto:renadshady07@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/sondos head un doc.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Sondos Abdo</h3>
+                            <p>Head of UN Documents</p>
+                            <div class="social-links">
+                                <a href="mailto:sondosabdo1123@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/zenab vice un doc.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Zeinab Mahmoud</h3>
+                            <p>Vice-Head of UN Documents</p>
+                            <div class="social-links">
+                                <a href="mailto:hmmansour87@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><span>Nurturing Delegate Potential</span>Academics</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/ammar head acad.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Ammar Mohamed</h3>
+                            <p>Head of Academics</p>
+                            <div class="social-links">
+                                <a href="mailto:ammarmohamed2565@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/ibrahim vice acad.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Ibrahim Ahmed</h3>
+                            <p>Vice-Head of Academics</p>
+                            <div class="social-links">
+                                <a href="mailto:ibrahimshishy@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/jumana vice acad.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Jumana Ahmed</h3>
+                            <p>Vice-Head of Academics</p>
+                            <div class="social-links">
+                                <a href="mailto:juky.ahmed@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><span>Tech Empowers Connection</span>Information Technology</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/meeeeee.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mohamed Ramadan</h3>
+                            <p>Co-Head of IT & Web Manager</p>
+                            <div class="social-links">
+                                <a href="mailto:Mohamedr7825@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/Shahd co it.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Shahd Morad</h3>
+                            <p>Co-Head of IT</p>
+                            <div class="social-links">
+                                <a href="mailto:shahdmorad2007@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><span>Strategize, Attract, Inspire</span>Marketing</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/haneen head marketing.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Hanin Mohamed</h3>
+                            <p>Head of Marketing</p>
+                            <div class="social-links">
+                                <a href="mailto:example@stemegypt.edu.eg" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/jana vice marketing.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Jana Anwar</h3>
+                            <p>Vice-Head of Marketing</p>
+                            <div class="social-links">
+                                <a href="mailto:example@stemegypt.edu.eg" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/abdo vice marketing.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>ABDO Ahmed</h3>
+                            <p>Vice-Head of Marketing</p>
+                            <div class="social-links">
+                                <a href="mailto:example@stemegypt.edu.eg" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2><span>Visualizing Ideas Vibrantly</span>Multimedia Production</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/amro head media.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Amro Salah</h3>
+                            <p>Vice-Head of Multimedia Production</p>
+                            <div class="social-links">
+                                <a href="mailto:amrosalah762007@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/marvy vice media.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Marvy Samaan</h3>
+                            <p>Vice-Head of Multimedia Production</p>
+                            <div class="social-links">
+                                <a href="mailto:milokokozeze2030@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/board 2025/sama vice media.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Sama Hassan</h3>
+                            <p>Head of Multimedia Production</p>
+                            <div class="social-links">
+                                <a href="mailto:samahassan450@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 2024 Team Container -->
+        <div id="team2024" class="team-container">
+            <div class="highboard">
+                <h2><span>Guiding with Vision</span>2024 Secretariat Board</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Mohamed Mahmoud President.png">
+                        </div>
+                        <div class="caption">
+                            <h3>Mohamed Mahmoud</h3>
+                            <p>President</p>
+                            <div class="social-links">
+                                <a href="mailto:1022121.Mohamed@stemegypt.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Co-Head of IT.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mohamed Zaki</h3>
+                            <p>Vice President</p>
+                            <div class="social-links">
+                                <a href="https://github.com/zakiiiii77" target="_blank"><i class="fa-brands fa-github"></i></i></a>
+                                <a href="https://www.linkedin.com/in/mohamed-zaki-34a3b6265/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="mailto:1022113.Mohamed@stemegypt.edu.eg" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Salma Alkosha Vice President.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Salma Alkosha</h3>
+                            <p>Vice President</p>
+                            <div class="social-links">
+                                <a href="mailto:salma.1122556@stemmaadi.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Engy Fathy Secretary.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Engy Fathy</h3>
+                            <p>Secretary</p>
+                            <div class="social-links">
+                                <a href="mailto:engy.1622508@stemredsea.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Connecting Voices Harmoniously</span>Human Resources</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/vice head of hr.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Safa Atraf</h3>
+                            <p>Vice Head of Human Resources TM</p>
+                            <div class="social-links">
+                                <a href="mailto:safaatraf24@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/Head HR.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Hamza Mohamed</h3>
+                            <p>Head of Human Resources TM</p>
+                            <div class="social-links">
+                                <a href="mailto:hamza.1022069@stemoctober.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/Mariam Adel Head HR.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mariam Adel</h3>
+                            <p>Head of Human Resources OD</p>
+                            <div class="social-links">
+                                <a href="mailto:maariaam.adell@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Ahmed Amr vice head of hr.png">
+                        </div>
+                        <div class="caption">
+                            <h3>Ahmed Amr</h3>
+                            <p>Vice Head of Human Resources OD</p>
+                            <div class="social-links">
+                                <a href="mailto:ahmedamr1532007@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Efficiency in Execution</span>Public Relations & Logistics</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\PR Vice-Head.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Raghad Nour</h3>
+                            <p>Vice Head of Public Relations</p>
+                            <div class="social-links">
+                                <a href="mailto:raghdnoor568@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\head of pr.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Toka Radwan</h3>
+                            <p>Head of Public Relations</p>
+                            <div class="social-links">
+                                <a href="mailto:toka.1122516@stemmaadi.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Mariam Abdelaziz Logistics Co-Head.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mariam Abdelaziz</h3>
+                            <p>Co-Head of Logistics</p>
+                            <div class="social-links">
+                                <a href="mailto:mariam.1122590@stemmaadi.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Abdo Essa Logistics Co-Head.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Abdelraman Essa</h3>
+                            <p>Co-Head of Logistics</p>
+                            <div class="social-links">
+                                <a href="mailto:abdooessaa98@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Nurturing Delegate Potential</span>Academics</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/Omar Aboolo Co-Head of Academics.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Omar Hany</h3>
+                            <p>Co-Head of Academics</p>
+                            <div class="social-links">
+                                <a href="mailto:omaraboolo924@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/Vice Head of Academics.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mariam Hany</h3>
+                            <p>Vice Head of Academics</p>
+                            <div class="social-links">
+                                <a href="mailto:mrymhany1840@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/Judy Co-Head of Academics.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Judy Reda</h3>
+                            <p>Co-Head of Academics</p>
+                            <div class="social-links">
+                                <a href="mailto:judy.1122522@stemmaadi.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Words Shape Worlds</span>Content Writing</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img/members/Kimo vice head of content writing.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Karim Ibrahim</h3>
+                            <p>Vice Head of Content Writing</p>
+                            <div class="social-links">
+                                <a href="mailto:karimwael2811@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\head of content writing.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Zeinab Yasser</h3>
+                            <p>Head of Content Writing</p>
+                            <div class="social-links">
+                                <a href="mailto:zeinabysrhassan@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\vice head of content writing.webp">
+                        </div>
+                        <div class="caption">
+                            <h3>Mazen Ahmed</h3>
+                            <p>Vice Head of Content Writing</p>
+                            <div class="social-links">
+                                <a href="mailto:mazenahmedgaber@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Tech Empowers Connection</span>Information Technology</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Karim Atef Co-Head of IT.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Karim Atef</h3>
+                            <p>Head of IT & Web Manager</p>
+                            <div class="social-links">
+                                <a href="mailto:karimatef138@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\VIce Head of IT.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Noureldin Ali</h3>
+                            <p>Vice Head of IT & Web Manager</p>
+                            <div class="social-links">
+                                <a href="mailto:noureldinnour856@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members/Yaseen Saad Eldin Formall.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Yaseen Saad Eldin</h3>
+                            <p>Vice Head of IT & Web Manager</p>
+                            <div class="social-links">
+                                <a href="https://github.com/Yaseen-Saad" target="_blank"><i
+                                        class="fa-brands fa-github"></i></i></a>
+                                <a href="https://wa.link/o8lwgc" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                                <a href="https://facebook.com/yasoo.saad.94" target="_blank"><i
+                                        class="fa-brands fa-facebook"></i></a>
+                                <a href="mailto:yaseen.saad.frontend@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Strategize, Attract, Inspire</span>Marketing</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\Jana Abdelfatah vice head of marketing.jpg">
+                        </div>
+                        <div class="caption">
+                            <h3>Jana Abdelfatah</h3>
+                            <p>Vice Head of Marketing</p>
+                            <div class="social-links">
+                                <a href="mailto:jana.1622523@stemredsea.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\head of marketing.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Malak Kasem</h3>
+                            <p>Head of Marketing</p>
+                            <div class="social-links">
+                                <a href="mailto:Malak.1122594@stemmaadi.moe.edu.eg" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Visualizing Ideas Vibrantly</span>Multimedia Production</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\VE Head.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Omar Ahmed</h3>
+                            <p>Head of Video Editing</p>
+                            <div class="social-links">
+                                <a href="mailto:3bdelrhmanehab@gmail.com" target="_blank"><i
+                                        class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\members\GD Vice Head.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Omar Sabry</h3>
+                            <p>Vice Head of Graphic Design</p>
+                            <div class="social-links">
+                                <a href="mailto:omarsabry592007@gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="https://www.facebook.com/omar.sabry.988?mibextid=ZbWKwL" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/omar.sabry.988?igsh=Y25rdzk2bHY4OGZj" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Enrichment the International Voice</span>Ambassadors</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\davidNigeria.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>David Ayodele</h3>
+                            <p>Nigeria Ambassador</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/d4vd.ayo?igsh=Yjk2M3BqcjJ3ajQ0&utm_source=qr" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.tiktok.com/@d4vd.ayo?_t=8pHyWIZiP4Q&_r=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\kawtarMorroco.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Kawtar El jamii</h3>
+                            <p>Morroco Ambassador</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/kawtar_el_jamii?igsh=cDZzdm9mMDNuaDEy" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/kawtar-el-jamii-37283426a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\susanBotswana.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Susan E Mbata</h3>
+                            <p>Botswana Ambassador</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/susan_mbata?igsh=MTNxdG1venpjNzJhdg==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.tiktok.com/@suzyy_2?_r=1&_d=e6bd5j2h816cih&sec_uid=MS4wLjABAAAApqBSlQf7aEkAEZvYWoyd_kVGgIpvHXJ7jjj9H1vWQyFEkbhZexvIxW-qaWPf-RYC&share_author_id=6905040937131967489&sharer_language=en&source=h5_m&u_code=dg20fkb3j26079&timestamp=1725011812&user_id=6905040937131967489&sec_user_id=MS4wLjABAAAApqBSlQf7aEkAEZvYWoyd_kVGgIpvHXJ7jjj9H1vWQyFEkbhZexvIxW-qaWPf-RYC&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7407821841056532230&share_link_id=b998b679-3c16-45d6-91bc-521905f0af66&share_app_id=1233&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb0229&social_share_type=5&enable_checksum=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\lasuUganda.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Lasu Manasi</h3>
+                            <p>Uganda Ambassador</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/gift.manas?igsh=YzljYTk1ODg3Zg==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://vm.tiktok.com/ZMrToe9rq/" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\nigelZimbabwe.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Nigel Chirambagowa</h3>
+                            <p>Zimbabwe Ambassador</p>
+                            <div class="social-links">
+                                <a href="https://www.instagram.com/mr_n.i.g.e.l?igsh=ZGVsZHFieXpnYW54" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/nigel-chirambagowa-2ab1592b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\radwaAfrica.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Radwa Ashraf</h3>
+                            <p>Africa Ambassador</p>
+                            <div class="social-links">
+                                <a href="mailto:radwa1037@gamil.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="https://www.linkedin.com/in/radwa-ashraf-b05842317?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\ambassadors\hudaME.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Huda Elgendy</h3>
+                            <p>Middle East Ambassador</p>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/profile.php?id=100026813912152&mibextid=LQQJ4d" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/in/huda-elgendy-165375218?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h2><span>Meet our Best</span>Best Members</h2>
+                <div class="shelf">
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\pr.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Basmallah Ahmed</h3>
+                            <p>Best Member of Public Relations</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\hr.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Ammar Mohamed</h3>
+                            <p>Best member of Human Resources</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\academics.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Hana Mohamed</h3>
+                            <p>Best member of Academics</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\mp.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mohab Abdelrahman</h3>
+                            <p>Best member of Multimedia Production</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\cw.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Reween Mohammed</h3>
+                            <p>Best member of Content Writing</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\cw2.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Zainab Mahmoud</h3>
+                            <p>Best member of Content Writing</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\cw3.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Darien Wafaey</h3>
+                            <p>Best member of Content Writing</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\cw4.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Menna Mohammed</h3>
+                            <p>Best member of Content Writing</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\logistics.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Mariam Ayman</h3>
+                            <p>Best member of Logistics</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-card">
+                        <div class="img">
+                            <img src="img\best\logistics2.jpeg">
+                        </div>
+                        <div class="caption">
+                            <h3>Amr Waleed</h3>
+                            <p>Best member of Logistics</p>
+                            <div class="social-links">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="back-to-top"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+       
+    </div>
+    <!-- Preloader end -->
+    
+   <!-- Modern Footer -->
+   <footer class="modern-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#about">Our Mission</a></li>
+          <li><a href="Team-upgraded.html">The Board</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#">Our History</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="conferences.html">Conferences</a></li>
+          <li><a href="delegates.html">Delegate Applications</a></li>
+          <li><a href="events.html">Upcoming Events</a></li>
+          <li><a href="newspaper.html">Newspaper</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <div class="contact-info">
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-map-marker fa-solid fas fa-map-marker-alt"></i>
+            </div>
+            <div class="info-text">
+              STEM Model United Nations<br>
+              Cairo, Egypt
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-envelope fa-solid fas fa-envelope"></i>
+            </div>
+            <div class="info-text">
+              <a href="mailto:stemmun@stemegypt.edu.eg">stemmun@stemegypt.edu.eg</a>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon">
+              <i class="fa fa-phone fa-solid fas fa-phone"></i>
+            </div>
+            <div class="info-text">
+              <a href="tel:+20 111 269 0319">+20 111 269 0319</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-column">
+        <h4>Newsletter</h4>
+        <div class="footer-newsletter">
+          <p>Subscribe to receive updates about our events and opportunities</p>
+          <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Your email address">
+            <button type="submit" class="newsletter-button">Subscribe</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-logo-center">
+      <a href="index.html">
+        <img src="img/logo.svg" alt="STEM MUN Logo">
+      </a>
+    </div>
+    
+    <div class="social-icons">
+      <a href="https://www.facebook.com/STEMModelUnitedNations/"><i class="fa fa-facebook fa-brands fab fa-facebook-f"></i></a>
+      <a href="https://x.com/stem_mun?t=e0Ofa19utwuIQs8VO3P3_w&s=08"><i class="fa fa-twitter fa-brands fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/stem_mun/"><i class="fa fa-instagram fa-brands fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/company/stem-model-united-nation-s/"><i class="fa fa-linkedin fa-brands fab fa-linkedin-in"></i></a>
+    
+    </div>
+    
+    <div class="footer-links-modern">
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+        <li><a href="#">Sitemap</a></li>
+      </ul>
+    </div>
+    
+    <div class="copyright-text">
+      <p>&copy; 2023 STEM Model United Nations. All rights reserved.</p>
+    </div>
+  </footer>
+    
+    <!-- Core Scripts -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/include-header.js"></script>
+    <script src="js/header-enhancements.js" defer></script>
+
+    <!-- Team Toggle Script (extracted from the original file) -->
+    <script src="team-toggle.js"></script>
+
+    <!-- Additional libraries -->
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+    <!-- Animation effects script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles effect
+            if (typeof particlesJS !== 'undefined') {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: { value: 80, density: { enable: true, value_area: 800 } },
+                        color: { value: "#420c02" },
+                        shape: { type: "circle" },
+                        opacity: { value: 0.2, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false } },
+                        size: { value: 3, random: true },
+                        line_linked: { enable: true, distance: 150, color: "#cdb06f", opacity: 0.2, width: 1 },
+                        move: { enable: true, speed: 2, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+                    },
+                    interactivity: {
+                        detect_on: "canvas",
+                        events: {
+                            onhover: { enable: true, mode: "repulse" },
+                            onclick: { enable: true, mode: "push" },
+                            resize: true
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+
+            // ScrollReveal animations
+            if (typeof ScrollReveal !== 'undefined') {
+                const sr = ScrollReveal({
+                    origin: 'bottom',
+                    distance: '50px',
+                    duration: 1000,
+                    delay: 200,
+                    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+                    reset: false
+                });
+
+                sr.reveal('.highboard h2', { origin: 'top', distance: '30px' });
+                sr.reveal('.profile-card', { interval: 100, duration: 800, viewFactor: 0.3 });
+                sr.reveal('.flex-container h1', { origin: 'left', distance: '50px', delay: 200 });
+                sr.reveal('.flex-container p', { origin: 'right', distance: '50px', delay: 400 });
+                sr.reveal('.year-toggle', { origin: 'bottom', distance: '30px', delay: 600 });
+            }
+
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        backToTopButton.style.opacity = "1";
+                        backToTopButton.style.transform = "translateY(0)";
+                    } else {
+                        backToTopButton.style.opacity = "0";
+                        backToTopButton.style.transform = "translateY(20px)";
+                    }
+                });
+
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Scroll progress indicator
+            const scrollProgress = document.getElementById('scroll-progress');
+            if (scrollProgress) {
+                window.addEventListener('scroll', function() {
+                    const totalHeight = document.body.scrollHeight - window.innerHeight;
+                    const progress = (window.scrollY / totalHeight) * 100;
+                    scrollProgress.style.width = progress + '%';
+                });
+            }
+
+            // Profile card hover effect
+            const profileCards = document.querySelectorAll('.profile-card');
+            profileCards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    
+                    this.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${y * -10}deg) translateZ(20px) scale(1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateZ(0)';
+                });
+            });
+
+            // Add hero section decorations and interactivity after DOM is loaded
+            const heroSection = document.querySelector('.flex-container');
+            if (heroSection) {
+                // Add decoration elements
+                const decorations = document.createElement('div');
+                decorations.className = 'hero-decorations';
+                decorations.innerHTML = `
+                    <div class="hero-decoration decoration-1"></div>
+                    <div class="hero-decoration decoration-2"></div>
+                `;
+                heroSection.prepend(decorations);
+                
+                // Add interactive effect
+                heroSection.addEventListener('mousemove', function(e) {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    
+                    const heroContent = this.querySelector('.hero-content');
+                    if (heroContent) {
+                        heroContent.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg) translateZ(10px)`;
+                    }
+                    
+                    const decorations = this.querySelectorAll('.hero-decoration');
+                    decorations.forEach((decoration, index) => {
+                        const factor = index + 1;
+                        decoration.style.transform = `translate(${-xAxis * factor * 2}px, ${-yAxis * factor * 2}px)`;
+                    });
+                });
+                
+                heroSection.addEventListener('mouseleave', function() {
+                    const heroContent = this.querySelector('.hero-content');
+                    if (heroContent) {
+                        heroContent.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateZ(0)';
+                    }
+                    
+                    const decorations = this.querySelectorAll('.hero-decoration');
+                    decorations.forEach(decoration => {
+                        decoration.style.transform = 'translate(0, 0)';
+                    });
+                });
+            }
+
+            // Simple 3D tilt effect for hero section
+            const heroContent = document.querySelector('.hero-content');
+            const flexContainer = document.querySelector('.flex-container');
+            const decorations = document.querySelectorAll('.hero-decoration');
+            
+            if (flexContainer && heroContent) {
+                flexContainer.addEventListener('mousemove', function(e) {
+                    // Calculate mouse position relative to container center
+                    const rect = this.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const mouseX = e.clientX - centerX;
+                    const mouseY = e.clientY - centerY;
+                    
+                    // Limit tilt angle to subtle values
+                    const tiltX = (mouseY / (rect.height / 2)) * 3; // max 3 degrees
+                    const tiltY = (mouseX / (rect.width / 2)) * 3; // max 3 degrees
+                    
+                    // Apply tilt effect to hero content
+                    heroContent.style.transform = `perspective(1000px) rotateX(${-tiltX}deg) rotateY(${tiltY}deg) translateZ(10px)`;
+                    
+                    // Move decorations in opposite direction for parallax effect
+                    if (decorations && decorations.length > 0) {
+                        decorations.forEach((el, index) => {
+                            const factor = index === 0 ? 15 : 10;
+                            el.style.transform = `translate(${mouseX / factor}px, ${mouseY / factor}px)`;
+                        });
+                    }
+                });
+                
+                // Reset on mouse leave
+                flexContainer.addEventListener('mouseleave', function() {
+                    heroContent.style.transform = '';
+                    
+                    if (decorations && decorations.length > 0) {
+                        decorations.forEach(el => {
+                            el.style.transform = '';
+                        });
+                    }
+                });
+            }
+
+            // Enhanced button hover effect
+            const yearButtons = document.querySelectorAll('.year-btn');
+            if (yearButtons && yearButtons.length > 0) {
+                yearButtons.forEach(button => {
+                    button.addEventListener('mouseenter', function() {
+                        if (!this.classList.contains('active')) {
+                            this.style.transform = 'translateY(-5px)';
+                        }
+                    });
+                    
+                    button.addEventListener('mouseleave', function() {
+                        if (!this.classList.contains('active')) {
+                            this.style.transform = '';
+                        }
+                    });
+                });
+            }
+
+            // Canvas Background Animation Implementation
+            const initCanvasAnimation = () => {
+                const canvas = document.getElementById('heroCanvas');
+                if (!canvas) return;
+                
+                const ctx = canvas.getContext('2d');
+                let width = canvas.width = canvas.offsetWidth;
+                let height = canvas.height = canvas.offsetHeight;
+                
+                // Configure animation properties
+                const particles = [];
+                const particleCount = 100;
+                const colors = ['#420c02', '#652211', '#873423', '#cdb06f', '#a88e59'];
+                
+                // Set up resize handler
+                window.addEventListener('resize', () => {
+                    width = canvas.width = canvas.offsetWidth;
+                    height = canvas.height = canvas.offsetHeight;
+                });
+                
+                // Create particles
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * width;
+                        this.y = Math.random() * height;
+                        this.size = Math.random() * 2 + 1;
+                        this.color = colors[Math.floor(Math.random() * colors.length)];
+                        this.speed = Math.random() * 0.5 + 0.1;
+                        this.direction = Math.random() * 360;
+                        this.opacity = Math.random() * 0.5 + 0.1;
+                        this.connectDistance = 100;
+                    }
+                    
+                    update() {
+                        // Convert angle to radians and calculate movement
+                        const angle = this.direction * Math.PI / 180;
+                        this.x += Math.cos(angle) * this.speed;
+                        this.y += Math.sin(angle) * this.speed;
+                        
+                        // Wrap around edges
+                        if (this.x < 0) this.x = width;
+                        if (this.x > width) this.x = 0;
+                        if (this.y < 0) this.y = height;
+                        if (this.y > height) this.y = 0;
+                        
+                        // Slight random movement
+                        this.direction += (Math.random() - 0.5) * 2;
+                    }
+                    
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.globalAlpha = this.opacity;
+                        ctx.fill();
+                        ctx.globalAlpha = 1;
+                    }
+                    
+                    connect(particles) {
+                        for (let i = 0; i < particles.length; i++) {
+                            const p2 = particles[i];
+                            const distance = Math.sqrt(
+                                Math.pow(this.x - p2.x, 2) + 
+                                Math.pow(this.y - p2.y, 2)
+                            );
+                            
+                            if (distance < this.connectDistance) {
+                                // Calculate line opacity based on distance
+                                const opacity = 1 - (distance / this.connectDistance);
+                                ctx.beginPath();
+                                ctx.strokeStyle = this.color;
+                                ctx.globalAlpha = opacity * 0.2;
+                                ctx.lineWidth = 0.5;
+                                ctx.moveTo(this.x, this.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                                ctx.globalAlpha = 1;
+                            }
+                        }
+                    }
+                }
+                
+                // Initialize particles
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+                
+                // Animation loop
+                function animate() {
+                    // Clear canvas with translucent background to create trail effect
+                    ctx.fillStyle = 'rgba(30, 5, 0, 0.05)';
+                    ctx.fillRect(0, 0, width, height);
+                    
+                    // Update and draw particles
+                    for (let i = 0; i < particles.length; i++) {
+                        particles[i].update();
+                        particles[i].draw();
+                        particles[i].connect(particles.slice(i));
+                    }
+                    
+                    // Draw subtle gradient overlay
+                    const gradient = ctx.createRadialGradient(
+                        width/2, height/2, 0,
+                        width/2, height/2, Math.max(width, height)/1.5
+                    );
+                    gradient.addColorStop(0, 'rgba(66, 12, 2, 0)');
+                    gradient.addColorStop(1, 'rgba(66, 12, 2, 0.3)');
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, width, height);
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                // Start animation
+                animate();
+                
+                // Mouse interaction
+                let mouseX = 0;
+                let mouseY = 0;
+                let isMouseMoving = false;
+                let mouseTimer;
+                
+                canvas.addEventListener('mousemove', (e) => {
+                    mouseX = e.offsetX;
+                    mouseY = e.offsetY;
+                    isMouseMoving = true;
+                    
+                    // Create ripple effect on mouse move
+                    const ripple = new Particle();
+                    ripple.x = mouseX;
+                    ripple.y = mouseY;
+                    ripple.size = 2;
+                    ripple.speed = 0.8;
+                    ripple.connectDistance = 150;
+                    particles.push(ripple);
+                    
+                    // Keep particles array manageable
+                    if (particles.length > particleCount + 20) {
+                        particles.splice(0, particles.length - particleCount);
+                    }
+                    
+                    // Reset timer for mouse movement
+                    clearTimeout(mouseTimer);
+                    mouseTimer = setTimeout(() => {
+                        isMouseMoving = false;
+                    }, 100);
+                });
+            };
+            
+            // Initialize canvas animation
+            initCanvasAnimation();
+        });
+    </script>
+</body>
+</html>

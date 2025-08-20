@@ -1,0 +1,133 @@
+/* Dropdown menu fixes */
+.main-nav .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  padding: 10px 0;
+  margin-top: 0;
+  background-color: rgba(66, 12, 2, 0.98);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  z-index: 1000;
+  opacity: 1;
+  visibility: visible;
+  transition: none;
+  transform: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-nav .dropdown-menu li {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.main-nav .dropdown-menu li a {
+  padding: 12px 20px;
+  display: block;
+  color: var(--neutral-color) !important;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-weight: 400;
+  border-left: 3px solid transparent;
+}
+
+.main-nav .dropdown-menu li a:hover,
+.main-nav .dropdown-menu li a:focus {
+  background-color: rgba(205, 176, 111, 0.15);
+  color: var(--secondary-warm) !important;
+  padding-left: 25px;
+  border-left: 3px solid var(--secondary-warm);
+}
+
+/* Mobile dropdown menu styles */
+@media only screen and (max-width: 767px) {
+  .main-nav .dropdown-menu {
+    position: static;
+    width: 100%;
+    background-color: rgba(88, 13, 0, 0.9);
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 0;
+    display: none;
+  }
+  
+  .main-nav .dropdown-menu li a {
+    padding: 10px 0 10px 20px;
+    font-size: 13px;
+  }
+  
+  .main-nav .has-dropdown > a:after {
+    float: right;
+    margin-top: 5px;
+  }
+  
+  .main-nav .has-dropdown.open-drop > a:after {
+    content: "\f106";
+  }
+}
+
+/* Fix for Home menu item */
+.main-nav li:first-child a[href="index.html"],
+.main-nav li:first-child a[href="#home"] {
+  color: var(--secondary-warm) !important;
+}
+
+/* Fix for active menu highlighting */
+.main-nav li.active > a,
+.main-nav li.active > a:hover,
+.main-nav li.active > a:focus {
+  color: var(--secondary-warm) !important;
+}
+
+.main-nav li.active > a:after {
+  width: 100%;
+  opacity: 1;
+}
+
+/* Dropdown indicator */
+.main-nav li.has-dropdown > a {
+  position: relative;
+  padding-right: 25px !important;
+}
+
+.main-nav li.has-dropdown > a:after {
+  content: "\f107";
+  font-family: "FontAwesome";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.main-nav li.has-dropdown:hover > a:after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Fix for nested dropdowns (if needed) */
+.main-nav .dropdown-menu .dropdown-menu {
+  left: 100%;
+  top: 0;
+  margin-top: 0;
+}
+
+/* Fix for active dropdown parent */
+.main-nav li.has-dropdown.active {
+  position: relative;
+}
+
+.main-nav li.has-dropdown.active > a {
+  color: var(--secondary-warm) !important;
+}
+
+.main-nav li.has-dropdown.active > a:after {
+  color: var(--secondary-warm);
+} 
