@@ -1,10 +1,9 @@
 // Countdown Timer for STEM MUN Delegation Form
 // Deadline: August 20, 2025 at 12:00 PM Egypt Time (UTC+2)
-
 class CountdownTimer {
     constructor() {
-        // Set deadline to August 20, 2025 12:00 PM Egypt Time (UTC+2)
-        this.deadline = new Date('2025-08-20T12:00:00+02:00');
+        // Set deadline with +12 hours
+        this.deadline = new Date(new Date('2025-08-20T12:00:00+02:00').getTime() + (12 * 60 * 60 * 1000));
         this.timer = null;
         this.isExpired = false;
         
@@ -79,15 +78,12 @@ class CountdownTimer {
         
         // Add urgency based on time remaining
         if (days === 0 && hours < 1) {
-            // Final hour - most urgent
             container.classList.add('final-hours');
             this.elements.timer.classList.add('pulse-critical');
         } else if (days === 0 && hours < 24) {
-            // Less than 24 hours - critical
             container.classList.add('critical');
             this.elements.timer.classList.add('pulse-urgent');
         } else if (days < 3) {
-            // Less than 3 days - urgent
             container.classList.add('urgent');
         }
         
@@ -98,7 +94,6 @@ class CountdownTimer {
     }
     
     addVisualEffects() {
-        // Add entrance animation
         const container = document.querySelector('.countdown-container');
         container.style.opacity = '0';
         container.style.transform = 'translateY(20px)';
@@ -109,7 +104,6 @@ class CountdownTimer {
             container.style.transform = 'translateY(0)';
         }, 500);
         
-        // Add number flip animation
         this.elements.timer.querySelectorAll('.countdown-number').forEach(number => {
             number.addEventListener('transitionend', () => {
                 number.classList.add('flip');
@@ -121,28 +115,22 @@ class CountdownTimer {
     handleExpiredDeadline() {
         this.isExpired = true;
         
-        // Clear the timer
         if (this.timer) {
             clearInterval(this.timer);
         }
         
-        // Hide countdown and show warning
         this.elements.timer.style.display = 'none';
         this.elements.warning.style.display = 'block';
         
-        // Disable the form
         this.disableForm();
         
-        // Store expired state
         localStorage.setItem('countdown_active', 'false');
         localStorage.setItem('deadline_expired', 'true');
         
-        // Show expiry notification
         this.showExpiryNotification();
     }
     
     disableForm() {
-        // Disable all form inputs
         const inputs = this.elements.form.querySelectorAll('input, textarea, select, button');
         inputs.forEach(input => {
             input.disabled = true;
@@ -150,7 +138,6 @@ class CountdownTimer {
             input.style.cursor = 'not-allowed';
         });
         
-        // Add overlay to form
         const overlay = document.createElement('div');
         overlay.className = 'form-expired-overlay';
         overlay.innerHTML = `
@@ -166,7 +153,6 @@ class CountdownTimer {
     }
     
     showExpiryNotification() {
-        // Create notification element
         const notification = document.createElement('div');
         notification.className = 'deadline-notification';
         notification.innerHTML = `
@@ -182,7 +168,6 @@ class CountdownTimer {
         
         document.body.appendChild(notification);
         
-        // Auto-remove after 10 seconds
         setTimeout(() => {
             if (notification.parentElement) {
                 notification.remove();
@@ -190,15 +175,15 @@ class CountdownTimer {
         }, 10000);
     }
     
-    // Method to check if deadline has passed (can be called from other scripts)
+    // Method to check if deadline has passed
     static isDeadlinePassed() {
-        const deadline = new Date('2025-08-20T12:00:00+02:00');
+        const deadline = new Date(new Date('2025-08-20T12:00:00+02:00').getTime() + (12 * 60 * 60 * 1000));
         return new Date() >= deadline;
     }
     
     // Method to get time remaining
     static getTimeRemaining() {
-        const deadline = new Date('2025-08-20T12:00:00+02:00');
+        const deadline = new Date(new Date('2025-08-20T12:00:00+02:00').getTime() + (12 * 60 * 60 * 1000));
         const now = new Date().getTime();
         const distance = deadline.getTime() - now;
         
@@ -214,17 +199,13 @@ class CountdownTimer {
     }
 }
 
-// Initialize countdown when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if deadline elements exist
     if (document.getElementById('countdown-timer')) {
         new CountdownTimer();
     }
     
-    // Also check on page load if deadline has already passed
     const deadlineExpired = localStorage.getItem('deadline_expired');
     if (deadlineExpired === 'true' && CountdownTimer.isDeadlinePassed()) {
-        // If deadline was already expired, disable form immediately
         const form = document.querySelector('.contactForm');
         if (form) {
             const timer = new CountdownTimer();
@@ -233,5 +214,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Export for use in other scripts
 window.CountdownTimer = CountdownTimer;
