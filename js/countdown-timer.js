@@ -1,10 +1,10 @@
 // Countdown Timer for STEM MUN Delegation Form
-// Deadline: August 20, 2025 at 12:00 PM Egypt Time (UTC+2)
+// Deadline: August 21, 2025 at 12:00 AM Egypt Time
 
 class CountdownTimer {
     constructor() {
-        // Set deadline to August 20, 2025 12:00 PM Egypt Time (UTC+2)
-        this.deadline = new Date('2025-08-20T12:00:00+02:00');
+        // Set deadline to August 21, 2025 12:00 AM Egypt Time
+        this.deadline = new Date('2025-08-21T00:00:00+03:00');
         this.timer = null;
         this.isExpired = false;
         
@@ -192,13 +192,13 @@ class CountdownTimer {
     
     // Method to check if deadline has passed (can be called from other scripts)
     static isDeadlinePassed() {
-        const deadline = new Date('2025-08-20T12:00:00+02:00');
+        const deadline = new Date('2025-08-21T00:00:00+03:00');
         return new Date() >= deadline;
     }
     
     // Method to get time remaining
     static getTimeRemaining() {
-        const deadline = new Date('2025-08-20T12:00:00+02:00');
+        const deadline = new Date('2025-08-21T00:00:00+03:00');
         const now = new Date().getTime();
         const distance = deadline.getTime() - now;
         

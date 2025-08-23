@@ -392,6 +392,140 @@
         background-color: #420c02 ;
         border: 1px solid #420c02 ;
       }
+      
+      /* SWAT 2025 Event Navigator Styles */
+      .swat-event-navigator {
+        margin-bottom: 3rem;
+        width: 100%;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .swat-ticket-link {
+        display: block;
+        text-decoration: none;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+      }
+      
+      .swat-ticket-link:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        text-decoration: none;
+      }
+      
+      .swat-ticket-container {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        border-radius: 20px;
+      }
+      
+      .swat-ticket-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      
+      .swat-ticket-link:hover .swat-ticket-image {
+        transform: scale(1.05);
+      }
+      
+      .swat-ticket-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(66, 12, 2, 0.8) 0%,
+          rgba(139, 69, 19, 0.6) 50%,
+          rgba(205, 156, 87, 0.4) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+      
+      .swat-ticket-link:hover .swat-ticket-overlay {
+        opacity: 1;
+      }
+      
+      .swat-ticket-content {
+        text-align: center;
+        color: white;
+        padding: 2rem;
+        transform: translateY(30px);
+        transition: transform 0.4s ease;
+      }
+      
+      .swat-ticket-link:hover .swat-ticket-content {
+        transform: translateY(0);
+      }
+      
+      .swat-ticket-content h3 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      
+      .swat-ticket-content p {
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+      }
+      
+      .swat-cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #cd9c57, #e6b800);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 15px rgba(205, 156, 87, 0.4);
+        transition: all 0.3s ease;
+      }
+      
+      .swat-cta-button:hover {
+        background: linear-gradient(135deg, #e6b800, #cd9c57);
+        box-shadow: 0 6px 20px rgba(205, 156, 87, 0.6);
+        transform: translateY(-2px);
+      }
+      
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .swat-ticket-container {
+          height: 200px;
+        }
+        
+        .swat-ticket-content h3 {
+          font-size: 1.5rem;
+        }
+        
+        .swat-ticket-content p {
+          font-size: 1rem;
+        }
+        
+        .swat-cta-button {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+      }
   </style>
   <link type="text/css" rel="stylesheet" href="css/header.css" />
   <link type="text/css" rel="stylesheet" href="css/header-enhancements.css" />
@@ -533,6 +667,26 @@
   <!-- Events Section -->
   <section class="events-section">
     <div class="events-container">
+      
+      <!-- SWAT 2025 Event Navigator -->
+      <div class="swat-event-navigator">
+        <a href="event-details.html" class="swat-ticket-link">
+          <div class="swat-ticket-container">
+            <img src="img/Eventswat.jpg" alt="SWAT 2025 Conference - September 6th" class="swat-ticket-image" />
+            <div class="swat-ticket-overlay">
+              <div class="swat-ticket-content">
+                <h3>Book Your Seat Now!</h3>
+                <p>Click to register for SWAT 2025 Conference</p>
+                <span class="swat-cta-button">
+                  <i class="fas fa-ticket-alt"></i>
+                  Register Now
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      
       <!-- Event Card 1: Outing -->
       <div class="event-card">
         <span class="event-card-tag">Outing</span>

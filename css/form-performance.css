@@ -1,0 +1,201 @@
+/* Form Performance Optimizations - STEM MUN */
+
+/* GPU Acceleration for better performance */
+.booking-modal {
+    will-change: opacity, transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.booking-modal-content {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.form-step {
+    will-change: opacity, transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Optimized particles for mobile */
+.particle {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    pointer-events: none; /* Prevent interaction lag */
+}
+
+/* Reduce animations on mobile for better performance */
+@media (max-width: 768px) {
+    .particle {
+        animation-duration: 8s !important; /* Slower for less CPU usage */
+        opacity: 0.3 !important; /* Less visible for better performance */
+    }
+    
+    .form-step {
+        transition-duration: 0.2s !important;
+    }
+    
+    .booking-modal {
+        backdrop-filter: none !important; /* Remove blur on mobile */
+        -webkit-backdrop-filter: none !important;
+    }
+}
+
+/* Ultra low-end device optimizations */
+@media (max-width: 480px) {
+    .particle {
+        display: none !important; /* Completely hide particles */
+    }
+    
+    .booking-modal-content {
+        box-shadow: none !important; /* Remove expensive shadows */
+    }
+    
+    * {
+        animation-duration: 0.15s !important;
+        transition-duration: 0.15s !important;
+    }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .particle,
+    .form-step,
+    .booking-modal {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Input field optimizations */
+.premium-input {
+    will-change: auto; /* Only animate when needed */
+    transform: translateZ(0);
+}
+
+.premium-input:focus {
+    will-change: border-color, box-shadow;
+}
+
+.premium-input:not(:focus) {
+    will-change: auto;
+}
+
+/* Progress indicator optimizations */
+.progress-step {
+    will-change: background-color, transform;
+    transform: translateZ(0);
+}
+
+/* Button hover optimizations */
+.premium-submit {
+    will-change: transform, background-color;
+    transform: translateZ(0);
+}
+
+.premium-submit:hover {
+    will-change: transform, background-color;
+}
+
+.premium-submit:not(:hover) {
+    will-change: auto;
+}
+
+/* File upload optimizations */
+.file-upload-container {
+    will-change: auto;
+    transform: translateZ(0);
+}
+
+/* Notification optimizations */
+.premium-notification {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Prevent layout shifts */
+.form-navigation {
+    min-height: 60px; /* Prevent layout shift when buttons appear */
+}
+
+.progress-container {
+    min-height: 80px; /* Prevent layout shift in progress indicator */
+}
+
+/* Optimize scroll performance */
+.booking-modal {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Container query optimizations for modern browsers */
+@supports (container-type: inline-size) {
+    .booking-modal-content {
+        container-type: inline-size;
+    }
+    
+    @container (max-width: 480px) {
+        .particle {
+            display: none;
+        }
+        
+        .form-step {
+            padding: 1rem;
+        }
+    }
+}
+
+/* Critical performance hints */
+.booking-modal * {
+    box-sizing: border-box;
+}
+
+/* Prevent repaints during animations */
+.booking-modal.active .booking-modal-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* Optimize form validation animations */
+.form-group.error .premium-input {
+    will-change: border-color;
+    transition: border-color 0.15s ease;
+}
+
+.form-group.success .premium-input {
+    will-change: border-color;
+    transition: border-color 0.15s ease;
+}
+
+/* Memory and CPU optimizations */
+.booking-modal:not(.active) {
+    display: none !important; /* Completely remove from layout when hidden */
+}
+
+/* Optimize font loading to prevent layout shifts */
+body {
+    font-display: swap; /* Improve loading performance */
+}
+
+/* Optimize for 60fps animations */
+@media (min-width: 769px) {
+    .form-step.active {
+        animation: fadeInSlide 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateX(20px) translateZ(0);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0) translateZ(0);
+        }
+    }
+}

@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM MUN - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        /* STEM MUN Dashboard Styles - Matching Website Theme */
+        :root {
+            --primary-color: #420c02;
+            --primary-dark: #580d00;
+            --secondary-color: #dcd8cc;
+            --secondary-warm: #cdb06f;
+            --neutral-color: #ffffff;
+            --accent-color: #48382f;
+            --shadow-light: rgba(66, 12, 2, 0.1);
+            --shadow-medium: rgba(66, 12, 2, 0.2);
+            --shadow-dark: rgba(66, 12, 2, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Varela Round", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--accent-color);
+            background: linear-gradient(135deg, #f8f6f3 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(205,176,111,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(205,176,111,0.1)"/><circle cx="30" cy="80" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="70" cy="70" r="1.5" fill="rgba(205,176,111,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            color: var(--neutral-color);
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(205, 176, 111, 0.3);
+            animation: pulse-icon 3s ease-in-out infinite;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--neutral-color);
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 1rem;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: var(--secondary-warm);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(205,176,111,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(205,176,111,0.1)"/><circle cx="30" cy="80" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="70" cy="70" r="1.5" fill="rgba(205,176,111,0.1)"/></svg>') repeat;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .login-form {
+            background: var(--neutral-color);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-form .header-icon {
+            margin: 0 auto 2rem;
+            animation: pulse-icon 3s ease-in-out infinite;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-warm);
+            background: var(--neutral-color);
+            box-shadow: 0 0 0 3px rgba(205, 176, 111, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(66, 12, 2, 0.3);
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--neutral-color);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(205, 176, 111, 0.1);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-warm) 0%, var(--primary-color) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(205, 176, 111, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .stat-label {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        /* Applications Table */
+        .applications-section {
+            background: var(--neutral-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(205, 176, 111, 0.1);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 1.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-height: 44px;
+            min-width: 120px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--secondary-warm);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-warm);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--neutral-color);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: #e6c477;
+            border-color: #e6c477;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .table-container {
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .applications-table th,
+        .applications-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .applications-table th {
+            background: var(--secondary-color);
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.8rem;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .applications-table tr:hover {
+            background: rgba(205, 176, 111, 0.05);
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ff6b35;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .status-approved {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .status-rejected {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .action-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            min-height: 36px;
+            min-width: 80px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            white-space: nowrap;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .btn-approve {
+            background: #28a745;
+            color: white;
+            border: 2px solid #28a745;
+        }
+
+        .btn-reject {
+            background: #dc3545;
+            color: white;
+            border: 2px solid #dc3545;
+        }
+
+        .btn-view {
+            background: var(--secondary-warm);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-warm);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn-approve:hover {
+            background: #218838;
+            border-color: #218838;
+        }
+
+        .btn-reject:hover {
+            background: #c82333;
+            border-color: #c82333;
+        }
+
+        .btn-view:hover {
+            background: #e6c477;
+            border-color: #e6c477;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--neutral-color);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            padding: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--neutral-color);
+        }
+
+        .close {
+            color: var(--neutral-color);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--secondary-warm);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-field {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-field label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .modal-field span {
+            color: var(--accent-color);
+            padding: 0.8rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            word-break: break-all;
+        }
+
+        .payment-screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .header-title h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                padding: 1.5rem;
+            }
+
+            .section-actions {
+                justify-content: center;
+                gap: 0.75rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+                min-width: 100px;
+                min-height: 40px;
+            }
+
+            .filter-btn {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+                min-width: 100px;
+                min-height: 40px;
+            }
+
+            .action-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+                min-width: 70px;
+                min-height: 32px;
+            }
+
+            .table-container {
+                padding: 1rem;
+            }
+
+            .applications-table {
+                font-size: 0.8rem;
+            }
+
+            .applications-table th,
+            .applications-table td {
+                padding: 0.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .filter-actions {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .filter-actions .filter-btn {
+                width: 100%;
+            }
+
+            .filters-content.active {
+                max-height: 900px;
+                padding-bottom: 4rem;
+            }
+
+            /* Quick filter buttons on mobile */
+            .quick-filter-btn {
+                min-width: 130px !important;
+                padding: 0.7rem 1.1rem !important;
+                font-size: 0.9rem !important;
+            }
+
+            .quick-filters-container {
+                gap: 0.75rem;
+                padding: 0.5rem 0 1.25rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                min-width: 90px;
+                min-height: 36px;
+            }
+
+            .filter-btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                min-width: 90px;
+                min-height: 36px;
+            }
+
+            .action-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.75rem;
+                min-width: 60px;
+                min-height: 28px;
+            }
+
+            .section-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .section-actions .btn {
+                width: 100%;
+            }
+
+            .filters-content.active {
+                max-height: 1000px;
+                padding-bottom: 5rem;
+            }
+
+            /* Quick filter buttons on small mobile */
+            .quick-filter-btn {
+                min-width: 110px !important;
+                padding: 0.6rem 0.9rem !important;
+                font-size: 0.85rem !important;
+            }
+
+            .quick-filters-container {
+                gap: 0.5rem;
+                padding: 0.5rem 0 1rem 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--secondary-color);
+            border-left: 4px solid var(--secondary-warm);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Messages */
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            font-weight: 600;
+        }
+
+        /* Filter Section Styles */
+        .filters-section {
+            background: var(--neutral-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(205, 176, 111, 0.1);
+        }
+
+        .filters-header {
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
+            color: var(--primary-color);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filters-header:hover {
+            background: linear-gradient(135deg, #e6c477 0%, var(--secondary-warm) 100%);
+        }
+
+        .filters-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .filter-toggle.active {
+            transform: rotate(180deg);
+        }
+
+        .filters-content {
+            padding: 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .filters-content.active {
+            max-height: 800px;
+            padding-bottom: 3rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            padding: 0.8rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--secondary-warm);
+            background: var(--neutral-color);
+            box-shadow: 0 0 0 3px rgba(205, 176, 111, 0.1);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .filter-btn {
+            padding: 1rem 1.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-height: 44px;
+            min-width: 120px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .filter-btn-apply {
+            background: var(--primary-color);
+            color: var(--neutral-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .filter-btn-clear {
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-color);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .filter-btn-apply:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .filter-btn-clear:hover {
+            background: #c8c4b8;
+            border-color: #c8c4b8;
+        }
+
+        .active-filters {
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-tag {
+            background: var(--secondary-warm);
+            color: var(--primary-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-tag .remove-filter {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1;
+        }
+
+        .filter-tag .remove-filter:hover {
+            color: #dc3545;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary-warm);
+            background: var(--neutral-color);
+            box-shadow: 0 0 0 3px rgba(205, 176, 111, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .results-info {
+            background: rgba(205, 176, 111, 0.1);
+            border: 1px solid rgba(205, 176, 111, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .sort-controls label {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .sort-select {
+            padding: 0.6rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: var(--neutral-color);
+        }
+
+        /* Quick Filters Scrollable Container */
+        .quick-filters-container {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 0.75rem 0 1.5rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--secondary-warm) var(--secondary-color);
+            margin: 0 -0.5rem;
+        }
+
+        .quick-filters-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .quick-filters-container::-webkit-scrollbar-track {
+            background: var(--secondary-color);
+            border-radius: 6px;
+            margin: 0 8px;
+        }
+
+        .quick-filters-container::-webkit-scrollbar-thumb {
+            background: var(--secondary-warm);
+            border-radius: 6px;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .quick-filters-container::-webkit-scrollbar-thumb:hover {
+            background: #e6c477;
+        }
+
+        .quick-filter-btn {
+            flex-shrink: 0;
+            padding: 0.8rem 1.4rem;
+            font-size: 0.95rem;
+            min-width: 160px;
+            min-height: 42px;
+            white-space: nowrap;
+            margin: 0 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-form">
+            <div class="header-icon">
+                <i class="fas fa-globe-americas"></i>
+            </div>
+            <h2>STEM MUN Admin</h2>
+            <div class="form-group">
+                <label for="password">Admin Password</label>
+                <input type="password" id="password" placeholder="Enter admin password">
+            </div>
+            <button class="login-btn" onclick="login()">Access Dashboard</button>
+            <div id="loginError" class="error-message" style="display: none;">
+                Invalid password. Please try again.
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-title">
+                        <div class="header-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h1>STEM MUN Dashboard</h1>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Statistics Grid -->
+            <div class="stats-grid fade-in">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" id="totalApplications">0</div>
+                    <div class="stat-label">Total Applications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" id="pendingApplications">0</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-number" id="approvedApplications">0</div>
+                    <div class="stat-label">Approved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-number" id="rejectedApplications">0</div>
+                    <div class="stat-label">Rejected</div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <section class="filters-section fade-in">
+                <div class="filters-header" onclick="toggleFilters()">
+                    <h3>
+                        <i class="fas fa-filter"></i> Advanced Filters & Search
+                    </h3>
+                    <i class="fas fa-chevron-down filter-toggle" id="filterToggle"></i>
+                </div>
+                <div class="filters-content" id="filtersContent">
+                    <!-- Search Bar -->
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search by name, email, faculty, or transaction number..." onkeyup="handleSearch()">
+                    </div>
+
+                    <!-- Filter Controls -->
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label for="statusFilter">Status</label>
+                            <select id="statusFilter" onchange="applyFilters()">
+                                <option value="">All Statuses</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="facultyFilter">Faculty</label>
+                            <select id="facultyFilter" onchange="applyFilters()">
+                                <option value="">All Faculties</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="gradeFilter">Grade</label>
+                            <select id="gradeFilter" onchange="applyFilters()">
+                                <option value="">All Grades</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="dateRangeFilter">Date Range</label>
+                            <select id="dateRangeFilter" onchange="handleDateRangeChange()">
+                                <option value="">Custom Range</option>
+                                <option value="today">Today</option>
+                                <option value="yesterday">Yesterday</option>
+                                <option value="last_7_days">Last 7 Days</option>
+                                <option value="last_30_days">Last 30 Days</option>
+                                <option value="this_month">This Month</option>
+                                <option value="last_month">Last Month</option>
+                                <option value="this_year">This Year</option>
+                                <option value="last_year">Last Year</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="dateFromFilter">From Date</label>
+                            <input type="date" id="dateFromFilter" onchange="applyFilters()">
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="dateToFilter">To Date</label>
+                            <input type="date" id="dateToFilter" onchange="applyFilters()">
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="statusDateFilter">Status + Date Filter</label>
+                            <select id="statusDateFilter" onchange="applyFilters()">
+                                <option value="">All Status & Dates</option>
+                                <option value="pending_today">Pending - Today</option>
+                                <option value="pending_this_week">Pending - This Week</option>
+                                <option value="pending_this_month">Pending - This Month</option>
+                                <option value="approved_today">Approved - Today</option>
+                                <option value="approved_this_week">Approved - This Week</option>
+                                <option value="approved_this_month">Approved - This Month</option>
+                                <option value="rejected_today">Rejected - Today</option>
+                                <option value="rejected_this_week">Rejected - This Week</option>
+                                <option value="rejected_this_month">Rejected - This Month</option>
+                                <option value="pending_overdue">Pending - Overdue (>7 days)</option>
+                                <option value="recent_approvals">Recent Approvals (Last 3 days)</option>
+                                <option value="recent_rejections">Recent Rejections (Last 3 days)</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="paymentFilter">Payment Screenshot</label>
+                            <select id="paymentFilter" onchange="applyFilters()">
+                                <option value="">All Applications</option>
+                                <option value="with_payment">With Payment Screenshot</option>
+                                <option value="without_payment">Without Payment Screenshot</option>
+                                <option value="pending_with_payment">Pending with Payment</option>
+                                <option value="pending_without_payment">Pending without Payment</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="promoFilter">Promo Code Usage</label>
+                            <select id="promoFilter" onchange="applyFilters()">
+                                <option value="">All Applications</option>
+                                <option value="with_promo">Used Promo Code</option>
+                                <option value="without_promo">No Promo Code</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="newsletterFilter">Newsletter Subscription</label>
+                            <select id="newsletterFilter" onchange="applyFilters()">
+                                <option value="">All Applications</option>
+                                <option value="subscribed">Subscribed</option>
+                                <option value="not_subscribed">Not Subscribed</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="timeFilter">Submission Time</label>
+                            <select id="timeFilter" onchange="applyFilters()">
+                                <option value="">All Times</option>
+                                <option value="morning">Morning (6AM - 12PM)</option>
+                                <option value="afternoon">Afternoon (12PM - 6PM)</option>
+                                <option value="evening">Evening (6PM - 12AM)</option>
+                                <option value="night">Night (12AM - 6AM)</option>
+                                <option value="business_hours">Business Hours (9AM - 5PM)</option>
+                                <option value="weekend">Weekend Submissions</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="urgencyFilter">Urgency Level</label>
+                            <select id="urgencyFilter" onchange="applyFilters()">
+                                <option value="">All Applications</option>
+                                <option value="urgent">Urgent (Pending > 7 days)</option>
+                                <option value="high">High Priority (Pending 3-7 days)</option>
+                                <option value="normal">Normal (Pending < 3 days)</option>
+                                <option value="processed">Already Processed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Quick Filter Presets -->
+                    <div style="margin: 2rem 0 1rem 0; padding: 1.5rem; background: rgba(205, 176, 111, 0.05); border-radius: 12px; border-top: 3px solid var(--secondary-warm);">
+                        <label style="display: block; margin-bottom: 1.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Montserrat', sans-serif; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px;">Quick Filters:</label>
+                        <div class="quick-filters-container">
+                            <button class="filter-btn filter-btn-apply quick-filter-btn" onclick="applyQuickFilter('pending_urgent')">
+                                <i class="fas fa-exclamation-triangle"></i> Urgent Pending
+                            </button>
+                            <button class="filter-btn filter-btn-apply quick-filter-btn" onclick="applyQuickFilter('today_submissions')">
+                                <i class="fas fa-calendar-day"></i> Today's Applications
+                            </button>
+                            <button class="filter-btn filter-btn-apply quick-filter-btn" onclick="applyQuickFilter('pending_with_payment')">
+                                <i class="fas fa-credit-card"></i> Pending + Payment
+                            </button>
+                            <button class="filter-btn filter-btn-apply quick-filter-btn" onclick="applyQuickFilter('recent_approved')">
+                                <i class="fas fa-check-circle"></i> Recent Approved
+                            </button>
+                            <button class="filter-btn filter-btn-apply quick-filter-btn" onclick="applyQuickFilter('this_week')">
+                                <i class="fas fa-calendar-week"></i> This Week
+                            </button>
+                            <button class="filter-btn filter-btn-apply quick-filter-btn" onclick="applyQuickFilter('promo_users')">
+                                <i class="fas fa-tags"></i> Promo Code Users
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Active Filters Display -->
+                    <div class="active-filters" id="activeFilters"></div>
+
+                    <!-- Sort Controls -->
+                    <div class="sort-controls">
+                        <label for="sortBy">Sort By:</label>
+                        <select id="sortBy" class="sort-select" onchange="applyFilters()">
+                            <option value="submitted_at_desc">Newest First</option>
+                            <option value="submitted_at_asc">Oldest First</option>
+                            <option value="full_name_asc">Name A-Z</option>
+                            <option value="full_name_desc">Name Z-A</option>
+                            <option value="status_asc">Status</option>
+                            <option value="faculty_asc">Faculty</option>
+                            <option value="grade_asc">Grade</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter Actions -->
+                    <div class="filter-actions" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(205, 176, 111, 0.2);">
+                        <button class="filter-btn filter-btn-clear" onclick="clearAllFilters()">
+                            <i class="fas fa-times"></i> Clear All
+                        </button>
+                        <button class="filter-btn filter-btn-apply" onclick="applyFilters()">
+                            <i class="fas fa-check"></i> Apply Filters
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Info -->
+            <div class="results-info" id="resultsInfo" style="display: none;">
+                <span id="resultsText">Showing 0 of 0 applications</span>
+                <span id="filtersApplied">No filters applied</span>
+            </div>
+
+            <!-- Applications Section -->
+            <section class="applications-section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i> Applications Management
+                    </h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="exportToCSV()">
+                            <i class="fas fa-download"></i> Export Filtered CSV
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel"></i> Export Filtered Excel
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportAllToCSV()">
+                            <i class="fas fa-download"></i> Export All CSV
+                        </button>
+                        <button class="btn btn-secondary" onclick="refreshData()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="applications-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Faculty</th>
+                                <th>Grade</th>
+                                <th>Phone</th>
+                                <th>Transaction</th>
+                                <th>Status</th>
+                                <th>Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTableBody">
+                            <tr>
+                                <td colspan="9" class="loading">
+                                    <div class="loading-spinner"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Details Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> Application Details</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Application details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://steddllazfsprnfsmjng.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0ZWRkbGxhemZzcHJuZnNtam5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4MTYwMzQsImV4cCI6MjA3MTM5MjAzNH0.yf53IyNF3x0O90vPjmiDHOaSQyMlo8roIT3HpXWr_Zk';
+        const ADMIN_PASSWORD = 'geno3mk';
+
+        let applications = [];
+        let filteredApplications = [];
+        let currentFilters = {};
+
+        // Filter functionality
+        function toggleFilters() {
+            const content = document.getElementById('filtersContent');
+            const toggle = document.getElementById('filterToggle');
+            
+            content.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        function populateFilterOptions() {
+            // Get unique faculties
+            const faculties = [...new Set(applications.map(app => app.faculty))].sort();
+            const facultySelect = document.getElementById('facultyFilter');
+            facultySelect.innerHTML = '<option value="">All Faculties</option>';
+            faculties.forEach(faculty => {
+                facultySelect.innerHTML += `<option value="${faculty}">${faculty}</option>`;
+            });
+
+            // Get unique grades
+            const grades = [...new Set(applications.map(app => app.grade))].sort();
+            const gradeSelect = document.getElementById('gradeFilter');
+            gradeSelect.innerHTML = '<option value="">All Grades</option>';
+            grades.forEach(grade => {
+                gradeSelect.innerHTML += `<option value="${grade}">${grade}</option>`;
+            });
+        }
+
+        function handleSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            currentFilters.search = searchTerm;
+            applyFilters();
+        }
+
+        function handleDateRangeChange() {
+            const dateRange = document.getElementById('dateRangeFilter').value;
+            const today = new Date();
+            let fromDate = '';
+            let toDate = '';
+
+            switch (dateRange) {
+                case 'today':
+                    fromDate = toDate = today.toISOString().split('T')[0];
+                    break;
+                case 'yesterday':
+                    const yesterday = new Date(today);
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    fromDate = toDate = yesterday.toISOString().split('T')[0];
+                    break;
+                case 'last_7_days':
+                    const last7Days = new Date(today);
+                    last7Days.setDate(last7Days.getDate() - 7);
+                    fromDate = last7Days.toISOString().split('T')[0];
+                    toDate = today.toISOString().split('T')[0];
+                    break;
+                case 'last_30_days':
+                    const last30Days = new Date(today);
+                    last30Days.setDate(last30Days.getDate() - 30);
+                    fromDate = last30Days.toISOString().split('T')[0];
+                    toDate = today.toISOString().split('T')[0];
+                    break;
+                case 'this_month':
+                    fromDate = new Date(today.getFullYear(), today.getMonth(), 1).toISOString().split('T')[0];
+                    toDate = today.toISOString().split('T')[0];
+                    break;
+                case 'last_month':
+                    const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+                    const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
+                    fromDate = lastMonth.toISOString().split('T')[0];
+                    toDate = lastMonthEnd.toISOString().split('T')[0];
+                    break;
+                case 'this_year':
+                    fromDate = new Date(today.getFullYear(), 0, 1).toISOString().split('T')[0];
+                    toDate = today.toISOString().split('T')[0];
+                    break;
+                case 'last_year':
+                    fromDate = new Date(today.getFullYear() - 1, 0, 1).toISOString().split('T')[0];
+                    toDate = new Date(today.getFullYear() - 1, 11, 31).toISOString().split('T')[0];
+                    break;
+                default:
+                    // Custom range - don't change the manual inputs
+                    applyFilters();
+                    return;
+            }
+
+            // Set the date inputs
+            document.getElementById('dateFromFilter').value = fromDate;
+            document.getElementById('dateToFilter').value = toDate;
+            applyFilters();
+        }
+
+        function getDateRange(period) {
+            const today = new Date();
+            const start = new Date();
+            
+            switch (period) {
+                case 'today':
+                    start.setHours(0, 0, 0, 0);
+                    return { start, end: new Date() };
+                case 'this_week':
+                    start.setDate(today.getDate() - today.getDay());
+                    start.setHours(0, 0, 0, 0);
+                    return { start, end: new Date() };
+                case 'this_month':
+                    start.setDate(1);
+                    start.setHours(0, 0, 0, 0);
+                    return { start, end: new Date() };
+                default:
+                    return { start: new Date(0), end: new Date() };
+            }
+        }
+
+        function isDayOfWeek(date, dayOfWeek) {
+            return date.getDay() === dayOfWeek;
+        }
+
+        function isWeekend(date) {
+            return date.getDay() === 0 || date.getDay() === 6; // Sunday = 0, Saturday = 6
+        }
+
+        function applyFilters() {
+            // Get all filter values
+            currentFilters = {
+                search: document.getElementById('searchInput').value.toLowerCase(),
+                status: document.getElementById('statusFilter').value,
+                faculty: document.getElementById('facultyFilter').value,
+                grade: document.getElementById('gradeFilter').value,
+                dateFrom: document.getElementById('dateFromFilter').value,
+                dateTo: document.getElementById('dateToFilter').value,
+                dateRange: document.getElementById('dateRangeFilter').value,
+                statusDate: document.getElementById('statusDateFilter').value,
+                payment: document.getElementById('paymentFilter').value,
+                promo: document.getElementById('promoFilter').value,
+                newsletter: document.getElementById('newsletterFilter').value,
+                time: document.getElementById('timeFilter').value,
+                urgency: document.getElementById('urgencyFilter').value,
+                sortBy: document.getElementById('sortBy').value
+            };
+
+            // Apply filters
+            filteredApplications = applications.filter(app => {
+                const appDate = new Date(app.submitted_at);
+                const now = new Date();
+
+                // Search filter
+                if (currentFilters.search) {
+                    const searchFields = [
+                        app.full_name,
+                        app.email,
+                        app.faculty,
+                        app.grade,
+                        app.phone,
+                        app.transaction_number || ''
+                    ].join(' ').toLowerCase();
+                    
+                    if (!searchFields.includes(currentFilters.search)) {
+                        return false;
+                    }
+                }
+
+                // Status filter
+                if (currentFilters.status && app.status !== currentFilters.status) {
+                    return false;
+                }
+
+                // Faculty filter
+                if (currentFilters.faculty && app.faculty !== currentFilters.faculty) {
+                    return false;
+                }
+
+                // Grade filter
+                if (currentFilters.grade && app.grade !== currentFilters.grade) {
+                    return false;
+                }
+
+                // Date range filter
+                if (currentFilters.dateFrom) {
+                    const appDateStr = appDate.toISOString().split('T')[0];
+                    if (appDateStr < currentFilters.dateFrom) {
+                        return false;
+                    }
+                }
+
+                if (currentFilters.dateTo) {
+                    const appDateStr = appDate.toISOString().split('T')[0];
+                    if (appDateStr > currentFilters.dateTo) {
+                        return false;
+                    }
+                }
+
+                // Status + Date combination filter
+                if (currentFilters.statusDate) {
+                    const daysDiff = Math.floor((now - appDate) / (1000 * 60 * 60 * 24));
+                    const weekStart = new Date(now);
+                    weekStart.setDate(now.getDate() - now.getDay());
+                    weekStart.setHours(0, 0, 0, 0);
+                    
+                    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                    const todayStart = new Date(now);
+                    todayStart.setHours(0, 0, 0, 0);
+
+                    switch (currentFilters.statusDate) {
+                        case 'pending_today':
+                            if (app.status !== 'pending' || appDate < todayStart) return false;
+                            break;
+                        case 'pending_this_week':
+                            if (app.status !== 'pending' || appDate < weekStart) return false;
+                            break;
+                        case 'pending_this_month':
+                            if (app.status !== 'pending' || appDate < monthStart) return false;
+                            break;
+                        case 'approved_today':
+                            if (app.status !== 'approved' || appDate < todayStart) return false;
+                            break;
+                        case 'approved_this_week':
+                            if (app.status !== 'approved' || appDate < weekStart) return false;
+                            break;
+                        case 'approved_this_month':
+                            if (app.status !== 'approved' || appDate < monthStart) return false;
+                            break;
+                        case 'rejected_today':
+                            if (app.status !== 'rejected' || appDate < todayStart) return false;
+                            break;
+                        case 'rejected_this_week':
+                            if (app.status !== 'rejected' || appDate < weekStart) return false;
+                            break;
+                        case 'rejected_this_month':
+                            if (app.status !== 'rejected' || appDate < monthStart) return false;
+                            break;
+                        case 'pending_overdue':
+                            if (app.status !== 'pending' || daysDiff <= 7) return false;
+                            break;
+                        case 'recent_approvals':
+                            if (app.status !== 'approved' || daysDiff > 3) return false;
+                            break;
+                        case 'recent_rejections':
+                            if (app.status !== 'rejected' || daysDiff > 3) return false;
+                            break;
+                    }
+                }
+
+                // Payment screenshot filter
+                if (currentFilters.payment) {
+                    switch (currentFilters.payment) {
+                        case 'with_payment':
+                            if (!app.payment_screenshot_url) return false;
+                            break;
+                        case 'without_payment':
+                            if (app.payment_screenshot_url) return false;
+                            break;
+                        case 'pending_with_payment':
+                            if (app.status !== 'pending' || !app.payment_screenshot_url) return false;
+                            break;
+                        case 'pending_without_payment':
+                            if (app.status !== 'pending' || app.payment_screenshot_url) return false;
+                            break;
+                    }
+                }
+
+                // Promo code filter
+                if (currentFilters.promo) {
+                    if (currentFilters.promo === 'with_promo' && !app.promo_code) {
+                        return false;
+                    }
+                    if (currentFilters.promo === 'without_promo' && app.promo_code) {
+                        return false;
+                    }
+                }
+
+                // Newsletter filter
+                if (currentFilters.newsletter) {
+                    if (currentFilters.newsletter === 'subscribed' && !app.newsletter_subscribed) {
+                        return false;
+                    }
+                    if (currentFilters.newsletter === 'not_subscribed' && app.newsletter_subscribed) {
+                        return false;
+                    }
+                }
+
+                // Time filter
+                if (currentFilters.time) {
+                    const hour = appDate.getHours();
+                    const isWeekendDay = isWeekend(appDate);
+
+                    switch (currentFilters.time) {
+                        case 'morning':
+                            if (hour < 6 || hour >= 12) return false;
+                            break;
+                        case 'afternoon':
+                            if (hour < 12 || hour >= 18) return false;
+                            break;
+                        case 'evening':
+                            if (hour < 18 || hour >= 24) return false;
+                            break;
+                        case 'night':
+                            if (hour >= 6 && hour < 24) return false;
+                            break;
+                        case 'business_hours':
+                            if (hour < 9 || hour >= 17 || isWeekendDay) return false;
+                            break;
+                        case 'weekend':
+                            if (!isWeekendDay) return false;
+                            break;
+                    }
+                }
+
+                // Urgency filter
+                if (currentFilters.urgency) {
+                    const daysDiff = Math.floor((now - appDate) / (1000 * 60 * 60 * 24));
+
+                    switch (currentFilters.urgency) {
+                        case 'urgent':
+                            if (app.status !== 'pending' || daysDiff <= 7) return false;
+                            break;
+                        case 'high':
+                            if (app.status !== 'pending' || daysDiff < 3 || daysDiff > 7) return false;
+                            break;
+                        case 'normal':
+                            if (app.status !== 'pending' || daysDiff >= 3) return false;
+                            break;
+                        case 'processed':
+                            if (app.status === 'pending') return false;
+                            break;
+                    }
+                }
+
+                return true;
+            });
+
+            // Apply sorting
+            applySorting();
+
+            // Update display
+            displayFilteredApplications();
+            updateActiveFilters();
+            updateResultsInfo();
+            updateStatistics();
+        }
+
+        function applySorting() {
+            const [field, direction] = currentFilters.sortBy.split('_');
+            
+            filteredApplications.sort((a, b) => {
+                let aValue, bValue;
+                
+                switch (field) {
+                    case 'submitted':
+                        aValue = new Date(a.submitted_at);
+                        bValue = new Date(b.submitted_at);
+                        break;
+                    case 'full':
+                        aValue = a.full_name.toLowerCase();
+                        bValue = b.full_name.toLowerCase();
+                        break;
+                    case 'status':
+                        aValue = a.status;
+                        bValue = b.status;
+                        break;
+                    case 'faculty':
+                        aValue = a.faculty;
+                        bValue = b.faculty;
+                        break;
+                    case 'grade':
+                        aValue = a.grade;
+                        bValue = b.grade;
+                        break;
+                    default:
+                        aValue = a[field];
+                        bValue = b[field];
+                }
+
+                if (aValue < bValue) return direction === 'asc' ? -1 : 1;
+                if (aValue > bValue) return direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+        }
+
+        function clearAllFilters() {
+            // Reset all filter inputs
+            document.getElementById('searchInput').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('facultyFilter').value = '';
+            document.getElementById('gradeFilter').value = '';
+            document.getElementById('dateRangeFilter').value = '';
+            document.getElementById('dateFromFilter').value = '';
+            document.getElementById('dateToFilter').value = '';
+            document.getElementById('statusDateFilter').value = '';
+            document.getElementById('paymentFilter').value = '';
+            document.getElementById('promoFilter').value = '';
+            document.getElementById('newsletterFilter').value = '';
+            document.getElementById('timeFilter').value = '';
+            document.getElementById('urgencyFilter').value = '';
+            document.getElementById('sortBy').value = 'submitted_at_desc';
+
+            // Clear current filters
+            currentFilters = {};
+            filteredApplications = [...applications];
+
+            // Apply default sorting
+            currentFilters.sortBy = 'submitted_at_desc';
+            applySorting();
+
+            // Update display
+            displayFilteredApplications();
+            updateActiveFilters();
+            updateResultsInfo();
+            updateStatistics();
+        }
+
+        function updateActiveFilters() {
+            const activeFiltersContainer = document.getElementById('activeFilters');
+            activeFiltersContainer.innerHTML = '';
+
+            const filterLabels = {
+                search: 'Search',
+                status: 'Status',
+                faculty: 'Faculty',
+                grade: 'Grade',
+                dateRange: 'Date Range',
+                dateFrom: 'From Date',
+                dateTo: 'To Date',
+                statusDate: 'Status + Date',
+                payment: 'Payment',
+                promo: 'Promo Code',
+                newsletter: 'Newsletter',
+                time: 'Time Filter',
+                urgency: 'Urgency',
+                sortBy: 'Sort'
+            };
+
+            Object.entries(currentFilters).forEach(([key, value]) => {
+                if (value && key !== 'sortBy') {
+                    const tag = document.createElement('div');
+                    tag.className = 'filter-tag';
+                    
+                    // Format the display value for better readability
+                    let displayValue = value;
+                    if (key === 'statusDate') {
+                        displayValue = value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    } else if (key === 'dateRange') {
+                        displayValue = value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    } else if (key === 'time') {
+                        displayValue = value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    } else if (key === 'payment') {
+                        displayValue = value.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    } else if (key === 'urgency') {
+                        displayValue = value.replace(/\b\w/g, l => l.toUpperCase());
+                    }
+                    
+                    tag.innerHTML = `
+                        <span>${filterLabels[key]}: ${displayValue}</span>
+                        <span class="remove-filter" onclick="removeFilter('${key}')">&times;</span>
+                    `;
+                    activeFiltersContainer.appendChild(tag);
+                }
+            });
+        }
+
+        function removeFilter(filterKey) {
+            // Clear the specific filter
+            switch (filterKey) {
+                case 'search':
+                    document.getElementById('searchInput').value = '';
+                    break;
+                case 'status':
+                    document.getElementById('statusFilter').value = '';
+                    break;
+                case 'faculty':
+                    document.getElementById('facultyFilter').value = '';
+                    break;
+                case 'grade':
+                    document.getElementById('gradeFilter').value = '';
+                    break;
+                case 'dateRange':
+                    document.getElementById('dateRangeFilter').value = '';
+                    break;
+                case 'dateFrom':
+                    document.getElementById('dateFromFilter').value = '';
+                    break;
+                case 'dateTo':
+                    document.getElementById('dateToFilter').value = '';
+                    break;
+                case 'statusDate':
+                    document.getElementById('statusDateFilter').value = '';
+                    break;
+                case 'payment':
+                    document.getElementById('paymentFilter').value = '';
+                    break;
+                case 'promo':
+                    document.getElementById('promoFilter').value = '';
+                    break;
+                case 'newsletter':
+                    document.getElementById('newsletterFilter').value = '';
+                    break;
+                case 'time':
+                    document.getElementById('timeFilter').value = '';
+                    break;
+                case 'urgency':
+                    document.getElementById('urgencyFilter').value = '';
+                    break;
+            }
+
+            // Reapply filters
+            applyFilters();
+        }
+
+        function updateResultsInfo() {
+            const resultsInfo = document.getElementById('resultsInfo');
+            const resultsText = document.getElementById('resultsText');
+            const filtersApplied = document.getElementById('filtersApplied');
+
+            const total = applications.length;
+            const filtered = filteredApplications.length;
+
+            resultsText.textContent = `Showing ${filtered} of ${total} applications`;
+
+            const activeFilterCount = Object.values(currentFilters).filter(v => v && v !== 'submitted_at_desc').length;
+            if (activeFilterCount > 0) {
+                filtersApplied.textContent = `${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''} applied`;
+                resultsInfo.style.display = 'flex';
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        }
+
+        function displayFilteredApplications() {
+            const tbody = document.getElementById('applicationsTableBody');
+            
+            if (filteredApplications.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--accent-color);">No applications match the current filters.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = filteredApplications.map(app => `
+                <tr>
+                    <td>${app.full_name}</td>
+                    <td>${app.email}</td>
+                    <td>${app.faculty}</td>
+                    <td>${app.grade}</td>
+                    <td>${app.phone}</td>
+                    <td>${app.transaction_number || 'N/A'}</td>
+                    <td><span class="status-badge status-${app.status}">${app.status}</span></td>
+                    <td>${new Date(app.submitted_at).toLocaleDateString()}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn btn-view" onclick="viewApplication(${app.id})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            ${app.status === 'pending' ? `
+                                <button class="action-btn btn-approve" onclick="updateApplicationStatus(${app.id}, 'approved')">
+                                    <i class="fas fa-check"></i> Approve
+                                </button>
+                                <button class="action-btn btn-reject" onclick="updateApplicationStatus(${app.id}, 'rejected')">
+                                    <i class="fas fa-times"></i> Reject
+                                </button>
+                            ` : ''}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Export functions now use filtered data
+        function exportFilteredToCSV() {
+            const headers = ['Name', 'Email', 'Phone', 'Faculty', 'Grade', 'Transaction Number', 'Status', 'Submitted At'];
+            const csvContent = [
+                headers.join(','),
+                ...filteredApplications.map(app => [
+                    `"${app.full_name}"`,
+                    `"${app.email}"`,
+                    `"${app.phone}"`,
+                    `"${app.faculty}"`,
+                    `"${app.grade}"`,
+                    `"${app.transaction_number || ''}"`,
+                    `"${app.status}"`,
+                    `"${new Date(app.submitted_at).toLocaleString()}"`
+                ].join(','))
+            ].join('\\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `stem_mun_filtered_applications_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showMessage(`CSV file downloaded with ${filteredApplications.length} applications!`, 'success');
+        }
+
+        function exportFilteredToExcel() {
+            const worksheet = XLSX.utils.json_to_sheet(filteredApplications.map(app => ({
+                'Full Name': app.full_name,
+                'Email': app.email,
+                'Phone': app.phone,
+                'Faculty': app.faculty,
+                'Grade': app.grade,
+                'Transaction Number': app.transaction_number || '',
+                'Promo Code': app.promo_code || '',
+                'Terms Accepted': app.terms_accepted ? 'Yes' : 'No',
+                'Newsletter Subscribed': app.newsletter_subscribed ? 'Yes' : 'No',
+                'Status': app.status,
+                'Submitted At': new Date(app.submitted_at).toLocaleString(),
+                'Payment Screenshot': app.payment_screenshot_url || '',
+                'Notes': app.notes || ''
+            })));
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Applications');
+            XLSX.writeFile(workbook, `stem_mun_filtered_applications_${new Date().toISOString().split('T')[0]}.xlsx`);
+
+            showMessage(`Excel file downloaded with ${filteredApplications.length} applications!`, 'success');
+        }
+
+        // Quick filter presets
+        function applyQuickFilter(filterType) {
+            // Clear all filters first
+            clearAllFilters();
+            
+            const today = new Date().toISOString().split('T')[0];
+            const weekStart = new Date();
+            weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+            const weekStartStr = weekStart.toISOString().split('T')[0];
+
+            switch (filterType) {
+                case 'pending_urgent':
+                    document.getElementById('urgencyFilter').value = 'urgent';
+                    break;
+                case 'today_submissions':
+                    document.getElementById('dateRangeFilter').value = 'today';
+                    handleDateRangeChange();
+                    return; // handleDateRangeChange already calls applyFilters
+                case 'pending_with_payment':
+                    document.getElementById('paymentFilter').value = 'pending_with_payment';
+                    break;
+                case 'recent_approved':
+                    document.getElementById('statusDateFilter').value = 'recent_approvals';
+                    break;
+                case 'this_week':
+                    document.getElementById('dateRangeFilter').value = 'last_7_days';
+                    handleDateRangeChange();
+                    return; // handleDateRangeChange already calls applyFilters
+                case 'promo_users':
+                    document.getElementById('promoFilter').value = 'with_promo';
+                    break;
+            }
+            
+            applyFilters();
+        }
+
+        // Login functionality
+        function login() {
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+                loadApplications();
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        }
+
+        // Logout functionality
+        function logout() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+
+        // Load applications from Supabase
+        async function loadApplications() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/applications?order=submitted_at.desc`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (response.ok) {
+                    applications = await response.json();
+                    filteredApplications = [...applications]; // Initialize filtered data
+                    populateFilterOptions(); // Populate filter dropdowns
+                    displayFilteredApplications(); // Use filtered display function
+                    updateStatistics();
+                    updateResultsInfo();
+                } else {
+                    throw new Error('Failed to load applications');
+                }
+            } catch (error) {
+                console.error('Error loading applications:', error);
+                document.getElementById('applicationsTableBody').innerHTML = 
+                    '<tr><td colspan="9" class="error-message">Error loading applications. Please refresh the page.</td></tr>';
+            }
+        }
+
+        // Display applications in table (removed - now using displayFilteredApplications)
+
+        // Update statistics (now uses filtered data for display context)
+        function updateStatistics() {
+            // Always show total statistics from all applications
+            const total = applications.length;
+            const pending = applications.filter(app => app.status === 'pending').length;
+            const approved = applications.filter(app => app.status === 'approved').length;
+            const rejected = applications.filter(app => app.status === 'rejected').length;
+
+            document.getElementById('totalApplications').textContent = total;
+            document.getElementById('pendingApplications').textContent = pending;
+            document.getElementById('approvedApplications').textContent = approved;
+            document.getElementById('rejectedApplications').textContent = rejected;
+        }
+
+        // View application details
+        function viewApplication(id) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="modal-field">
+                    <label>Full Name:</label>
+                    <span>${app.full_name}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Email:</label>
+                    <span>${app.email}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Phone:</label>
+                    <span>${app.phone}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Faculty:</label>
+                    <span>${app.faculty}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Grade:</label>
+                    <span>${app.grade}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Transaction Number:</label>
+                    <span>${app.transaction_number || 'Not provided'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Promo Code:</label>
+                    <span>${app.promo_code || 'Not used'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Terms Accepted:</label>
+                    <span>${app.terms_accepted ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Newsletter Subscription:</label>
+                    <span>${app.newsletter_subscribed ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Status:</label>
+                    <span class="status-badge status-${app.status}">${app.status}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Submitted At:</label>
+                    <span>${new Date(app.submitted_at).toLocaleString()}</span>
+                </div>
+                ${app.payment_screenshot_url ? `
+                    <div class="modal-field">
+                        <label>Payment Screenshot:</label>
+                        <img src="${app.payment_screenshot_url}" alt="Payment Screenshot" class="payment-screenshot" onclick="window.open('${app.payment_screenshot_url}', '_blank')">
+                    </div>
+                ` : ''}
+                ${app.notes ? `
+                    <div class="modal-field">
+                        <label>Notes:</label>
+                        <span>${app.notes}</span>
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('applicationModal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('applicationModal').style.display = 'none';
+        }
+
+        // Update application status
+        async function updateApplicationStatus(id, status) {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/applications?id=eq.${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({ status })
+                });
+
+                if (response.ok) {
+                    // Update the local data
+                    const appIndex = applications.findIndex(app => app.id === id);
+                    if (appIndex !== -1) {
+                        applications[appIndex].status = status;
+                    }
+                    
+                    // Reapply current filters
+                    applyFilters();
+                    showMessage(`Application ${status} successfully!`, 'success');
+                } else {
+                    throw new Error('Failed to update application status');
+                }
+            } catch (error) {
+                console.error('Error updating application status:', error);
+                showMessage('Error updating application status. Please try again.', 'error');
+            }
+        }
+
+        // Show success/error messages
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `${type}-message`;
+            messageDiv.textContent = message;
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '20px';
+            messageDiv.style.right = '20px';
+            messageDiv.style.zIndex = '9999';
+            messageDiv.style.maxWidth = '300px';
+
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 5000);
+        }
+
+        // Export to CSV (now exports filtered data)
+        function exportToCSV() {
+            exportFilteredToCSV();
+        }
+
+        // Export to Excel (now exports filtered data)
+        function exportToExcel() {
+            exportFilteredToExcel();
+        }
+
+        // Export all data to CSV (ignores filters)
+        function exportAllToCSV() {
+            const headers = ['Name', 'Email', 'Phone', 'Faculty', 'Grade', 'Transaction Number', 'Status', 'Submitted At'];
+            const csvContent = [
+                headers.join(','),
+                ...applications.map(app => [
+                    `"${app.full_name}"`,
+                    `"${app.email}"`,
+                    `"${app.phone}"`,
+                    `"${app.faculty}"`,
+                    `"${app.grade}"`,
+                    `"${app.transaction_number || ''}"`,
+                    `"${app.status}"`,
+                    `"${new Date(app.submitted_at).toLocaleString()}"`
+                ].join(','))
+            ].join('\\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `stem_mun_all_applications_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showMessage(`CSV file downloaded with all ${applications.length} applications!`, 'success');
+        }
+
+        // Refresh data
+        function refreshData() {
+            loadApplications();
+            showMessage('Data refreshed successfully!', 'success');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('applicationModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Handle Enter key for login
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>

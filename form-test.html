@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Test - STEM MUN</title>
+    <link rel="stylesheet" href="css/event-booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container" style="margin-top: 50px;">
+        <h1>Event Booking Form Test</h1>
+        
+        <div class="booking-form-container">
+            <form class="booking-form" id="eventBookingForm">
+                <h3>Book Your Spot</h3>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age *</label>
+                        <input type="number" id="age" name="age" min="14" max="25" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="education">Education Level *</label>
+                        <select id="education" name="education" required>
+                            <option value="">Select Level</option>
+                            <option value="high-school">High School</option>
+                            <option value="university">University</option>
+                            <option value="graduate">Graduate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="institution">School/University *</label>
+                    <input type="text" id="institution" name="institution" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">MUN Experience</label>
+                    <select id="experience" name="experience">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Dietary Requirements</label>
+                    <textarea id="dietary" name="dietary" rows="3" placeholder="Any dietary restrictions or special requirements..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="motivation">Why do you want to join? *</label>
+                    <textarea id="motivation" name="motivation" rows="4" required placeholder="Tell us about your motivation to participate in STEM MUN..."></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#" onclick="showTerms()">Terms & Conditions</a>
+                    </label>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <span class="checkmark"></span>
+                        Subscribe to our newsletter for updates
+                    </label>
+                </div>
+
+                <button type="submit" class="book-btn">
+                    <i class="fas fa-calendar-check"></i>
+                    Book My Spot - EGP 500
+                </button>
+
+                <p class="form-note">
+                    <i class="fas fa-shield-alt"></i>
+                    Secure booking. You'll receive confirmation within 24 hours.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/event-booking.js"></script>
+</body>
+</html>

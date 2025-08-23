@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Event - STEM MUN</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/event-booking.css">
+    <link rel="stylesheet" href="css/premium-form-clean.css">
+    <link rel="stylesheet" href="css/premium-booking-3d.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-maroon': '#370a02',
+                        'maroon-dark': '#370a01',
+                        'burgundy': '#4d1b0d',
+                        'burgundy-alt': '#4c1b0d',
+                        'dark-burgundy': '#380a02',
+                        'maroon': '#360a02',
+                        'maroon-secondary': '#380a01',
+                        'maroon-light': '#390a02',
+                        'maroon-accent': '#360a01',
+                        'burgundy-warm': '#4c1a0c',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="icon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Navigation -->
+    <header id="header" class="header">
+        <div class="container">
+            <nav id="nav" class="navbar nav">
+              <div class="navbar-header">
+                <div id="svg-icon" class="navbar-brand">
+                  <img class="logo" src="img/logo.svg" alt="STEM MUN Logo" />
+                </div>
+              </div>
+              <div class="nav-collapse">
+                <span></span>
+              </div>
+              <!-- Mobile Home Button -->
+              <a href="index.html" class="mobile-home-btn" style="display: none;">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+              <ul class="main-nav nav navbar-nav navbar-right">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li class="has-dropdown">
+                  <a href="#">Events</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="events.html">All Events</a></li>
+                    <li><a href="event-details.html">Book Event</a></li>
+                    <li><a href="conferences.html">Conferences</a></li>
+                  </ul>
+                </li>
+                <li class="has-dropdown">
+                  <a href="#">Programs</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="conferences.html">Conferences</a></li>
+                  </ul>
+                </li>
+                <li><a href="Team.html">Meet The Board</a></li>
+                <li><a href="newspaper.html">Newspaper</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="delegates.html" id="cta">Become a Delegate</a></li>
+              </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Clean Hero Section -->
+    <section class="hero-section relative min-h-screen overflow-hidden bg-gradient-to-br from-deep-maroon via-burgundy to-maroon-dark pt-20">
+        <!-- Three.js Background -->
+        <div id="threejs-background" class="absolute inset-0 z-0"></div>
+        
+        <!-- Simple Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-maroon-dark/60 to-transparent z-10"></div>
+        
+        <!-- Main Content Container -->
+        <div class="relative z-30 container mx-auto px-6 h-full min-h-screen flex items-center">
+            <div class="grid lg:grid-cols-2 gap-20 items-center w-full py-16">
+                
+                <!-- Left Content -->
+                <div class="space-y-10 lg:pr-8">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center space-x-3 bg-burgundy/30 backdrop-blur-md border border-burgundy-warm/40 
+                                rounded-full px-6 py-3 opacity-0 transform translate-y-10" id="hero-badge">
+                        <div class="w-8 h-8 bg-gradient-to-r from-burgundy-warm to-burgundy rounded-full flex items-center justify-center">
+                            <i class="fas fa-university text-white text-sm"></i>
+                        </div>
+                        <span class="text-orange-300 font-semibold text-sm uppercase tracking-wide">Model United Nations</span>
+                    </div>
+                    
+                    <!-- Main Title -->
+                    <div class="space-y-6">
+                        <h1 class="text-5xl lg:text-7xl font-black text-white leading-tight">
+                            <span class="block opacity-0 transform translate-y-20" id="title-1">SWAT</span>
+                            <span class="block opacity-0 transform translate-y-20" id="title-2">
+                                <span class="bg-gradient-to-r from-orange-400 via-red-500 to-orange-600 bg-clip-text text-transparent">
+                                    2025
+                                </span>
+                            </span>
+                            <span class="block text-3xl lg:text-4xl font-bold text-orange-100 opacity-0 transform translate-y-20" id="title-3">
+                                STEM MUN EVENT
+                            </span>
+                        </h1>
+                        
+                        <!-- Subtitle -->
+                        <p class="text-lg lg:text-xl text-orange-50 max-w-2xl leading-relaxed opacity-0 transform translate-y-10" id="subtitle">
+                            A student-led initiative focused on diplomacy, global issues, and leadership. Join us on September 6th, 2025 in Egypt for an unforgettable experience!
+                        </p>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                        <button onclick="openBookingModal()" 
+                                class="bg-gradient-to-r from-burgundy-warm to-orange-600 text-white font-bold py-4 px-8 
+                                       rounded-full text-lg shadow-xl hover:shadow-orange-500/25 transform hover:scale-105 
+                                       transition-all duration-300 opacity-0 translate-y-10" id="cta-primary">
+                            <span class="flex items-center justify-center space-x-3">
+                                <i class="fas fa-rocket"></i>
+                                <span>Book Your Seat</span>
+                            </span>
+                        </button>
+                        
+                        <button class="border-2 border-orange-400 text-orange-300 font-bold py-4 px-8 rounded-full text-lg 
+                                       hover:bg-orange-500 hover:text-white transition-all duration-300 opacity-0 translate-y-10" id="cta-secondary">
+                            <span class="flex items-center justify-center space-x-3">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Learn More</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Globe and Components -->
+                <div class="relative lg:pl-8">
+                    <!-- Countdown Timer - Positioned above globe -->
+                    <div id="countdown-timer" class="mb-8 opacity-0 transform translate-y-10">
+                        <div class="bg-burgundy/30 backdrop-blur-md border border-burgundy-warm/40 rounded-xl p-6 text-center">
+                            <h3 class="text-orange-300 text-xl font-bold mb-4">Event Starts In:</h3>
+                            <div class="grid grid-cols-4 gap-4">
+                                <div class="text-center">
+                                    <div id="days" class="text-2xl lg:text-3xl font-black text-orange-400">00</div>
+                                    <div class="text-orange-200 text-xs lg:text-sm">Days</div>
+                                </div>
+                                <div class="text-center">
+                                    <div id="hours" class="text-2xl lg:text-3xl font-black text-orange-400">00</div>
+                                    <div class="text-orange-200 text-xs lg:text-sm">Hours</div>
+                                </div>
+                                <div class="text-center">
+                                    <div id="minutes" class="text-2xl lg:text-3xl font-black text-orange-400">00</div>
+                                    <div class="text-orange-200 text-xs lg:text-sm">Minutes</div>
+                                </div>
+                                <div class="text-center">
+                                    <div id="seconds" class="text-2xl lg:text-3xl font-black text-orange-400">00</div>
+                                    <div class="text-orange-200 text-xs lg:text-sm">Seconds</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3D Globe -->
+                    <div class="relative w-full h-80 lg:h-96 mb-8">
+                        <div id="globe-container" class="absolute inset-0"></div>
+                    </div>
+                    
+                    <!-- Stats - Positioned below globe -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 opacity-0 transform translate-y-10" id="stats">
+                        <div class="text-center bg-burgundy/20 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-orange-400/20">
+                            <div class="text-xl sm:text-2xl lg:text-3xl font-black text-orange-400 mb-1" id="stat-1">1000</div>
+                            <div class="text-orange-200 text-xs lg:text-sm font-semibold">Trained Members</div>
+                        </div>
+                        <div class="text-center bg-burgundy/20 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-orange-400/20">
+                            <div class="text-xl sm:text-2xl lg:text-3xl font-black text-orange-400 mb-1" id="stat-2">150</div>
+                            <div class="text-orange-200 text-xs lg:text-sm font-semibold">Trained Delegates</div>
+                        </div>
+                        <div class="text-center bg-burgundy/20 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-orange-400/20 sm:col-span-2 lg:col-span-1">
+                            <div class="text-xl sm:text-2xl lg:text-3xl font-black text-orange-400 mb-1" id="stat-3">8</div>
+                            <div class="text-orange-200 text-xs lg:text-sm font-semibold">Years Experience</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <!-- <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 opacity-0" id="scroll-indicator">
+            <div class="flex flex-col items-center space-y-2 cursor-pointer" onclick="scrollToNext()">
+                <span class="text-orange-400 text-sm font-semibold uppercase">Explore</span>
+                <div class="w-6 h-10 border-2 border-orange-400 rounded-full flex items-start justify-center pt-2">
+                    <div class="w-1 h-3 bg-orange-400 rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </div> -->
+    </section>
+    
+    <!-- Clean CSS Styles -->
+    <style>
+        /* Performance optimizations for form and animations */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* GPU acceleration for better performance */
+        .booking-modal,
+        .booking-modal-content,
+        .form-step,
+        .particle {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* Optimize animations for 60fps */
+        @media (min-width: 768px) {
+            .booking-modal {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+        }
+        
+        /* Reduce motion for performance on low-end devices */
+        @media (max-width: 480px), (prefers-reduced-motion: reduce) {
+            .booking-modal,
+            .form-step,
+            .particle {
+                animation-duration: 0.2s !important;
+                transition-duration: 0.2s !important;
+            }
+            
+            .particle {
+                display: none; /* Hide particles on very small screens */
+            }
+        }
+        
+        /* Mobile Navigation Styles - Simplified Home Button */
+        @media (max-width: 768px) {
+            /* Hide complex navigation elements */
+            .nav-collapse {
+                display: none !important;
+            }
+            
+            .main-nav {
+                display: none !important;
+            }
+            
+            /* Header adjustments */
+            #nav {
+                padding: 10px 20px !important;
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+            
+            /* Logo positioning */
+            .navbar-brand {
+                flex: 0 0 auto;
+            }
+            
+            /* Simple Home Button */
+            .mobile-home-btn {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(135deg, var(--secondary-warm, #cd9c57), #e6b800);
+                color: white !important;
+                padding: 10px 20px;
+                border-radius: 25px;
+                text-decoration: none !important;
+                font-weight: 600;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                box-shadow: 0 4px 15px rgba(205, 156, 87, 0.3);
+                border: 2px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                margin-left: auto;
+                min-width: 100px;
+            }
+            
+            .mobile-home-btn:hover {
+                background: linear-gradient(135deg, #e6b800, var(--secondary-warm, #cd9c57));
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(205, 156, 87, 0.4);
+                color: white !important;
+            }
+            
+            .mobile-home-btn:active {
+                transform: translateY(0);
+                box-shadow: 0 2px 10px rgba(205, 156, 87, 0.3);
+            }
+            
+            .mobile-home-btn i {
+                margin-right: 6px;
+                font-size: 12px;
+            }
+        }
+        
+        /* Hide toggle on desktop */
+        @media (min-width: 769px) {
+            .nav-collapse {
+                display: none !important;
+            }
+        }
+        
+        /* Hero Section Spacing */
+        .hero-section {
+            padding-top: 80px; /* Ensure no header overlap */
+        }
+        
+        /* Enhanced hero layout */
+        @media (min-width: 1024px) {
+            .hero-section .container {
+                max-width: 1280px;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+            
+            .hero-section .grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            /* Mobile countdown timer adjustments */
+            #countdown-timer .grid {
+                gap: 0.75rem;
+            }
+            
+            #countdown-timer .text-2xl {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 120px;
+                min-height: 100vh;
+            }
+            
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Mobile stats grid */
+            #stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+            
+            #stats > div {
+                padding: 1rem;
+            }
+            
+            /* Mobile countdown */
+            #countdown-timer {
+                margin-bottom: 1.5rem;
+            }
+            
+            #countdown-timer .grid {
+                gap: 0.5rem;
+            }
+            
+            #countdown-timer .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            /* Mobile globe height */
+            .hero-section .h-80 {
+                height: 16rem;
+            }
+            
+            /* Mobile title sizing */
+            .hero-section h1 .text-5xl {
+                font-size: 2.5rem;
+            }
+            
+            /* Mobile CTA buttons */
+            .hero-section .flex-col {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+            
+            /* Ultra mobile adjustments */
+            #stats {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .hero-section .py-16 {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .hero-section .space-y-10 > * + * {
+                margin-top: 1.5rem;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #370a02;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ea580c 0%, #dc2626 100%);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+            
+            .hero-section .grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            /* Mobile countdown timer adjustments */
+            #countdown-timer .grid {
+                gap: 0.75rem;
+            }
+            
+            #countdown-timer .text-2xl {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding-top: 120px;
+                min-height: 100vh;
+            }
+            
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Mobile stats grid */
+            #stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+            
+            #stats > div {
+                padding: 1rem;
+            }
+            
+            /* Mobile countdown */
+            #countdown-timer {
+                margin-bottom: 1.5rem;
+            }
+            
+            #countdown-timer .grid {
+                gap: 0.5rem;
+            }
+            
+            #countdown-timer .text-2xl {
+                font-size: 1.25rem;
+            }
+            
+            /* Mobile globe height */
+            .hero-section .h-80 {
+                height: 16rem;
+            }
+            
+            /* Mobile title sizing */
+            .hero-section h1 .text-5xl {
+                font-size: 2.5rem;
+            }
+            
+            /* Mobile CTA buttons */
+            .hero-section .flex-col {
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-section {
+                padding-top: 100px;
+            }
+            
+            /* Ultra mobile adjustments */
+            #stats {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .hero-section .py-16 {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            .hero-section .space-y-10 > * + * {
+                margin-top: 1.5rem;
+            }
+        }
+    </style>
+
+    <!-- Event Information -->
+    <section class="event-info">
+        <div class="container">
+            <div class="event-grid">
+                <!-- Event Details Card -->
+                <div class="event-card">
+                    <h2>SWAT 2025 Overview</h2>
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <h4>Event Date</h4>
+                                <p>September 6th, 2025</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Egypt</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <div>
+                                <h4>Experience</h4>
+                                <p>8+ Years of Expertise</p>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-trophy"></i>
+                            <div>
+                                <h4>Achievements</h4>
+                                <p>5 Conferences & 15 Events</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- What's Included Card -->
+                <div class="event-card">
+                    <h2>Welcome Package Includes</h2>
+                    <div class="included-list">
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Branded pen and wristband</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Small notepad & themed stickers</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Informative brochure with schedule</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>QR code for online competition</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Professional photography coverage</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Networking Opportunities</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Participation Certificate</span>
+                        </div>
+                        <div class="included-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Meals & Refreshments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workshop Highlights -->
+    <section class="workshops-highlight">
+        <div class="container">
+            <h2 class="section-title">Workshop Highlights</h2>
+            <div class="workshops-grid">
+                <div class="workshop-item">
+                    <div class="workshop-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3>Public Speaking & Debate</h3>
+                    <p>Master the art of persuasive communication and confident public speaking</p>
+                </div>
+                <div class="workshop-item">
+                    <div class="workshop-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Leadership & Negotiation</h3>
+                    <p>Develop essential leadership skills and diplomatic negotiation techniques</p>
+                </div>
+                <div class="workshop-item">
+                    <div class="workshop-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>UN Simulation</h3>
+                    <p>Experience real UN procedures and learn international diplomacy</p>
+                </div>
+                <div class="workshop-item">
+                    <div class="workshop-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h3>Human Rights Focus</h3>
+                    <p>Explore global human rights issues and develop advocacy skills</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premium Booking Section -->
+    <section class="premium-booking-section">
+        <div class="container">
+            <div class="booking-3d-container">
+                <div class="booking-header">
+                    <div class="header-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h2>Join the Future of Diplomacy</h2>
+                    <p>Become part of Egypt's premier Model United Nations conference</p>
+                </div>
+                
+                <div class="booking-content-grid">
+                    <!-- Pricing Card with 3D Effects -->
+                    <div class="pricing-card-3d-main">
+                        <div class="card-header">
+                            <div class="premium-badge">
+                                <i class="fas fa-graduation-cap"></i>
+                                STEM MUN 2025
+                            </div>
+                            <div class="price-display">
+                                <span class="currency">EGP</span>
+                                <span class="amount">180</span>
+                             
+                            </div>
+                        </div>
+                        
+                        <div class="features-list">
+                            <div class="feature-item-3d">
+                                <i class="fas fa-certificate"></i>
+                                <span>Official MUN Participation Certificate</span>
+                            </div>
+                            <div class="feature-item-3d">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                                <span>8+ Diplomatic Skills Workshops</span>
+                            </div>
+                            <div class="feature-item-3d">
+                                <i class="fas fa-users"></i>
+                                <span>Professional Conference Photography</span>
+                            </div>
+                            <div class="feature-item-3d">
+                                <i class="fas fa-utensils"></i>
+                                <span>All Meals & Refreshments Included</span>
+                            </div>
+                            <div class="feature-item-3d">
+                                <i class="fas fa-handshake"></i>
+                                <span>Networking with Future Leaders</span>
+                            </div>
+                            <div class="feature-item-3d">
+                                <i class="fas fa-award"></i>
+                                <span>Closing Ceremony & Awards</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-glow"></div>
+                    </div>
+                    
+                    <!-- Benefits & CTA -->
+                    <div class="benefits-section">
+                        <div class="benefits-grid">
+                            <div class="benefit-card">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <h4>Limited Seats</h4>
+                                <p>Only 200 delegates accepted for this exclusive conference</p>
+                            </div>
+                            
+                            <div class="benefit-card">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-university"></i>
+                                </div>
+                                <h4>University Recognition</h4>
+                                <p>Certificate recognized by top universities worldwide</p>
+                            </div>
+                            
+                            <div class="benefit-card">
+                                <div class="benefit-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h4>Global Network</h4>
+                                <p>Connect with aspiring diplomats from across Egypt</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Premium CTA Button -->
+                        <div class="premium-cta-container">
+                            <button class="premium-cta-button-main" onclick="openBookingModal()">
+                                <div class="button-layers">
+                                    <div class="button-bg"></div>
+                                    <div class="button-content">
+                                        <i class="fas fa-gavel"></i>
+                                        <div class="button-text">
+                                            <strong>Register as Delegate</strong>
+                                            <small>Begin Your Diplomatic Journey</small>
+                                        </div>
+                                    </div>
+                                    <div class="button-particles"></div>
+                                </div>
+                            </button>
+                            
+                            <div class="security-note">
+                                <i class="fas fa-shield-check"></i>
+                                <span>Secure registration • Instant confirmation • 24/7 support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enhanced Background Elements -->
+                <div class="floating-elements">
+                    <div class="float-element" style="--delay: 0s; --duration: 15s;">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="float-element" style="--delay: 3s; --duration: 18s;">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="float-element" style="--delay: 7s; --duration: 20s;">
+                        <i class="fas fa-dove"></i>
+                    </div>
+                    <div class="float-element" style="--delay: 2s; --duration: 14s;">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="float-element" style="--delay: 5s; --duration: 16s;">
+                        <i class="fas fa-earth-africa"></i>
+                    </div>
+                </div>
+
+                <!-- Professional Diplomatic Particles -->
+                <div class="diplomatic-particles">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <!-- <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Need Help?</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email Us</h4>
+                    <p>info@stemmun.org</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <h4>Call Us</h4>
+                    <p>+20 123 456 7890</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-comments"></i>
+                    <h4>Live Chat</h4>
+                    <p>Available 9 AM - 6 PM</p>
+                </div>
+            </div>
+        </div> -->
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>STEM MUN</h3>
+                    <p>Empowering youth through diplomacy and global citizenship</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="delegation-form.html">Apply</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@stemmun.org</p>
+                    <p>Phone: +20 123 456 7890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 STEM MUN. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/event-booking.js"></script>
+    <script src="js/premium-form.js"></script>
+    
+    <!-- Performance Optimized CSS -->
+    <link rel="stylesheet" href="css/form-performance.css">
+    
+    <!-- Simplified Mobile Navigation Script -->
+    <script>
+        // Performance optimized modal opening with debounce
+        let modalOpenTimeout;
+        let isModalOpening = false;
+        
+        function openBookingModal() {
+            // Prevent multiple rapid clicks
+            if (isModalOpening) {
+                console.log('Modal already opening, ignoring click');
+                return;
+            }
+            
+            isModalOpening = true;
+            
+            // Clear any pending timeouts
+            if (modalOpenTimeout) {
+                clearTimeout(modalOpenTimeout);
+            }
+            
+            // Debounce the modal opening
+            modalOpenTimeout = setTimeout(() => {
+                if (window.premiumForm) {
+                    premiumForm.openModal();
+                } else {
+                    console.log('Form not ready, initializing...');
+                    // Lazy load the form
+                    if (typeof PremiumBookingForm !== 'undefined') {
+                        premiumForm = new PremiumBookingForm();
+                        setTimeout(() => {
+                            premiumForm.openModal();
+                        }, 100);
+                    } else {
+                        console.error('PremiumBookingForm class not loaded');
+                    }
+                }
+                
+                // Reset the flag after a short delay
+                setTimeout(() => {
+                    isModalOpening = false;
+                }, 500);
+            }, 100); // Small debounce delay
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing simplified mobile navigation...');
+            
+            // Simple mobile navigation: just show/hide elements based on screen size
+            function handleMobileNavigation() {
+                const mobileHomeBtn = document.querySelector('.mobile-home-btn');
+                const navCollapse = document.querySelector('.nav-collapse');
+                const mainNav = document.querySelector('.main-nav');
+                
+                if (window.innerWidth <= 768) {
+                    // Mobile view: show home button, hide complex navigation
+                    if (mobileHomeBtn) mobileHomeBtn.style.display = 'flex';
+                    if (navCollapse) navCollapse.style.display = 'none';
+                    if (mainNav) mainNav.style.display = 'none';
+                    console.log('Mobile view: showing home button');
+                } else {
+                    // Desktop view: hide home button, show complex navigation
+                    if (mobileHomeBtn) mobileHomeBtn.style.display = 'none';
+                    if (navCollapse) navCollapse.style.display = 'block';
+                    if (mainNav) mainNav.style.display = 'flex';
+                    console.log('Desktop view: showing full navigation');
+                }
+            }
+            
+            // Initial setup
+            handleMobileNavigation();
+            
+            // Handle window resize
+            window.addEventListener('resize', handleMobileNavigation);
+            
+            // Add smooth scroll effect for mobile home button
+            const mobileHomeBtn = document.querySelector('.mobile-home-btn');
+            if (mobileHomeBtn) {
+                mobileHomeBtn.addEventListener('click', function(e) {
+                    console.log('Home button clicked');
+                    // Let the default navigation happen - no need to prevent
+                });
+            }
+            
+            console.log('Simplified mobile navigation initialized');
+        });
+        
+        // Keep minimal jQuery for compatibility with existing code
+        $(document).ready(function() {
+            console.log('jQuery simplified navigation ready');
+            
+            // Remove any complex navigation handlers that might interfere
+            $('#nav .nav-collapse').off('click.mobile-nav');
+            $(document).off('click.mobile-nav-outside');
+            
+            // Simple resize handler
+            $(window).on('resize', function() {
+                const mobileHomeBtn = $('.mobile-home-btn');
+                const navCollapse = $('.nav-collapse');
+                const mainNav = $('.main-nav');
+                
+                if ($(window).width() <= 768) {
+                    mobileHomeBtn.show();
+                    navCollapse.hide();
+                    mainNav.hide();
+                } else {
+                    mobileHomeBtn.hide();
+                    navCollapse.show();
+                    mainNav.show();
+                }
+            });
+        });
+    </script>
+    
+    <!-- Three.js and GSAP Animations -->
+    <script>
+        // GSAP Animation Timeline
+        gsap.registerPlugin(ScrollTrigger, TextPlugin);
+        
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initGSAPAnimations();
+            initThreeJSGlobe();
+        });
+        
+        function initGSAPAnimations() {
+            // Simple timeline for hero elements
+            const tl = gsap.timeline();
+            
+            // Badge
+            tl.to("#hero-badge", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            })
+            
+            // Title animations
+            .to("#title-1", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.5")
+            
+            .to("#title-2", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.7")
+            
+            .to("#title-3", {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.7")
+            
+            // Subtitle
+            .to("#subtitle", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.5")
+            
+            // CTAs
+            .to("#cta-primary, #cta-secondary", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power3.out"
+            }, "-=0.3")
+            
+            // Stats
+            .to("#stats", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.2")
+            
+            // Floating info cards
+            .to("#floating-info-1, #floating-info-2", {
+                opacity: 1,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out"
+            }, "-=0.3")
+            
+            // Countdown timer
+            .to("#countdown-timer", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.3")
+            
+            // Scroll indicator
+            .to("#scroll-indicator", {
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out"
+            }, "-=0.2");
+            
+            // Animate stats numbers with new values
+            gsap.to("#stat-1", {
+                textContent: "1000",
+                duration: 2,
+                ease: "power2.out",
+                snap: { textContent: 1 },
+                delay: 2
+            });
+            
+            gsap.to("#stat-2", {
+                textContent: "150",
+                duration: 2,
+                ease: "power2.out", 
+                snap: { textContent: 1 },
+                delay: 2.2
+            });
+            
+            gsap.to("#stat-3", {
+                textContent: "8",
+                duration: 2,
+                ease: "power2.out",
+                snap: { textContent: 1 },
+                delay: 2.4
+            });
+            
+            // Initialize countdown timer
+            initCountdownTimer();
+        }
+        
+        // Countdown Timer Function
+        function initCountdownTimer() {
+            // Set the date we're counting down to (September 6th, 2025, Egypt time)
+            const countDownDate = new Date("Sep 6, 2025 09:00:00 GMT+0200").getTime();
+            
+            // Update the countdown every 1 second
+            const countdownInterval = setInterval(function() {
+                // Get current date and time
+                const now = new Date().getTime();
+                
+                // Find the distance between now and the countdown date
+                const distance = countDownDate - now;
+                
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Display the result in the respective elements
+                document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+                
+                // If the countdown is finished, display event started message
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown-timer").innerHTML = `
+                        <div class="bg-green-600/30 backdrop-blur-md border border-green-500/40 rounded-xl p-6">
+                            <h3 class="text-green-300 text-xl font-bold mb-4">🎉 SWAT 2025 HAS STARTED! 🎉</h3>
+                            <p class="text-green-200">Join us live for an amazing experience!</p>
+                        </div>
+                    `;
+                }
+            }, 1000);
+        }
+        
+        // Three.js Globe Implementation
+        let scene, camera, renderer, globe, stars;
+        let mouseX = 0, mouseY = 0;
+        
+        function initThreeJSGlobe() {
+            const container = document.getElementById('globe-container');
+            if (!container) return;
+            
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            
+            // Scene setup with proper depth sorting
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ 
+                antialias: true, 
+                alpha: true,
+                powerPreference: "high-performance"
+            });
+            
+            renderer.setSize(width, height);
+            renderer.setClearColor(0x000000, 0);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            // Enable proper depth sorting
+            renderer.sortObjects = true;
+            container.appendChild(renderer.domElement);
+            
+            // Create elements in proper order (back to front)
+            // createStarField();    // Stars removed as requested
+            createEarth();        // Earth in middle
+            createAtmosphere();   // Atmosphere in front
+            addLights();          // Lighting
+            
+            // Position camera closer for better detail
+            camera.position.z = 5.0; // Moved back to accommodate larger earth
+            
+            // Mouse interaction with enhanced hover effects
+            container.addEventListener('mousemove', onMouseMove);
+            container.addEventListener('mouseenter', onMouseEnter);
+            container.addEventListener('mouseleave', onMouseLeave);
+            
+            // Start animation
+            animate();
+            
+            // Handle resize
+            window.addEventListener('resize', onWindowResize);
+        }
+        
+        let isHovering = false;
+        let hoverTween = null;
+        
+        function onMouseEnter() {
+            isHovering = true;
+            
+            if (hoverTween) hoverTween.kill();
+            
+            if (window.globeElements) {
+                hoverTween = gsap.timeline()
+                    .to(window.globeElements.earth.scale, {
+                        x: 1.06, y: 1.06, z: 1.06, // Adjusted for larger earth
+                        duration: 0.6, ease: "power2.out"
+                    })
+                    .to(window.globeElements.clouds.scale, {
+                        x: 1.08, y: 1.08, z: 1.08, // Adjusted for larger earth
+                        duration: 0.4, ease: "power2.out"
+                    }, 0.1);
+            }
+        }
+        
+        function onMouseLeave() {
+            isHovering = false;
+            
+            if (hoverTween) hoverTween.kill();
+            
+            if (window.globeElements) {
+                hoverTween = gsap.timeline()
+                    .to(window.globeElements.earth.scale, {
+                        x: 1, y: 1, z: 1,
+                        duration: 0.8, ease: "power2.out"
+                    })
+                    .to(window.globeElements.clouds.scale, {
+                        x: 1, y: 1, z: 1,
+                        duration: 0.6, ease: "power2.out"
+                    }, 0.1);
+            }
+        }
+        
+        function createEarth() {
+            const geometry = new THREE.SphereGeometry(2.2, 128, 128); // Increased size from 1.8 to 2.2
+            
+            // Create realistic Earth texture using canvas
+            const canvas = document.createElement('canvas');
+            canvas.width = 2048;
+            canvas.height = 1024;
+            const context = canvas.getContext('2d');
+            
+            // Create base ocean color
+            const oceanGradient = context.createRadialGradient(1024, 512, 0, 1024, 512, 800);
+            oceanGradient.addColorStop(0, '#1a237e'); // Deep ocean blue
+            oceanGradient.addColorStop(0.3, '#1565c0'); // Medium blue
+            oceanGradient.addColorStop(0.6, '#2196f3'); // Light blue
+            oceanGradient.addColorStop(1, '#0d47a1'); // Dark blue edges
+            
+            context.fillStyle = oceanGradient;
+            context.fillRect(0, 0, 2048, 1024);
+            
+            // Add realistic continents with varied colors
+            const continents = [
+                // Africa
+                { x: 1100, y: 400, w: 200, h: 300, color: '#2e7d32' },
+                { x: 1120, y: 450, w: 180, h: 250, color: '#388e3c' },
+                
+                // Europe
+                { x: 1050, y: 250, w: 120, h: 100, color: '#4caf50' },
+                
+                // Asia
+                { x: 1300, y: 200, w: 400, h: 300, color: '#689f38' },
+                { x: 1350, y: 250, w: 350, h: 250, color: '#7cb342' },
+                
+                // North America
+                { x: 400, y: 150, w: 300, h: 350, color: '#558b2f' },
+                { x: 450, y: 200, w: 250, h: 300, color: '#689f38' },
+                
+                // South America
+                { x: 500, y: 500, w: 150, h: 400, color: '#33691e' },
+                
+                // Australia
+                { x: 1500, y: 650, w: 200, h: 120, color: '#827717' },
+                
+                // Greenland
+                { x: 650, y: 100, w: 100, h: 150, color: '#f5f5f5' },
+            ];
+            
+            // Draw continents with natural shapes
+            continents.forEach(continent => {
+                context.fillStyle = continent.color;
+                context.beginPath();
+                
+                // Create irregular continent shapes
+                const points = 12;
+                const centerX = continent.x + continent.w / 2;
+                const centerY = continent.y + continent.h / 2;
+                
+                for (let i = 0; i < points; i++) {
+                    const angle = (i / points) * Math.PI * 2;
+                    const radiusVariation = 0.7 + Math.random() * 0.6;
+                    const x = centerX + Math.cos(angle) * (continent.w / 2) * radiusVariation;
+                    const y = centerY + Math.sin(angle) * (continent.h / 2) * radiusVariation;
+                    
+                    if (i === 0) {
+                        context.moveTo(x, y);
+                    } else {
+                        context.lineTo(x, y);
+                    }
+                }
+                context.closePath();
+                context.fill();
+                
+                // Add some inland details (mountains, forests)
+                const details = Math.floor(Math.random() * 8) + 3;
+                for (let j = 0; j < details; j++) {
+                    const detailX = continent.x + Math.random() * continent.w;
+                    const detailY = continent.y + Math.random() * continent.h;
+                    const detailSize = Math.random() * 15 + 5;
+                    
+                    context.fillStyle = continent.color === '#f5f5f5' ? '#e0e0e0' : '#1b5e20';
+                    context.beginPath();
+                    context.arc(detailX, detailY, detailSize, 0, Math.PI * 2);
+                    context.fill();
+                }
+            });
+            
+            // Add cloud patterns
+            context.globalAlpha = 0.3;
+            context.fillStyle = '#ffffff';
+            for (let i = 0; i < 150; i++) {
+                const x = Math.random() * 2048;
+                const y = Math.random() * 1024;
+                const size = Math.random() * 40 + 10;
+                context.beginPath();
+                context.arc(x, y, size, 0, Math.PI * 2);
+                context.fill();
+            }
+            context.globalAlpha = 1;
+            
+            // Create normal map for surface detail
+            const normalCanvas = document.createElement('canvas');
+            normalCanvas.width = 1024;
+            normalCanvas.height = 512;
+            const normalContext = normalCanvas.getContext('2d');
+            
+            // Generate surface bumps
+            const gradient = normalContext.createRadialGradient(512, 256, 0, 512, 256, 400);
+            gradient.addColorStop(0, '#8080ff');
+            gradient.addColorStop(1, '#4040ff');
+            normalContext.fillStyle = gradient;
+            normalContext.fillRect(0, 0, 1024, 512);
+            
+            const earthTexture = new THREE.CanvasTexture(canvas);
+            const normalTexture = new THREE.CanvasTexture(normalCanvas);
+            
+            // Enhanced material with multiple maps
+            const material = new THREE.MeshPhongMaterial({
+                map: earthTexture,
+                normalMap: normalTexture,
+                normalScale: new THREE.Vector2(0.3, 0.3),
+                shininess: 10,
+                transparent: false,
+                side: THREE.FrontSide
+            });
+            
+            globe = new THREE.Mesh(geometry, material);
+            globe.castShadow = true;
+            globe.receiveShadow = true;
+            scene.add(globe);
+            
+            // Add cloud layer
+            const cloudGeometry = new THREE.SphereGeometry(2.25, 64, 64); // Adjusted for larger earth
+            const cloudCanvas = document.createElement('canvas');
+            cloudCanvas.width = 1024;
+            cloudCanvas.height = 512;
+            const cloudContext = cloudCanvas.getContext('2d');
+            
+            // Create cloud texture
+            cloudContext.fillStyle = 'rgba(0,0,0,0)';
+            cloudContext.fillRect(0, 0, 1024, 512);
+            
+            for (let i = 0; i < 200; i++) {
+                const x = Math.random() * 1024;
+                const y = Math.random() * 512;
+                const size = Math.random() * 30 + 5;
+                const opacity = Math.random() * 0.6 + 0.2;
+                
+                cloudContext.fillStyle = `rgba(255,255,255,${opacity})`;
+                cloudContext.beginPath();
+                cloudContext.arc(x, y, size, 0, Math.PI * 2);
+                cloudContext.fill();
+            }
+            
+            const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
+            const cloudMaterial = new THREE.MeshLambertMaterial({
+                map: cloudTexture,
+                transparent: true,
+                opacity: 0.4,
+                depthWrite: false
+            });
+            
+            const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
+            scene.add(clouds);
+            
+            // Animate clouds separately
+            gsap.to(clouds.rotation, {
+                y: Math.PI * 2,
+                duration: 120,
+                repeat: -1,
+                ease: "none"
+            });
+            
+            // Store references
+            window.globeElements = {
+                earth: globe,
+                clouds: clouds
+            };
+        }
+        
+        function createStarField() {
+            // Create multiple star layers for depth
+            const starLayers = [];
+            
+            for (let layer = 0; layer < 3; layer++) {
+                const starsGeometry = new THREE.BufferGeometry();
+                const starCount = layer === 0 ? 2000 : layer === 1 ? 1500 : 1000;
+                const distance = 20 + layer * 15;
+                
+                const starsMaterial = new THREE.PointsMaterial({
+                    size: layer === 0 ? 1 : layer === 1 ? 1.5 : 2,
+                    transparent: true,
+                    opacity: layer === 0 ? 0.8 : layer === 1 ? 0.6 : 0.4,
+                    vertexColors: true,
+                    blending: THREE.AdditiveBlending
+                });
+                
+                const starsVertices = [];
+                const starsColors = [];
+                
+                for (let i = 0; i < starCount; i++) {
+                    // Spherical distribution
+                    const radius = distance + Math.random() * 10;
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    
+                    const x = radius * Math.sin(phi) * Math.cos(theta);
+                    const y = radius * Math.sin(phi) * Math.sin(theta);
+                    const z = radius * Math.cos(phi);
+                    
+                    starsVertices.push(x, y, z);
+                    
+                    // Vary star colors (white, blue, yellow, red)
+                    const starType = Math.random();
+                    if (starType < 0.6) {
+                        // White stars
+                        starsColors.push(1, 1, 1);
+                    } else if (starType < 0.8) {
+                        // Blue stars
+                        starsColors.push(0.7, 0.9, 1);
+                    } else if (starType < 0.95) {
+                        // Yellow stars
+                        starsColors.push(1, 1, 0.7);
+                    } else {
+                        // Red stars
+                        starsColors.push(1, 0.7, 0.7);
+                    }
+                }
+                
+                starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+                starsGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starsColors, 3));
+                
+                const starsLayer = new THREE.Points(starsGeometry, starsMaterial);
+                starLayers.push(starsLayer);
+                scene.add(starsLayer);
+            }
+            
+            // Store reference to first layer for main animation
+            stars = starLayers[0];
+            
+            // Animate star layers at different speeds
+            starLayers.forEach((layer, index) => {
+                const speed = 0.0002 * (index + 1);
+                gsap.to(layer.rotation, {
+                    y: Math.PI * 2,
+                    duration: 200 / (index + 1),
+                    repeat: -1,
+                    ease: "none"
+                });
+            });
+            
+            // Add twinkling effect
+            starLayers.forEach((layer, index) => {
+                gsap.to(layer.material, {
+                    opacity: layer.material.opacity * 0.5,
+                    duration: 2 + index,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            });
+        }
+        
+        function createAtmosphere() {
+            // Multi-layered atmosphere
+            const atmosphereGeometry = new THREE.SphereGeometry(2.37, 64, 64); // Adjusted for larger earth
+            const atmosphereMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    time: { value: 0.0 },
+                    atmosphereColor: { value: new THREE.Color(0x00bcd4) }
+                },
+                vertexShader: `
+                    varying vec3 vNormal;
+                    varying vec3 vPosition;
+                    void main() {
+                        vNormal = normalize(normalMatrix * normal);
+                        vPosition = position;
+                        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    uniform float time;
+                    uniform vec3 atmosphereColor;
+                    varying vec3 vNormal;
+                    varying vec3 vPosition;
+                    
+                    void main() {
+                        float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 2.0);
+                        vec3 atmosphere = atmosphereColor * pow(intensity, 1.5);
+                        gl_FragColor = vec4(atmosphere, intensity * 0.8);
+                    }
+                `,
+                blending: THREE.AdditiveBlending,
+                side: THREE.BackSide,
+                transparent: true
+            });
+            
+            const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+            scene.add(atmosphere);
+            
+            // Outer atmosphere glow
+            const outerAtmosphereGeometry = new THREE.SphereGeometry(2.53, 32, 32); // Adjusted for larger earth
+            const outerAtmosphereMaterial = new THREE.MeshBasicMaterial({
+                color: 0x42a5f5,
+                transparent: true,
+                opacity: 0.1,
+                side: THREE.BackSide
+            });
+            const outerAtmosphere = new THREE.Mesh(outerAtmosphereGeometry, outerAtmosphereMaterial);
+            scene.add(outerAtmosphere);
+            
+            // Animate atmosphere
+            gsap.to(atmosphereMaterial.uniforms.time, {
+                value: 10,
+                duration: 10,
+                repeat: -1,
+                ease: "none"
+            });
+            
+            // Pulsing outer atmosphere
+            gsap.to(outerAtmosphereMaterial, {
+                opacity: 0.2,
+                duration: 4,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+        }
+        
+        function addLights() {
+            // Ambient light (space ambient)
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.3);
+            scene.add(ambientLight);
+            
+            // Sun light (main directional light)
+            const sunLight = new THREE.DirectionalLight(0xffffff, 1.5);
+            sunLight.position.set(10, 5, 5);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.width = 2048;
+            sunLight.shadow.mapSize.height = 2048;
+            sunLight.shadow.camera.near = 0.5;
+            sunLight.shadow.camera.far = 50;
+            sunLight.shadow.camera.left = -10;
+            sunLight.shadow.camera.right = 10;
+            sunLight.shadow.camera.top = 10;
+            sunLight.shadow.camera.bottom = -10;
+            scene.add(sunLight);
+            
+            // Earth reflected light (bounce light)
+            const earthLight = new THREE.DirectionalLight(0x4fc3f7, 0.3);
+            earthLight.position.set(-5, -3, -2);
+            scene.add(earthLight);
+            
+            // Rim lighting for atmosphere
+            const rimLight1 = new THREE.DirectionalLight(0x42a5f5, 0.4);
+            rimLight1.position.set(0, 10, -5);
+            scene.add(rimLight1);
+            
+            const rimLight2 = new THREE.DirectionalLight(0x81c784, 0.3);
+            rimLight2.position.set(-8, 0, 3);
+            scene.add(rimLight2);
+            
+            // Point lights for depth and color variety
+            const cityLights = new THREE.PointLight(0xffeb3b, 0.5, 20);
+            cityLights.position.set(2, -2, 3);
+            scene.add(cityLights);
+            
+            const moonlight = new THREE.PointLight(0xe1f5fe, 0.2, 30);
+            moonlight.position.set(-8, 8, -8);
+            scene.add(moonlight);
+            
+            // Animate sun position for day/night cycle effect
+            gsap.to(sunLight.position, {
+                x: -10,
+                z: -5,
+                duration: 30,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+            
+            // Animate city lights intensity
+            gsap.to(cityLights, {
+                intensity: 0.8,
+                duration: 15,
+                repeat: -1,
+                yoyo: true,
+                ease: "sine.inOut"
+            });
+            
+            // Store light references
+            window.lightElements = {
+                sun: sunLight,
+                earth: earthLight,
+                city: cityLights,
+                moon: moonlight
+            };
+        }
+        
+        function onMouseMove(event) {
+            const container = document.getElementById('globe-container');
+            const rect = container.getBoundingClientRect();
+            mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            const time = Date.now() * 0.001;
+            
+            // Enhanced globe rotation with mouse interaction
+            if (globe) {
+                // Natural Earth rotation - increased speed
+                globe.rotation.y += 0.008; // Increased from 0.003 to 0.008
+                
+                // Mouse influence
+                const mouseInfluence = isHovering ? 0.02 : 0.01;
+                globe.rotation.x += (mouseY * mouseInfluence - globe.rotation.x) * 0.05;
+                globe.rotation.y += mouseX * mouseInfluence * 0.02;
+                
+                // Subtle axis tilt like real Earth
+                globe.rotation.z = Math.sin(time * 0.5) * 0.05;
+            }
+            
+            // Animate clouds independently - also faster
+            if (window.globeElements && window.globeElements.clouds) {
+                window.globeElements.clouds.rotation.y += 0.003; // Increased from 0.001 to 0.003
+                window.globeElements.clouds.rotation.x = Math.sin(time * 0.3) * 0.02;
+            }
+            
+            // Render scene
+            renderer.render(scene, camera);
+        }
+        
+        function onWindowResize() {
+            const container = document.getElementById('globe-container');
+            if (!container) return;
+            
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+        
+        // Scroll to next section
+        function scrollToNext() {
+            const nextSection = document.querySelector('.event-info');
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Enhanced hover effects for features
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('[id^="feature-"]');
+            features.forEach(feature => {
+                feature.addEventListener('mouseenter', function() {
+                    gsap.to(this, { scale: 1.05, duration: 0.3, ease: "power2.out" });
+                });
+                feature.addEventListener('mouseleave', function() {
+                    gsap.to(this, { scale: 1, duration: 0.3, ease: "power2.out" });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

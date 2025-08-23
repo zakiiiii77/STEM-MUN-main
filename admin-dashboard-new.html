@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM MUN - Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Varela+Round&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        /* STEM MUN Dashboard Styles - Matching Website Theme */
+        :root {
+            --primary-color: #420c02;
+            --primary-dark: #580d00;
+            --secondary-color: #dcd8cc;
+            --secondary-warm: #cdb06f;
+            --neutral-color: #ffffff;
+            --accent-color: #48382f;
+            --shadow-light: rgba(66, 12, 2, 0.1);
+            --shadow-medium: rgba(66, 12, 2, 0.2);
+            --shadow-dark: rgba(66, 12, 2, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Varela Round", sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--accent-color);
+            background: linear-gradient(135deg, #f8f6f3 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px var(--shadow-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(205,176,111,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(205,176,111,0.1)"/><circle cx="30" cy="80" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="70" cy="70" r="1.5" fill="rgba(205,176,111,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            color: var(--neutral-color);
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(205, 176, 111, 0.3);
+            animation: pulse-icon 3s ease-in-out infinite;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--neutral-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--secondary-warm);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(205,176,111,0.1)"/><circle cx="20" cy="20" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="80" cy="30" r="1.5" fill="rgba(205,176,111,0.1)"/><circle cx="30" cy="80" r="1" fill="rgba(205,176,111,0.1)"/><circle cx="70" cy="70" r="1.5" fill="rgba(205,176,111,0.1)"/></svg>') repeat;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .login-form {
+            background: var(--neutral-color);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-form .header-icon {
+            margin: 0 auto 2rem;
+            animation: pulse-icon 3s ease-in-out infinite;
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--secondary-warm);
+            background: var(--neutral-color);
+            box-shadow: 0 0 0 3px rgba(205, 176, 111, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(66, 12, 2, 0.3);
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--neutral-color);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(205, 176, 111, 0.1);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-warm) 0%, var(--primary-color) 100%);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-medium);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(205, 176, 111, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .stat-label {
+            color: var(--accent-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        /* Applications Table */
+        .applications-section {
+            background: var(--neutral-color);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px var(--shadow-light);
+            margin: 2rem 0;
+            overflow: hidden;
+            border: 1px solid rgba(205, 176, 111, 0.1);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .section-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--secondary-warm);
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--neutral-color);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .table-container {
+            padding: 2rem;
+            overflow-x: auto;
+        }
+
+        .applications-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .applications-table th,
+        .applications-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .applications-table th {
+            background: var(--secondary-color);
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.8rem;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .applications-table tr:hover {
+            background: rgba(205, 176, 111, 0.05);
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ff6b35;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .status-approved {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .status-rejected {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-approve {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-reject {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-view {
+            background: var(--secondary-warm);
+            color: var(--primary-color);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--neutral-color);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--neutral-color);
+            padding: 2rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--neutral-color);
+        }
+
+        .close {
+            color: var(--neutral-color);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--secondary-warm);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-field {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-field label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .modal-field span {
+            color: var(--accent-color);
+            padding: 0.8rem;
+            background: var(--secondary-color);
+            border-radius: 8px;
+            word-break: break-all;
+        }
+
+        .payment-screenshot {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .header-title h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .section-actions {
+                justify-content: center;
+            }
+
+            .table-container {
+                padding: 1rem;
+            }
+
+            .applications-table {
+                font-size: 0.8rem;
+            }
+
+            .applications-table th,
+            .applications-table td {
+                padding: 0.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--secondary-color);
+            border-left: 4px solid var(--secondary-warm);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Messages */
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-form">
+            <div class="header-icon">
+                <i class="fas fa-globe-americas"></i>
+            </div>
+            <h2>STEM MUN Admin</h2>
+            <div class="form-group">
+                <label for="password">Admin Password</label>
+                <input type="password" id="password" placeholder="Enter admin password">
+            </div>
+            <button class="login-btn" onclick="login()">Access Dashboard</button>
+            <div id="loginError" class="error-message" style="display: none;">
+                Invalid password. Please try again.
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent" style="display: none;">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="header-title">
+                        <div class="header-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h1>STEM MUN Dashboard</h1>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Statistics Grid -->
+            <div class="stats-grid fade-in">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-number" id="totalApplications">0</div>
+                    <div class="stat-label">Total Applications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-number" id="pendingApplications">0</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-number" id="approvedApplications">0</div>
+                    <div class="stat-label">Approved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-number" id="rejectedApplications">0</div>
+                    <div class="stat-label">Rejected</div>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <section class="applications-section fade-in">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users"></i> Applications Management
+                    </h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" onclick="exportToCSV()">
+                            <i class="fas fa-download"></i> Export CSV
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportToExcel()">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                        <button class="btn btn-secondary" onclick="refreshData()">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="applications-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Faculty</th>
+                                <th>Grade</th>
+                                <th>Phone</th>
+                                <th>Transaction</th>
+                                <th>Status</th>
+                                <th>Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTableBody">
+                            <tr>
+                                <td colspan="9" class="loading">
+                                    <div class="loading-spinner"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Application Details Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-user"></i> Application Details</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Application details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Supabase configuration
+        const SUPABASE_URL = 'https://steddllazfsprnfsmjng.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0ZWRkbGxhemZzcHJuZnNtam5nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4MTYwMzQsImV4cCI6MjA3MTM5MjAzNH0.yf53IyNF3x0O90vPjmiDHOaSQyMlo8roIT3HpXWr_Zk';
+        const ADMIN_PASSWORD = 'geno3mk';
+
+        let applications = [];
+
+        // Login functionality
+        function login() {
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('loginError');
+
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboardContent').style.display = 'block';
+                loadApplications();
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        }
+
+        // Logout functionality
+        function logout() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('dashboardContent').style.display = 'none';
+            document.getElementById('password').value = '';
+        }
+
+        // Load applications from Supabase
+        async function loadApplications() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/applications?order=submitted_at.desc`, {
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    }
+                });
+
+                if (response.ok) {
+                    applications = await response.json();
+                    displayApplications();
+                    updateStatistics();
+                } else {
+                    throw new Error('Failed to load applications');
+                }
+            } catch (error) {
+                console.error('Error loading applications:', error);
+                document.getElementById('applicationsTableBody').innerHTML = 
+                    '<tr><td colspan="9" class="error-message">Error loading applications. Please refresh the page.</td></tr>';
+            }
+        }
+
+        // Display applications in table
+        function displayApplications() {
+            const tbody = document.getElementById('applicationsTableBody');
+            
+            if (applications.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--accent-color);">No applications found.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = applications.map(app => `
+                <tr>
+                    <td>${app.full_name}</td>
+                    <td>${app.email}</td>
+                    <td>${app.faculty}</td>
+                    <td>${app.grade}</td>
+                    <td>${app.phone}</td>
+                    <td>${app.transaction_number || 'N/A'}</td>
+                    <td><span class="status-badge status-${app.status}">${app.status}</span></td>
+                    <td>${new Date(app.submitted_at).toLocaleDateString()}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn btn-view" onclick="viewApplication(${app.id})">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                            ${app.status === 'pending' ? `
+                                <button class="action-btn btn-approve" onclick="updateApplicationStatus(${app.id}, 'approved')">
+                                    <i class="fas fa-check"></i> Approve
+                                </button>
+                                <button class="action-btn btn-reject" onclick="updateApplicationStatus(${app.id}, 'rejected')">
+                                    <i class="fas fa-times"></i> Reject
+                                </button>
+                            ` : ''}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            const total = applications.length;
+            const pending = applications.filter(app => app.status === 'pending').length;
+            const approved = applications.filter(app => app.status === 'approved').length;
+            const rejected = applications.filter(app => app.status === 'rejected').length;
+
+            document.getElementById('totalApplications').textContent = total;
+            document.getElementById('pendingApplications').textContent = pending;
+            document.getElementById('approvedApplications').textContent = approved;
+            document.getElementById('rejectedApplications').textContent = rejected;
+        }
+
+        // View application details
+        function viewApplication(id) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <div class="modal-field">
+                    <label>Full Name:</label>
+                    <span>${app.full_name}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Email:</label>
+                    <span>${app.email}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Phone:</label>
+                    <span>${app.phone}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Faculty:</label>
+                    <span>${app.faculty}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Grade:</label>
+                    <span>${app.grade}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Transaction Number:</label>
+                    <span>${app.transaction_number || 'Not provided'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Promo Code:</label>
+                    <span>${app.promo_code || 'Not used'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Terms Accepted:</label>
+                    <span>${app.terms_accepted ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Newsletter Subscription:</label>
+                    <span>${app.newsletter_subscribed ? 'Yes' : 'No'}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Status:</label>
+                    <span class="status-badge status-${app.status}">${app.status}</span>
+                </div>
+                <div class="modal-field">
+                    <label>Submitted At:</label>
+                    <span>${new Date(app.submitted_at).toLocaleString()}</span>
+                </div>
+                ${app.payment_screenshot_url ? `
+                    <div class="modal-field">
+                        <label>Payment Screenshot:</label>
+                        <img src="${app.payment_screenshot_url}" alt="Payment Screenshot" class="payment-screenshot" onclick="window.open('${app.payment_screenshot_url}', '_blank')">
+                    </div>
+                ` : ''}
+                ${app.notes ? `
+                    <div class="modal-field">
+                        <label>Notes:</label>
+                        <span>${app.notes}</span>
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('applicationModal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('applicationModal').style.display = 'none';
+        }
+
+        // Update application status
+        async function updateApplicationStatus(id, status) {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/applications?id=eq.${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({ status })
+                });
+
+                if (response.ok) {
+                    await loadApplications(); // Reload data
+                    showMessage(`Application ${status} successfully!`, 'success');
+                } else {
+                    throw new Error('Failed to update application status');
+                }
+            } catch (error) {
+                console.error('Error updating application status:', error);
+                showMessage('Error updating application status. Please try again.', 'error');
+            }
+        }
+
+        // Show success/error messages
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `${type}-message`;
+            messageDiv.textContent = message;
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '20px';
+            messageDiv.style.right = '20px';
+            messageDiv.style.zIndex = '9999';
+            messageDiv.style.maxWidth = '300px';
+
+            document.body.appendChild(messageDiv);
+
+            setTimeout(() => {
+                document.body.removeChild(messageDiv);
+            }, 5000);
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            const headers = ['Name', 'Email', 'Phone', 'Faculty', 'Grade', 'Transaction Number', 'Status', 'Submitted At'];
+            const csvContent = [
+                headers.join(','),
+                ...applications.map(app => [
+                    `"${app.full_name}"`,
+                    `"${app.email}"`,
+                    `"${app.phone}"`,
+                    `"${app.faculty}"`,
+                    `"${app.grade}"`,
+                    `"${app.transaction_number || ''}"`,
+                    `"${app.status}"`,
+                    `"${new Date(app.submitted_at).toLocaleString()}"`
+                ].join(','))
+            ].join('\\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', `stem_mun_applications_${new Date().toISOString().split('T')[0]}.csv`);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            showMessage('CSV file downloaded successfully!', 'success');
+        }
+
+        // Export to Excel
+        function exportToExcel() {
+            const worksheet = XLSX.utils.json_to_sheet(applications.map(app => ({
+                'Full Name': app.full_name,
+                'Email': app.email,
+                'Phone': app.phone,
+                'Faculty': app.faculty,
+                'Grade': app.grade,
+                'Transaction Number': app.transaction_number || '',
+                'Promo Code': app.promo_code || '',
+                'Terms Accepted': app.terms_accepted ? 'Yes' : 'No',
+                'Newsletter Subscribed': app.newsletter_subscribed ? 'Yes' : 'No',
+                'Status': app.status,
+                'Submitted At': new Date(app.submitted_at).toLocaleString(),
+                'Payment Screenshot': app.payment_screenshot_url || '',
+                'Notes': app.notes || ''
+            })));
+
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Applications');
+            XLSX.writeFile(workbook, `stem_mun_applications_${new Date().toISOString().split('T')[0]}.xlsx`);
+
+            showMessage('Excel file downloaded successfully!', 'success');
+        }
+
+        // Refresh data
+        function refreshData() {
+            loadApplications();
+            showMessage('Data refreshed successfully!', 'success');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('applicationModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Handle Enter key for login
+        document.getElementById('password').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>

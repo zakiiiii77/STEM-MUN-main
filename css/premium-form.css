@@ -1,0 +1,812 @@
+/* Enhanced Event Booking Form - Premium UI */
+
+/* Premium CTA Button in Hero Section */
+.premium-cta-section {
+    margin: 40px 0 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.premium-cta-button {
+    position: relative;
+    background: linear-gradient(135deg, var(--secondary-warm) 0%, var(--primary-color) 100%);
+    border: none;
+    border-radius: 20px;
+    padding: 0;
+    cursor: pointer;
+    overflow: hidden;
+    font-family: 'Varela Round', sans-serif;
+    transform: perspective(1000px) rotateX(0deg);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 15px 35px rgba(217, 119, 6, 0.3),
+        0 5px 15px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.premium-cta-button:hover {
+    transform: perspective(1000px) rotateX(-5deg) translateY(-8px);
+    box-shadow: 
+        0 25px 50px rgba(217, 119, 6, 0.4),
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.premium-cta-button:active {
+    transform: perspective(1000px) rotateX(-2deg) translateY(-4px);
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 40px;
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-weight: 600;
+}
+
+.button-content i {
+    font-size: 24px;
+    animation: rocket-pulse 2s ease-in-out infinite;
+}
+
+@keyframes rocket-pulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.button-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+}
+
+.button-text strong {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.button-text small {
+    font-size: 13px;
+    opacity: 0.9;
+    font-weight: 400;
+}
+
+.button-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.premium-cta-button:hover .button-glow {
+    opacity: 1;
+    animation: glow-sweep 1.5s ease-in-out infinite;
+}
+
+@keyframes glow-sweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@media (max-width: 768px) {
+    .premium-cta-button {
+        border-radius: 15px;
+    }
+    
+    .button-content {
+        padding: 18px 30px;
+        gap: 12px;
+    }
+    
+    .button-content i {
+        font-size: 20px;
+    }
+    
+    .button-text strong {
+        font-size: 16px;
+    }
+    
+    .button-text small {
+        font-size: 12px;
+    }
+}
+
+/* Modal and Overlay */
+.booking-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(102, 126, 234, 0.95) 0%,
+        rgba(118, 75, 162, 0.95) 25%,
+        rgba(240, 147, 251, 0.95) 50%,
+        rgba(245, 87, 108, 0.95) 75%,
+        rgba(79, 172, 254, 0.95) 100%);
+    background-size: 400% 400%;
+    animation: modalBgShift 20s ease infinite;
+    backdrop-filter: blur(15px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    perspective: 1000px;
+}
+
+@keyframes modalBgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.booking-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.booking-modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    border-radius: 30px;
+    box-shadow: 
+        0 50px 100px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        inset 0 2px 0 rgba(255, 255, 255, 0.8);
+    max-width: 900px;
+    max-height: 90vh;
+    width: 90%;
+    overflow: hidden;
+    position: relative;
+    transform: perspective(1000px) rotateX(15deg) scale(0.8);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.booking-modal.active .booking-modal-content {
+    transform: perspective(1000px) rotateX(0deg) scale(1);
+}
+
+/* Close Button */
+.modal-close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(145deg, #ff4757, #ff3742);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 
+        0 8px 20px rgba(255, 71, 87, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: perspective(1000px) rotateX(0deg);
+}
+
+.modal-close:hover {
+    transform: perspective(1000px) rotateX(-10deg) scale(1.1);
+    box-shadow: 
+        0 12px 30px rgba(255, 71, 87, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(145deg, #ff3742, #ff2d39);
+}
+
+.modal-close:active {
+    transform: perspective(1000px) rotateX(-5deg) scale(1.05);
+}
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(145deg, #ff4757, #ff3742);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 
+        0 10px 25px rgba(255, 71, 87, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 
+        0 15px 35px rgba(255, 71, 87, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Form Header */
+.form-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    padding: 40px 50px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.form-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(205, 176, 111, 0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.form-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+.form-header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+}
+
+/* Form Body */
+.form-body {
+    padding: 40px 50px;
+    max-height: 60vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary-warm) transparent;
+}
+
+.form-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.form-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--secondary-warm), var(--primary-color));
+    border-radius: 10px;
+}
+
+/* Enhanced Form Groups */
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-group.floating-label {
+    margin-bottom: 30px;
+}
+
+.floating-label label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: white;
+    padding: 0 10px;
+    z-index: 2;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label.has-value label {
+    top: 0;
+    font-size: 14px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Premium Input Styling */
+.premium-input {
+    width: 100%;
+    padding: 20px 25px;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 16px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.05),
+        0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+}
+
+.premium-input:focus {
+    outline: none;
+    border-color: var(--secondary-warm);
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.05),
+        0 0 0 4px rgba(205, 176, 111, 0.2),
+        0 5px 15px rgba(205, 176, 111, 0.3);
+    transform: translateY(-2px);
+}
+
+.premium-input:hover {
+    border-color: var(--secondary-warm);
+    transform: translateY(-1px);
+}
+
+/* Form Row for Side-by-Side Inputs */
+.premium-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Select Styling */
+.premium-select {
+    position: relative;
+}
+
+.premium-select select {
+    appearance: none;
+    width: 100%;
+    padding: 20px 25px;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 16px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.05),
+        0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+.premium-select::after {
+    content: '\f107';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+.premium-select:hover::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Textarea Styling */
+.premium-textarea {
+    width: 100%;
+    padding: 20px 25px;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 16px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.05),
+        0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.premium-textarea:focus {
+    outline: none;
+    border-color: var(--secondary-warm);
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.05),
+        0 0 0 4px rgba(205, 176, 111, 0.2),
+        0 5px 15px rgba(205, 176, 111, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Enhanced Checkbox */
+.premium-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.premium-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-custom {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    box-shadow: 
+        inset 0 2px 5px rgba(0, 0, 0, 0.05),
+        0 1px 0 rgba(255, 255, 255, 0.8);
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.premium-checkbox input:checked + .checkbox-custom {
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.premium-checkbox input:checked + .checkbox-custom::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    opacity: 1;
+}
+
+.checkbox-custom::after {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Submit Button */
+.premium-submit {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 35px rgba(66, 12, 2, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-top: 30px;
+}
+
+.premium-submit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.8s ease;
+}
+
+.premium-submit:hover::before {
+    left: 100%;
+}
+
+.premium-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 20px 45px rgba(66, 12, 2, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.premium-submit:active {
+    transform: translateY(-1px);
+}
+
+/* Loading State */
+.premium-submit.loading {
+    pointer-events: none;
+}
+
+.premium-submit.loading::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+/* Error States */
+.form-group.error .premium-input,
+.form-group.error .premium-select select,
+.form-group.error .premium-textarea {
+    border-color: #ff4757;
+    box-shadow: 
+        inset 0 2px 10px rgba(255, 71, 87, 0.1),
+        0 0 0 4px rgba(255, 71, 87, 0.2);
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.form-group.error .floating-label label {
+    color: #ff4757;
+}
+
+/* Success State */
+.form-group.success .premium-input,
+.form-group.success .premium-select select,
+.form-group.success .premium-textarea {
+    border-color: #2ed573;
+    box-shadow: 
+        inset 0 2px 10px rgba(0, 0, 0, 0.05),
+        0 0 0 4px rgba(46, 213, 115, 0.2);
+}
+
+/* Book Now Button (Trigger) */
+.book-now-btn {
+    background: linear-gradient(145deg, var(--secondary-warm), #b8a05a);
+    color: var(--primary-color);
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 35px rgba(205, 176, 111, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.book-now-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.8s ease;
+}
+
+.book-now-btn:hover::before {
+    left: 100%;
+}
+
+.book-now-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 25px 50px rgba(205, 176, 111, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.book-now-btn i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.book-now-btn:hover i {
+    transform: rotate(15deg) scale(1.2);
+}
+
+/* 3D Card Effect for Pricing */
+.pricing-3d {
+    perspective: 1000px;
+    margin: 30px 0;
+}
+
+.pricing-card-3d {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transform: rotateX(5deg) rotateY(-5deg);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(205, 176, 111, 0.2);
+}
+
+.pricing-card-3d:hover {
+    transform: rotateX(0deg) rotateY(0deg) translateY(-10px);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.price-amount {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 0 2px 10px rgba(66, 12, 2, 0.2);
+}
+
+/* Progress Steps */
+.form-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.progress-step {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.progress-step.active {
+    background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    transform: scale(1.2);
+    box-shadow: 0 5px 15px rgba(66, 12, 2, 0.4);
+}
+
+.progress-step::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    width: calc(100vw / 3 - 80px);
+    height: 2px;
+    background: #e9ecef;
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+.progress-step:last-child::after {
+    display: none;
+}
+
+.progress-step.completed::after {
+    background: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .booking-modal-content {
+        width: 95%;
+        margin: 20px;
+        border-radius: 20px;
+    }
+    
+    .form-header,
+    .form-body {
+        padding: 30px 25px;
+    }
+    
+    .premium-form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .form-header h2 {
+        font-size: 2rem;
+    }
+    
+    .pricing-card-3d {
+        transform: none;
+    }
+    
+    .pricing-card-3d:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Animation for modal entrance */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Glassmorphism effect */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Floating particles background */
+.particles-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--secondary-warm);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+}
+
+.particle:nth-child(2n) {
+    animation-delay: -2s;
+    animation-duration: 8s;
+}
+
+.particle:nth-child(3n) {
+    animation-delay: -4s;
+    animation-duration: 10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+        opacity: 0.8;
+    }
+}
