@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM MUN - Connect With Us</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round:wght@400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #420c02;
+            --primary-dark: #2d0801;
+            --secondary-color: #dcd8cc;
+            --secondary-warm: #cdb06f;
+            --neutral-color: #ffffff;
+            --accent-color: #333333;
+            --text-dark: #333333;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Varela Round", sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="%23cdb06f" opacity="0.1"/><circle cx="80" cy="40" r="2" fill="%23cdb06f" opacity="0.1"/><circle cx="40" cy="80" r="2" fill="%23cdb06f" opacity="0.1"/><circle cx="60" cy="10" r="1.5" fill="%23cdb06f" opacity="0.08"/><circle cx="10" cy="60" r="1.5" fill="%23cdb06f" opacity="0.08"/></svg>');
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                0 15px 30px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(145deg, var(--secondary-warm), #f59e0b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 10px 25px rgba(205, 176, 111, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(2deg); }
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .header p {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border-radius: 15px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid transparent;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.08),
+                0 2px 8px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(205, 176, 111, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-color: rgba(205, 176, 111, 0.3);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.12),
+                0 8px 20px rgba(205, 176, 111, 0.2);
+        }
+
+        .social-link:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .facebook .social-icon {
+            background: linear-gradient(145deg, #1877f2, #166fe5);
+        }
+
+        .instagram .social-icon {
+            background: linear-gradient(145deg, #e4405f, #c13584, #833ab4);
+        }
+
+        .whatsapp .social-icon {
+            background: linear-gradient(145deg, #25d366, #128c7e);
+        }
+
+        .website .social-icon {
+            background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .linkedin .social-icon {
+            background: linear-gradient(145deg, #0077b5, #005582);
+        }
+
+        .social-link:hover .social-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .social-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .social-content p {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(205, 176, 111, 0.2);
+        }
+
+        .footer p {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 10px;
+        }
+
+        .footer .qr-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(205, 176, 111, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .footer .qr-info i {
+            color: var(--secondary-warm);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .social-link {
+                padding: 15px 18px;
+            }
+
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                margin-right: 12px;
+                font-size: 1.3rem;
+            }
+
+            .social-content h3 {
+                font-size: 1rem;
+            }
+
+            .social-content p {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Loading Animation */
+        .social-link {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .social-link:nth-child(1) { animation-delay: 0.1s; }
+        .social-link:nth-child(2) { animation-delay: 0.2s; }
+        .social-link:nth-child(3) { animation-delay: 0.3s; }
+        .social-link:nth-child(4) { animation-delay: 0.4s; }
+        .social-link:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Pulse Effect */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(205, 176, 111, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(205, 176, 111, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(205, 176, 111, 0); }
+        }
+
+        /* Accessibility Improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-contrast: high) {
+            .container {
+                border: 3px solid #000;
+                background: #fff;
+            }
+
+            .social-link {
+                border: 2px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo pulse">
+                <i class="fas fa-globe-americas"></i>
+            </div>
+            <h1>Connect With STEM MUN</h1>
+            <p>Follow us on all platforms for updates, news, and events</p>
+        </div>
+
+        <div class="social-links">
+            <a href="https://www.facebook.com/share/15abaPDagw/" class="social-link facebook" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-content">
+                    <h3>Facebook Page</h3>
+                    <p>Get the latest updates and connect with our community</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/stem_mun?igsh=MWpnem5rM25uMDJkcw==" class="social-link instagram" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="social-content">
+                    <h3>Instagram</h3>
+                    <p>Behind-the-scenes content and event highlights</p>
+                </div>
+            </a>
+
+            <a href="https://whatsapp.com/channel/0029Vb3DguO2phHDhoOZqF1c/113" class="social-link whatsapp" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="social-content">
+                    <h3>WhatsApp Channel</h3>
+                    <p>Instant updates and important announcements</p>
+                </div>
+            </a>
+
+            <a href="http://mun-stem.org" class="social-link website" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="social-content">
+                    <h3>Official Website</h3>
+                    <p>Complete information about STEM MUN programs</p>
+                </div>
+            </a>
+
+            <a href="https://www.linkedin.com/company/stem-model-united-nation-s/" class="social-link linkedin" target="_blank" rel="noopener noreferrer">
+                <div class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <div class="social-content">
+                    <h3>LinkedIn</h3>
+                    <p>Professional network and career opportunities</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="footer">
+            <p>Stay connected with STEM Model United Nations</p>
+            <div class="qr-info">
+                <i class="fas fa-qrcode"></i>
+                <span>Scanned from QR Code</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click tracking for analytics
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const platform = this.classList[1]; // Get the platform class name
+                console.log(`Clicked on ${platform} link`);
+                
+                // Optional: Add analytics tracking here
+                // gtag('event', 'social_click', {
+                //     'platform': platform,
+                //     'source': 'qr_code'
+                // });
+            });
+        });
+
+        // Add visual feedback on touch devices
+        document.querySelectorAll('.social-link').forEach(link => {
+            link.addEventListener('touchstart', function() {
+                this.style.transform = 'translateY(-2px) scale(1.01)';
+            });
+            
+            link.addEventListener('touchend', function() {
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Service Worker registration for offline support (optional)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed');
+                });
+            });
+        }
+    </script>
+</body>
+</html>
