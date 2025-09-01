@@ -167,11 +167,11 @@ class PremiumBookingForm {
                                         </h3>
                                         <div class="price-amount">EGP 180</div>
                                         <ul style="list-style: none; padding: 0;">
-                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> 3-Day Diplomatic Conference</li>
-                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> All Conference Materials</li>
-                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> MUN Participation Certificate</li>
-                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> Diplomatic Skills Workshops</li>
-                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> Professional Conference Photos</li>
+                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> Full-Day Interactive Event</li>
+                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> All Event Materials & Resources</li>
+                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> Participation Recognition</li>
+                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> Leadership & Communication Workshops</li>
+                                            <li><i class="fas fa-check" style="color: #2ed573; margin-right: 10px;"></i> Professional Event Photography</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@ class PremiumBookingForm {
                                         <i class="fas fa-arrow-left"></i> Previous
                                     </button>
                                     <button type="submit" class="premium-submit">
-                                        <i class="fas fa-gavel"></i> Complete Registration - EGP 180
+                                        <i class="fas fa-calendar-check"></i> Complete Event Registration - EGP 180
                                     </button>
                                 </div>
                             </div>
@@ -645,7 +645,12 @@ class PremiumBookingForm {
             }
             
             if (response.ok) {
-                this.showNotification('Registration submitted successfully! Welcome to STEM MUN 2025. We will contact you within 24 hours with your committee assignment.', 'success');
+                // Show enhanced success modal instead of just notification
+                if (typeof showSubmissionSuccess === 'function') {
+                    showSubmissionSuccess();
+                } else {
+                    this.showNotification('Registration submitted successfully! Welcome to STEM MUN 2025. We will contact you within 24 hours with event details.', 'success');
+                }
                 
                 // Show success state
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Registration Confirmed!';
@@ -654,7 +659,7 @@ class PremiumBookingForm {
                 setTimeout(() => {
                     this.closeModal();
                     this.resetForm();
-                }, 3000);
+                }, 4000); // Increased timeout to allow user to see the success modal
                 
             } else {
                 throw new Error('Server response was not ok');
@@ -794,27 +799,27 @@ class PremiumBookingForm {
                     <h2 style="color: var(--primary-color); margin-bottom: 20px;">Terms & Conditions</h2>
                     
                     <div style="color: var(--text-dark); line-height: 1.6;">
-                        <h3>Conference Registration Terms</h3>
+                        <h3>Event Registration Terms</h3>
                         <ul style="margin: 15px 0;">
                             <li>Registration fee is non-refundable after confirmation</li>
-                            <li>Delegates must attend all 3 days of the conference</li>
-                            <li>MUN participation certificate will be provided upon completion</li>
-                            <li>Committee assignments will be communicated before the conference</li>
+                            <li>Participants must attend the full day event</li>
+                            <li>Participation recognition will be provided upon completion</li>
+                            <li>Event activities and workshops will be communicated before the event</li>
                             <li>Photography/videography consent is included in registration</li>
                         </ul>
                         
-                        <h3>Delegate Code of Conduct</h3>
+                        <h3>Participant Code of Conduct</h3>
                         <ul style="margin: 15px 0;">
-                            <li>Maintain diplomatic decorum at all times</li>
-                            <li>Professional business attire required for all sessions</li>
-                            <li>Respect parliamentary procedure and chair decisions</li>
-                            <li>No disruption during formal sessions or workshops</li>
+                            <li>Maintain respectful behavior at all times</li>
+                            <li>Professional or smart casual attire required</li>
+                            <li>Respect event facilitators and fellow participants</li>
+                            <li>No disruption during sessions or workshops</li>
                             <li>Follow all venue rules and STEM MUN guidelines</li>
                         </ul>
                         
                         <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">
-                            By registering as a delegate, you agree to these terms and commit to 
-                            upholding the standards of diplomatic excellence expected at STEM MUN.
+                            By registering as a participant, you agree to these terms and commit to 
+                            engaging actively in this educational experience at STEM MUN.
                         </p>
                     </div>
                 </div>
@@ -933,14 +938,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Global function to open modal (for button onclick) - now optimized
 function openBookingModal() {
+    console.log('openBookingModal called');
+    console.log('premiumForm exists:', !!premiumForm);
+    console.log('PremiumBookingForm class exists:', typeof PremiumBookingForm !== 'undefined');
+    
     if (premiumForm) {
+        console.log('Using existing premiumForm');
         premiumForm.openModal();
     } else {
         // Fallback initialization if not ready
         console.log('Form not ready, initializing...');
-        premiumForm = new PremiumBookingForm();
-        setTimeout(() => {
-            premiumForm.openModal();
-        }, 100);
+        if (typeof PremiumBookingForm !== 'undefined') {
+            premiumForm = new PremiumBookingForm();
+            setTimeout(() => {
+                console.log('Opening modal after initialization');
+                premiumForm.openModal();
+            }, 100);
+        } else {
+            console.error('PremiumBookingForm class not available');
+            alert('Form system not loaded. Please refresh the page and try again.');
+        }
     }
 }

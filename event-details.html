@@ -151,6 +151,17 @@
                                 <span>Learn More</span>
                             </span>
                         </button>
+                        
+                        <!-- Test Button for Submission Success (REMOVE IN PRODUCTION) -->
+                        <button onclick="showSubmissionSuccess()" 
+                                class="border-2 border-green-400 text-green-300 font-bold py-4 px-8 rounded-full text-lg 
+                                       hover:bg-green-500 hover:text-white transition-all duration-300 opacity-0 translate-y-10" 
+                                id="test-success" style="display: none;">
+                            <span class="flex items-center justify-center space-x-3">
+                                <i class="fas fa-check"></i>
+                                <span>Test Success Modal</span>
+                            </span>
+                        </button>
                     </div>
                 </div>
                 
@@ -450,6 +461,348 @@
             background: linear-gradient(180deg, #f97316 0%, #ea580c 100%);
         }
         
+        /* Submission Success Modal Styles */
+        .submission-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .submission-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .submission-modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8) translateY(50px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+        
+        .submission-modal.active .submission-modal-content {
+            transform: scale(1) translateY(0);
+        }
+        
+        /* Success Animation */
+        .success-animation {
+            margin-bottom: 30px;
+        }
+        
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #2ed573;
+            stroke-miterlimit: 10;
+            margin: 0 auto 20px;
+            box-shadow: inset 0px 0px 0px #2ed573;
+            animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+        }
+        
+        .success-checkmark .check-icon {
+            width: 56px;
+            height: 56px;
+            position: relative;
+            border-radius: 50%;
+            box-sizing: content-box;
+            border: 4px solid #2ed573;
+            margin: 8px auto;
+        }
+        
+        .success-checkmark .check-icon::before {
+            top: 3px;
+            left: -2px;
+            width: 30px;
+            transform-origin: 100% 50%;
+            border-radius: 100px 0 0 100px;
+        }
+        
+        .success-checkmark .check-icon::after {
+            top: 0;
+            left: 30px;
+            width: 60px;
+            transform-origin: 0 50%;
+            border-radius: 0 100px 100px 0;
+            animation: rotate-circle 4.25s ease-in;
+        }
+        
+        .success-checkmark .check-icon::before,
+        .success-checkmark .check-icon::after {
+            content: '';
+            height: 100px;
+            position: absolute;
+            background: #ffffff;
+            transform: rotate(-45deg);
+        }
+        
+        .success-checkmark .icon-line {
+            height: 5px;
+            background-color: #2ed573;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+        }
+        
+        .success-checkmark .icon-line.line-tip {
+            top: 46px;
+            left: 14px;
+            width: 25px;
+            transform: rotate(45deg);
+            animation: icon-line-tip 0.75s;
+        }
+        
+        .success-checkmark .icon-line.line-long {
+            top: 38px;
+            right: 8px;
+            width: 47px;
+            transform: rotate(-45deg);
+            animation: icon-line-long 0.75s;
+        }
+        
+        @keyframes rotate-circle {
+            0% { transform: rotate(-45deg); }
+            5% { transform: rotate(-45deg); }
+            12% { transform: rotate(-405deg); }
+            100% { transform: rotate(-405deg); }
+        }
+        
+        @keyframes icon-line-tip {
+            0% { width: 0; left: 1px; top: 19px; }
+            54% { width: 0; left: 1px; top: 19px; }
+            70% { width: 50px; left: -8px; top: 37px; }
+            84% { width: 17px; left: 21px; top: 48px; }
+            100% { width: 25px; left: 14px; top: 45px; }
+        }
+        
+        @keyframes icon-line-long {
+            0% { width: 0; right: 46px; top: 54px; }
+            65% { width: 0; right: 46px; top: 54px; }
+            84% { width: 55px; right: 0px; top: 35px; }
+            100% { width: 47px; right: 8px; top: 38px; }
+        }
+        
+        @keyframes fill {
+            100% { box-shadow: inset 0px 0px 0px 60px #2ed573; }
+        }
+        
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+        
+        /* Success Content */
+        .success-content h2 {
+            color: #1a202c;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .success-content > p {
+            color: #4a5568;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        /* Next Steps */
+        .next-steps {
+            text-align: left;
+            margin-bottom: 30px;
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #2ed573;
+        }
+        
+        .next-steps h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #2ed573, #20bf6b);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h4 {
+            color: #2d3748;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .step-content p {
+            color: #718096;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Event Reminder */
+        .event-reminder {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+        }
+        
+        .reminder-icon {
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .reminder-icon i {
+            font-size: 1.5rem;
+        }
+        
+        .reminder-content h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .reminder-content p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        
+        /* Contact Info */
+        .contact-info {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info p {
+            margin: 0;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+        
+        .contact-info strong {
+            color: #2d3748;
+        }
+        
+        /* Close Button */
+        .close-success-modal {
+            background: linear-gradient(135deg, #2ed573, #20bf6b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+            box-shadow: 0 8px 25px rgba(46, 213, 115, 0.3);
+        }
+        
+        .close-success-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(46, 213, 115, 0.4);
+        }
+        
+        .close-success-modal:active {
+            transform: translateY(0);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .submission-modal-content {
+                padding: 30px 20px;
+                margin: 10px;
+                border-radius: 20px;
+            }
+            
+            .success-content h2 {
+                font-size: 1.6rem;
+            }
+            
+            .event-reminder {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .steps-list {
+                gap: 15px;
+            }
+            
+            .step-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .next-steps {
+                padding: 20px 15px;
+            }
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 1024px) {
             .hero-section {
@@ -614,7 +967,7 @@
                         </div>
                         <div class="included-item">
                             <i class="fas fa-check-circle"></i>
-                            <span>Participation Certificate</span>
+                            <span>Participation Recognition</span>
                         </div>
                         <div class="included-item">
                             <i class="fas fa-check-circle"></i>
@@ -671,8 +1024,8 @@
                     <div class="header-icon">
                         <i class="fas fa-globe-americas"></i>
                     </div>
-                    <h2>Join the Future of Diplomacy</h2>
-                    <p>Become part of Egypt's premier Model United Nations conference</p>
+                    <h2>Join the Future of Leadership</h2>
+                    <p>Become part of Egypt's premier educational leadership event</p>
                 </div>
                 
                 <div class="booking-content-grid">
@@ -693,15 +1046,15 @@
                         <div class="features-list">
                             <div class="feature-item-3d">
                                 <i class="fas fa-certificate"></i>
-                                <span>Official MUN Participation Certificate</span>
+                                <span>Event Participation Recognition</span>
                             </div>
                             <div class="feature-item-3d">
                                 <i class="fas fa-chalkboard-teacher"></i>
-                                <span>8+ Diplomatic Skills Workshops</span>
+                                <span>Interactive Learning Workshops</span>
                             </div>
                             <div class="feature-item-3d">
                                 <i class="fas fa-users"></i>
-                                <span>Professional Conference Photography</span>
+                                <span>Professional Event Photography</span>
                             </div>
                             <div class="feature-item-3d">
                                 <i class="fas fa-utensils"></i>
@@ -728,7 +1081,7 @@
                                     <i class="fas fa-user-tie"></i>
                                 </div>
                                 <h4>Limited Seats</h4>
-                                <p>Only 200 delegates accepted for this exclusive conference</p>
+                                <p>Only 200 participants accepted for this exclusive event</p>
                             </div>
                             
                             <div class="benefit-card">
@@ -744,7 +1097,7 @@
                                     <i class="fas fa-globe"></i>
                                 </div>
                                 <h4>Global Network</h4>
-                                <p>Connect with aspiring diplomats from across Egypt</p>
+                                <p>Connect with future leaders from across Egypt</p>
                             </div>
                         </div>
                         
@@ -756,8 +1109,8 @@
                                     <div class="button-content">
                                         <i class="fas fa-gavel"></i>
                                         <div class="button-text">
-                                            <strong>Register as Delegate</strong>
-                                            <small>Begin Your Diplomatic Journey</small>
+                                            <strong>Register for Event</strong>
+                                            <small>Join Our Interactive Experience</small>
                                         </div>
                                     </div>
                                     <div class="button-particles"></div>
@@ -856,58 +1209,170 @@
         </div>
     </footer>
 
+    <!-- Submission Success Modal -->
+    <div id="submissionSuccessModal" class="submission-modal" style="display: none;">
+        <div class="submission-modal-content">
+            <div class="success-animation">
+                <div class="success-checkmark">
+                    <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="success-content">
+                <h2>🎉 Registration Confirmed!</h2>
+                <p>Congratulations! Your registration for <strong>SWAT 2025</strong> has been successfully submitted.</p>
+                
+                <div class="event-reminder">
+                    <div class="reminder-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="reminder-content">
+                        <h4>Mark Your Calendar</h4>
+                        <p><strong>September 6th, 2025</strong> - SWAT 2025 Event</p>
+                        <p>Location: Egypt | Time: 12:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info">
+                    <p>We look forward to seeing you at the event!</p>
+                </div>
+                
+                <button class="close-success-modal" onclick="closeSubmissionSuccess()">
+                    <i class="fas fa-check"></i> Got it, Thanks!
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/event-booking.js"></script>
     <script src="js/premium-form.js"></script>
     
+    <!-- Debug Script -->
+    <script>
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded');
+            console.log('premiumForm available:', typeof premiumForm !== 'undefined');
+            console.log('PremiumBookingForm available:', typeof PremiumBookingForm !== 'undefined');
+            console.log('openBookingModal available:', typeof openBookingModal !== 'undefined');
+            
+            // Initialize premiumForm if not already done
+            if (typeof PremiumBookingForm !== 'undefined' && typeof premiumForm === 'undefined') {
+                console.log('Initializing premiumForm...');
+                window.premiumForm = new PremiumBookingForm();
+            }
+        });
+    </script>
+    
     <!-- Performance Optimized CSS -->
     <link rel="stylesheet" href="css/form-performance.css">
     
     <!-- Simplified Mobile Navigation Script -->
     <script>
-        // Performance optimized modal opening with debounce
-        let modalOpenTimeout;
-        let isModalOpening = false;
-        
-        function openBookingModal() {
-            // Prevent multiple rapid clicks
-            if (isModalOpening) {
-                console.log('Modal already opening, ignoring click');
-                return;
-            }
-            
-            isModalOpening = true;
-            
-            // Clear any pending timeouts
-            if (modalOpenTimeout) {
-                clearTimeout(modalOpenTimeout);
-            }
-            
-            // Debounce the modal opening
-            modalOpenTimeout = setTimeout(() => {
-                if (window.premiumForm) {
-                    premiumForm.openModal();
-                } else {
-                    console.log('Form not ready, initializing...');
-                    // Lazy load the form
-                    if (typeof PremiumBookingForm !== 'undefined') {
-                        premiumForm = new PremiumBookingForm();
-                        setTimeout(() => {
-                            premiumForm.openModal();
-                        }, 100);
-                    } else {
-                        console.error('PremiumBookingForm class not loaded');
-                    }
-                }
-                
-                // Reset the flag after a short delay
+        // Submission Success Modal Functions
+        function showSubmissionSuccess() {
+            const modal = document.getElementById('submissionSuccessModal');
+            if (modal) {
+                modal.style.display = 'flex';
+                // Trigger animation after display
                 setTimeout(() => {
-                    isModalOpening = false;
-                }, 500);
-            }, 100); // Small debounce delay
+                    modal.classList.add('active');
+                }, 50);
+                
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+                
+                // Add some confetti effect (optional)
+                if (typeof createConfetti === 'function') {
+                    createConfetti();
+                }
+            }
         }
+        
+        function closeSubmissionSuccess() {
+            const modal = document.getElementById('submissionSuccessModal');
+            if (modal) {
+                modal.classList.remove('active');
+                
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        }
+        
+        // Optional: Confetti Effect
+        function createConfetti() {
+            const colors = ['#2ed573', '#ffa502', '#ff6b6b', '#5f27cd', '#00d2d3', '#ff9ff3'];
+            const confettiCount = 50;
+            
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    left: ${Math.random() * 100}vw;
+                    top: -10px;
+                    z-index: 10002;
+                    border-radius: 50%;
+                    pointer-events: none;
+                    animation: confetti-fall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    if (document.body.contains(confetti)) {
+                        document.body.removeChild(confetti);
+                    }
+                }, 5000);
+            }
+        }
+        
+        // Add confetti animation keyframes
+        const confettiStyle = document.createElement('style');
+        confettiStyle.textContent = `
+            @keyframes confetti-fall {
+                0% {
+                    transform: translateY(-10px) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(confettiStyle);
+        
+        // Enhanced form submission success - integrate with existing form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Override the existing success notification for better UX
+            const originalShowSuccessMessage = window.showSuccessMessage;
+            
+            window.showSuccessMessage = function() {
+                // Show the enhanced success modal instead of the notification
+                showSubmissionSuccess();
+                
+                // Still show the original notification as a backup
+                if (originalShowSuccessMessage) {
+                    setTimeout(originalShowSuccessMessage, 2000);
+                }
+            };
+        });
+        
+        // Note: openBookingModal function is defined in premium-form.js
+        // Removed duplicate function to avoid conflicts
         
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Initializing simplified mobile navigation...');
