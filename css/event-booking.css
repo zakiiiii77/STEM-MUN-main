@@ -527,7 +527,8 @@ body {
 label {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    /* color: var(--primary-color); */
+    color: rgb(219, 216, 216) !important;
     font-weight: 600;
 }
 

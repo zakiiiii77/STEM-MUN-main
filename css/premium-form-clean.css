@@ -554,7 +554,8 @@
 }
 
 .progress-container:has(.progress-step.active) .step-label {
-    color: var(--primary-color);
+    /* color: var(--primary-color); */
+    color: #922929;
     font-weight: 600;
 }
 
