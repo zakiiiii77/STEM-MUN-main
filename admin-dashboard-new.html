@@ -335,14 +335,45 @@
         }
 
         .btn-primary {
-            background: var(--secondary-warm);
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
             color: var(--primary-color);
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--secondary-warm);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--neutral-color);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            color: var(--primary-color);
+            border: 2px solid var(--secondary-warm);
+            font-weight: 600;
+        }
+
+        /* Bulk Action Buttons */
+        .bulk-actions .btn {
+            padding: 0.7rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bulk-actions .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Clear Selection Button */
+        .btn-clear {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--accent-color);
+            border: 2px solid #dee2e6;
+        }
+
+        .btn-clear:hover {
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            border-color: var(--secondary-warm);
         }
 
         .btn:hover {
@@ -369,44 +400,63 @@
         }
 
         .applications-table th {
-            background: var(--secondary-color);
-            font-weight: 700;
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
+            font-weight: 800;
             color: var(--primary-color);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-family: "Montserrat", sans-serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .applications-table tr:hover {
-            background: rgba(205, 176, 111, 0.05);
+            background: linear-gradient(135deg, rgba(205, 176, 111, 0.1) 0%, rgba(205, 176, 111, 0.05) 100%);
+            box-shadow: 0 2px 8px rgba(205, 176, 111, 0.2);
+        }
+
+        .applications-table tr:nth-child(even) {
+            background: rgba(248, 246, 243, 0.5);
+        }
+
+        .applications-table tr:nth-child(even):hover {
+            background: linear-gradient(135deg, rgba(205, 176, 111, 0.15) 0%, rgba(205, 176, 111, 0.08) 100%);
         }
 
         .status-badge {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: "Montserrat", sans-serif;
         }
 
         .status-pending {
-            background: rgba(255, 193, 7, 0.1);
-            color: #ff6b35;
-            border: 1px solid rgba(255, 193, 7, 0.3);
+            background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+            color: white;
+            border: 2px solid #ffc107;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .status-approved {
-            background: rgba(40, 167, 69, 0.1);
-            color: #28a745;
-            border: 1px solid rgba(40, 167, 69, 0.3);
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: 2px solid #28a745;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .status-rejected {
-            background: rgba(220, 53, 69, 0.1);
-            color: #dc3545;
-            border: 1px solid rgba(220, 53, 69, 0.3);
+            background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+            color: white;
+            border: 2px solid #dc3545;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .action-buttons {
@@ -422,26 +472,176 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
         }
 
         .btn-approve {
-            background: #28a745;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
+            border: 2px solid #28a745;
+            font-weight: 600;
         }
 
         .btn-reject {
-            background: #dc3545;
+            background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
             color: white;
+            border: 2px solid #dc3545;
+            font-weight: 600;
         }
 
         .btn-view {
-            background: var(--secondary-warm);
+            background: linear-gradient(135deg, var(--secondary-warm) 0%, #e6c477 100%);
             color: var(--primary-color);
+            border: 2px solid var(--secondary-warm);
+            font-weight: 700;
+        }
+
+        .btn-delete {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: 2px solid #e74c3c;
+            font-weight: 600;
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: 2px solid #3498db;
+            font-weight: 600;
         }
 
         .action-btn:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Status Dropdown */
+        .status-dropdown {
+            padding: 0.5rem 0.8rem;
+            border: 2px solid var(--secondary-warm);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 2px 8px rgba(205, 176, 111, 0.2);
+        }
+
+        .status-dropdown:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(205, 176, 111, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .status-dropdown:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(205, 176, 111, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Bulk Actions */
+        .bulk-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--secondary-warm) 0.1, rgba(205, 176, 111, 0.2) 1);
+            border-radius: 12px;
+            border: 2px solid var(--secondary-warm);
+            box-shadow: 0 4px 15px rgba(205, 176, 111, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .bulk-actions.hidden {
+            display: none;
+        }
+
+        .bulk-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+            border: 2px solid var(--secondary-warm);
+            border-radius: 4px;
+            transform: scale(1.2);
+        }
+
+        .bulk-checkbox:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .bulk-checkbox:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(205, 176, 111, 0.4);
+        }
+
+        /* Table checkbox styling */
+        .row-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .row-checkbox:hover {
+            box-shadow: 0 0 6px rgba(205, 176, 111, 0.5);
+        }
+
+        .selected-count {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Confirmation Modal */
+        .confirm-modal {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .confirm-modal .modal-content {
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .confirm-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn.danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .confirm-btn.secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Modal */
@@ -744,9 +944,29 @@
                     </div>
                 </div>
                 <div class="table-container">
+                    <!-- Bulk Actions -->
+                    <div id="bulkActions" class="bulk-actions hidden">
+                        <span class="selected-count" id="selectedCount">0 selected</span>
+                        <button class="btn btn-secondary" onclick="bulkDeleteApplications()">
+                            <i class="fas fa-trash"></i> Delete Selected
+                        </button>
+                        <button class="btn btn-secondary" onclick="bulkChangeStatus('approved')">
+                            <i class="fas fa-check"></i> Approve Selected
+                        </button>
+                        <button class="btn btn-secondary" onclick="bulkChangeStatus('rejected')">
+                            <i class="fas fa-times"></i> Reject Selected
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearSelection()">
+                            <i class="fas fa-times-circle"></i> Clear Selection
+                        </button>
+                    </div>
+                    
                     <table class="applications-table">
                         <thead>
                             <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAll" class="bulk-checkbox" onchange="toggleSelectAll()">
+                                </th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Faculty</th>
@@ -760,7 +980,7 @@
                         </thead>
                         <tbody id="applicationsTableBody">
                             <tr>
-                                <td colspan="9" class="loading">
+                                <td colspan="10" class="loading">
                                     <div class="loading-spinner"></div>
                                 </td>
                             </tr>
@@ -784,6 +1004,27 @@
         </div>
     </div>
 
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Confirm Action</h3>
+                <span class="close" onclick="closeConfirmModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">Are you sure you want to perform this action?</p>
+                <div class="confirm-buttons">
+                    <button class="confirm-btn danger" id="confirmYes" onclick="executeConfirmedAction()">
+                        <i class="fas fa-check"></i> Yes, Continue
+                    </button>
+                    <button class="confirm-btn secondary" onclick="closeConfirmModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Supabase configuration
         const SUPABASE_URL = 'https://steddllazfsprnfsmjng.supabase.co';
@@ -791,6 +1032,8 @@
         const ADMIN_PASSWORD = 'geno3mk';
 
         let applications = [];
+        let selectedApplications = [];
+        let pendingAction = null;
 
         // Login functionality
         function login() {
@@ -844,33 +1087,40 @@
             const tbody = document.getElementById('applicationsTableBody');
             
             if (applications.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align: center; padding: 2rem; color: var(--accent-color);">No applications found.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 2rem; color: var(--accent-color);">No applications found.</td></tr>';
                 return;
             }
 
             tbody.innerHTML = applications.map(app => `
                 <tr>
+                    <td>
+                        <input type="checkbox" class="bulk-checkbox row-checkbox" value="${app.id}" onchange="toggleRowSelection(${app.id})">
+                    </td>
                     <td>${app.full_name}</td>
                     <td>${app.email}</td>
                     <td>${app.faculty}</td>
                     <td>${app.grade}</td>
                     <td>${app.phone}</td>
                     <td>${app.transaction_number || 'N/A'}</td>
-                    <td><span class="status-badge status-${app.status}">${app.status}</span></td>
+                    <td>
+                        <select class="status-dropdown" value="${app.status}" onchange="changeApplicationStatus(${app.id}, this.value)">
+                            <option value="pending" ${app.status === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="approved" ${app.status === 'approved' ? 'selected' : ''}>Approved</option>
+                            <option value="rejected" ${app.status === 'rejected' ? 'selected' : ''}>Rejected</option>
+                        </select>
+                    </td>
                     <td>${new Date(app.submitted_at).toLocaleDateString()}</td>
                     <td>
                         <div class="action-buttons">
-                            <button class="action-btn btn-view" onclick="viewApplication(${app.id})">
-                                <i class="fas fa-eye"></i> View
+                            <button class="action-btn btn-view" onclick="viewApplication(${app.id})" title="View Details">
+                                <i class="fas fa-eye"></i>
                             </button>
-                            ${app.status === 'pending' ? `
-                                <button class="action-btn btn-approve" onclick="updateApplicationStatus(${app.id}, 'approved')">
-                                    <i class="fas fa-check"></i> Approve
-                                </button>
-                                <button class="action-btn btn-reject" onclick="updateApplicationStatus(${app.id}, 'rejected')">
-                                    <i class="fas fa-times"></i> Reject
-                                </button>
-                            ` : ''}
+                            <button class="action-btn btn-edit" onclick="editApplicationStatus(${app.id})" title="Quick Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn btn-delete" onclick="deleteApplication(${app.id})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -1075,12 +1325,264 @@
             }
         }
 
+        // Update individual application status
+        async function updateApplicationStatus(id, newStatus) {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/applications?id=eq.${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (response.ok) {
+                    await loadApplications(); // Reload data
+                    const app = applications.find(a => a.id === id);
+                    showMessage(`Status updated to ${newStatus} for ${app?.full_name || 'application'}!`, 'success');
+                } else {
+                    throw new Error('Failed to update status');
+                }
+            } catch (error) {
+                console.error('Error updating status:', error);
+                showMessage('Error updating status. Please try again.', 'error');
+            }
+        }
+
+        // Message display function
+        function showMessage(message, type = 'info') {
+            // Create a temporary message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white font-medium ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'error' ? 'bg-red-500' : 
+                'bg-blue-500'
+            }`;
+            messageDiv.textContent = message;
+            
+            document.body.appendChild(messageDiv);
+            
+            // Auto-remove after 3 seconds
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.parentNode.removeChild(messageDiv);
+                }
+            }, 3000);
+        }
+
         // Handle Enter key for login
         document.getElementById('password').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 login();
             }
         });
+
+        // Bulk Selection Functions
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            
+            rowCheckboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+                const id = parseInt(checkbox.value);
+                if (selectAllCheckbox.checked) {
+                    if (!selectedApplications.includes(id)) {
+                        selectedApplications.push(id);
+                    }
+                } else {
+                    selectedApplications = selectedApplications.filter(appId => appId !== id);
+                }
+            });
+            
+            updateBulkActionsVisibility();
+        }
+
+        function toggleRowSelection(id) {
+            const checkbox = document.querySelector(`input[value="${id}"]`);
+            
+            if (checkbox.checked) {
+                if (!selectedApplications.includes(id)) {
+                    selectedApplications.push(id);
+                }
+            } else {
+                selectedApplications = selectedApplications.filter(appId => appId !== id);
+            }
+            
+            // Update select all checkbox
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const rowCheckboxes = document.querySelectorAll('.row-checkbox');
+            const checkedBoxes = document.querySelectorAll('.row-checkbox:checked');
+            
+            selectAllCheckbox.checked = checkedBoxes.length === rowCheckboxes.length;
+            selectAllCheckbox.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < rowCheckboxes.length;
+            
+            updateBulkActionsVisibility();
+        }
+
+        function updateBulkActionsVisibility() {
+            const bulkActions = document.getElementById('bulkActions');
+            const selectedCount = document.getElementById('selectedCount');
+            
+            if (selectedApplications.length > 0) {
+                bulkActions.classList.remove('hidden');
+                selectedCount.textContent = `${selectedApplications.length} selected`;
+            } else {
+                bulkActions.classList.add('hidden');
+            }
+        }
+
+        function clearSelection() {
+            selectedApplications = [];
+            document.getElementById('selectAll').checked = false;
+            document.getElementById('selectAll').indeterminate = false;
+            document.querySelectorAll('.row-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            updateBulkActionsVisibility();
+        }
+
+        // Status Change Functions
+        function changeApplicationStatus(id, newStatus) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            if (app.status === newStatus) return; // No change needed
+
+            confirmAction(
+                `Change status of "${app.full_name}" from ${app.status} to ${newStatus}?`,
+                () => updateApplicationStatus(id, newStatus)
+            );
+        }
+
+        function editApplicationStatus(id) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            // This could open a more detailed edit modal in the future
+            // For now, just show the view modal
+            viewApplication(id);
+        }
+
+        // Delete Functions
+        function deleteApplication(id) {
+            const app = applications.find(a => a.id === id);
+            if (!app) return;
+
+            confirmAction(
+                `Are you sure you want to delete the application from "${app.full_name}"? This action cannot be undone.`,
+                () => performDelete([id])
+            );
+        }
+
+        function bulkDeleteApplications() {
+            if (selectedApplications.length === 0) return;
+
+            confirmAction(
+                `Are you sure you want to delete ${selectedApplications.length} selected application(s)? This action cannot be undone.`,
+                () => performDelete(selectedApplications)
+            );
+        }
+
+        function bulkChangeStatus(newStatus) {
+            if (selectedApplications.length === 0) return;
+
+            confirmAction(
+                `Are you sure you want to change the status of ${selectedApplications.length} selected application(s) to ${newStatus}?`,
+                () => performBulkStatusChange(newStatus)
+            );
+        }
+
+        // Confirmation Modal Functions
+        function confirmAction(message, action) {
+            document.getElementById('confirmMessage').textContent = message;
+            pendingAction = action;
+            document.getElementById('confirmModal').style.display = 'block';
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+            pendingAction = null;
+        }
+
+        function executeConfirmedAction() {
+            if (pendingAction) {
+                pendingAction();
+                closeConfirmModal();
+            }
+        }
+
+        // API Functions for new operations
+        async function performDelete(ids) {
+            try {
+                const deletePromises = ids.map(id => 
+                    fetch(`${SUPABASE_URL}/rest/v1/applications?id=eq.${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                        }
+                    })
+                );
+
+                const responses = await Promise.all(deletePromises);
+                const failedDeletes = responses.filter(response => !response.ok);
+
+                if (failedDeletes.length === 0) {
+                    await loadApplications(); // Reload data
+                    clearSelection();
+                    showMessage(`${ids.length} application(s) deleted successfully!`, 'success');
+                } else {
+                    throw new Error(`Failed to delete ${failedDeletes.length} application(s)`);
+                }
+            } catch (error) {
+                console.error('Error deleting applications:', error);
+                showMessage('Error deleting application(s). Please try again.', 'error');
+            }
+        }
+
+        async function performBulkStatusChange(newStatus) {
+            try {
+                const updatePromises = selectedApplications.map(id => 
+                    fetch(`${SUPABASE_URL}/rest/v1/applications?id=eq.${id}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_ANON_KEY,
+                            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                        },
+                        body: JSON.stringify({ status: newStatus })
+                    })
+                );
+
+                const responses = await Promise.all(updatePromises);
+                const failedUpdates = responses.filter(response => !response.ok);
+
+                if (failedUpdates.length === 0) {
+                    await loadApplications(); // Reload data
+                    clearSelection();
+                    showMessage(`${selectedApplications.length} application(s) updated to ${newStatus} successfully!`, 'success');
+                } else {
+                    throw new Error(`Failed to update ${failedUpdates.length} application(s)`);
+                }
+            } catch (error) {
+                console.error('Error updating applications:', error);
+                showMessage('Error updating application(s). Please try again.', 'error');
+            }
+        }
+
+        // Update the existing modal close function to handle both modals
+        window.onclick = function(event) {
+            const applicationModal = document.getElementById('applicationModal');
+            const confirmModal = document.getElementById('confirmModal');
+            
+            if (event.target === applicationModal) {
+                closeModal();
+            } else if (event.target === confirmModal) {
+                closeConfirmModal();
+            }
+        }
     </script>
 </body>
 </html>

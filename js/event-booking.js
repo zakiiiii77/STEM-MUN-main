@@ -337,7 +337,12 @@ function initSmoothScrolling() {
 
 // Success Message
 function showSuccessMessage() {
-    const message = createNotification('success', 'Booking submitted successfully! We will contact you within 24 hours to confirm your registration.', 'fa-check-circle');
+    // Show enhanced success modal if available, otherwise fall back to notification
+    if (typeof showSubmissionSuccess === 'function') {
+        showSubmissionSuccess();
+    } else {
+        const message = createNotification('success', 'Booking submitted successfully! We will contact you within 24 hours to confirm your registration.', 'fa-check-circle');
+    }
 }
 
 // Error Message
