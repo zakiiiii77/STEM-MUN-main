@@ -252,6 +252,64 @@
   <section id="history" class="timeline-section">
     <div class="timeline-container">
       <div class="timeline-header">
+
+        <!-- <h2>2025 Season</h2> -->
+        <!-- /////////////////////////////////////////// -->
+
+        <!-- <div class="timeline-item" data-aos="fade-right">
+        <div class="timeline-dot"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-text">
+            <span class="timeline-year">2025</span>
+            <h3 class="timeline-title">Palestinian-Israeli conflict</h3>
+            <p class="timeline-desc">
+              On the 24th of September 2023, STEM MUN held its conference, where more than 17 delegates discussed the Sudan Conflict. This day also marked the end of a truly unforgettable season. It was an exceptional MUN season; the team were able to advance SDGs through multiple media; articles were written to be published in the team's official website, covering everything from natural disasters in the region, to challenges in education.
+            </p>
+            <p class="timeline-desc">
+              Moreover, the team lead a public park preservation campaign, which included the sweeping of El-Horreya National Park. Not to mention spreading awareness about other topics such as recycling and peace in the region. Today, we're passing the torch to a new generation of innovators. Here's to the leaders of tomorrow, shaped by the unparalleled experiences of STEM MUN!
+            </p>
+          </div>
+          <div class="timeline-image">
+            <div class="owl-carousel owl-theme" id="conferenceMain2025-slider">
+              <img src="img/confrences2025/Main1.JPG" alt="Conference 2025" />
+              <img src="img/confrences2025/Main2.JPG" alt="Conference 2025" />
+              <img src="img/confrences2025/Main3.jpg" alt="Conference 2025" />
+              <img src="img/confrences2025/Main4 (2).jpg" alt="Conference 2025" />
+              <img src="img/confrences2025/Main5.JPG" alt="Conference 2025" />
+              <img src="img/confrences2025/Main6.jpg" alt="Conference 2025" />
+              <img src="img/confrences2025/Main7.jpg" alt="Conference 2025" />
+              <img src="img/confrences2025/Main8.jpg" alt="Conference 2025" />
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="timeline-item" data-aos="fade-left">
+        <div class="timeline-dot"></div>
+        <div class="timeline-item-content">
+          <div class="timeline-image">
+            <div class="owl-carousel owl-theme" id="confrenceMAU2025-slider">
+              <img src="img/confrences2025/MAU1.jpeg" alt="First Conference" />
+              <img src="img/confrences2025/MAU2.jpeg" alt="First Conference" />
+              <img src="img/confrences2025/MAU3.jpeg" alt="First Conference" />
+              <img src="img/about5.jpg" alt="First Conference" />
+            </div>
+          </div>
+          <div class="timeline-text">
+            <span class="timeline-year">2025</span>
+            <h3 class="timeline-title">UNSC Sudan War conference</h3>
+            <p class="timeline-desc">
+              We are proud to announce the inaugural offline STEM MUN UNSC conference, a pioneering event convening forty delegates to confront the urgent humanitarian and political crisis of the Sudan War. This conference is uniquely designed to bridge the gap between technical analysis and human consequence, moving beyond traditional political dialogue. Delegates will be tasked not only with drafting resolutions but with understanding the conflict's devastating impact on critical infrastructure, public health systems, and educational frameworks. Our core mission is to foster a dialogue where rigorous political strategy is deeply intertwined with empathy and a commitment to actionable education. By uniting a diverse cohort of future leaders, we aim to cultivate a new generation of problem-solvers who can approach global crises with both intellectual precision and profound human understanding, crafting solutions that are as compassionate as they are strategically sound.
+            </p>
+            <p class="timeline-desc">
+              
+            </p>
+          </div>
+        </div>
+      </div> -->
+
         <h2>Conference History</h2>
       </div>
 
@@ -565,6 +623,52 @@
       
       // First Conference slider
       $("#first-conference-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        animateOut: 'fadeOut',
+        navSpeed: 500,
+        dotsSpeed: 500,
+        responsive: {
+          0: {
+            nav: true
+          },
+          768: {
+            nav: true
+          }
+        }
+      });
+
+      $("#confrenceMAU2025-slider").owlCarousel({
+        items: 1,
+        loop: true,
+        margin: 0,
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        animateOut: 'fadeOut',
+        navSpeed: 500,
+        dotsSpeed: 500,
+        responsive: {
+          0: {
+            nav: true
+          },
+          768: {
+            nav: true
+          }
+        }
+      });
+
+      $("#conferenceMain2025-slider").owlCarousel({
         items: 1,
         loop: true,
         margin: 0,
